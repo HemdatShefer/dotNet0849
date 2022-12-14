@@ -4,46 +4,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DalApi;
 
 namespace Dal;
-
-public class DalOrderItem//נתון פריט בהזמנה
+/// <summary>
+/// 
+/// </summary>
+public class DalOrderItem : IOrderItem
 {
-    public int Add(OrderItem item)
+    int ICrud<OrderItem>.Add(OrderItem item)
     {
         DataSource.OrderItem.Add(item);
         return item.OrderID;
     }
-
-    public OrderItem get(int id)
+    OrderItem ICrud<OrderItem>.GetById(int id)
     {
-        foreach (OrderItem item in DataSource.OrderItem)
+        foreach (var item in DataSource.OrderItem.Where(item => item.ID == id))
         {
-            if (item.ID == id)
-            {
-                return item;
-            }
+            return item;
         }
         throw new Exception("CANT FIND ITEM");
     }
-
-    public List<OrderItem> GetItemslist()
+    IEnumerable<OrderItem> ICrud<OrderItem>.GetAll()
     {
         return (from OrderItem item in DataSource.OrderItem select item).ToList();
     }
-    public void delete(int id)
+    public IEnumerable<OrderItem?> GetAll()
     {
-        foreach (OrderItem o in DataSource.OrderItem)
+        return (from OrderItem? item in DataSource.OrderItem select item).ToList();
+    }
+    void ICrud<OrderItem>.Delete(int id)
+    {
+        foreach (var order in DataSource.OrderItem.Where(o => o.ID == id))
         {
-            if (o.ID == id)
-            {
-                DataSource.OrderItem.Remove(o);
-                return;
-            }
+            DataSource.OrderItem.Remove(order);
+            return;
         }
+
         throw new Exception("CANT FIND ITEM");
     }
-    public bool Exist(int id)
+    private bool existItem(int id)
     {
         foreach (OrderItem item in DataSource.OrderItem)
         {
@@ -54,10 +54,15 @@ public class DalOrderItem//נתון פריט בהזמנה
         }
         return false;
     }
-    public void update(OrderItem item)//מתודת עדכון
+    void ICrud<OrderItem>.Update(OrderItem item)
     {
-        delete(item.ID);
-        Add(item);
+        foreach (var order in DataSource.OrderItem.Where(o => o.ID == item.ID))
+        {
+            DataSource.OrderItem.Remove(order);
+            return;
+        };
+        DataSource.OrderItem.Add(item);
     }
+
 
 }

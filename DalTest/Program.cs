@@ -1,13 +1,11 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 
 namespace Dal;
 
 class Program
 {
-    private static DalProduct _Products = new DalProduct();
-    private static DalOrderItem _items = new DalOrderItem();
-    private static DalOrder _order = new DalOrder();
-
+    private static IDal _dal = new DalList();
     private static void printAll<T>(IEnumerable<T> values)
     {
         Console.WriteLine(string.Join('\n', values));
@@ -18,7 +16,7 @@ class Program
         Console.WriteLine("a - add object");
         Console.WriteLine("b - print object");
         Console.WriteLine("c - print all object data");
-        Console.WriteLine("d - update object");
+        Console.WriteLine("d - Update object");
         Console.WriteLine("e - Delete object");
 
         Console.WriteLine("Enter your choice: ");
@@ -50,7 +48,7 @@ class Program
                 p.InStock = int.Parse(Console.ReadLine());
                 try
                 {
-                    _Products.Add(p);
+                    _dal.Product.Add(p);
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +61,7 @@ class Program
                 try
                 {
                     int ID = int.Parse(Console.ReadLine());
-                    p = _Products.get_product(ID);
+                    p = _dal.Product.GetById(ID); 
                     Console.WriteLine(p);
                 }
                 catch (Exception ex)
@@ -73,11 +71,11 @@ class Program
                 break;
 
             case 'c':
-                printAll(_Products.GetAll());
+                printAll(_dal.Product.GetAll());
                 break;
 
             case 'd':
-                Console.WriteLine("enter values to update object:");
+                Console.WriteLine("enter values to Update object:");
             
                 while (!int.TryParse(Console.ReadLine(), out id))
                 {
@@ -91,7 +89,7 @@ class Program
 
                 try
                 {
-                    _Products.Add(p);
+                    _dal.Product.Add(p);
                 }
                 catch (Exception ex)
                 {
@@ -104,7 +102,7 @@ class Program
                 id = int.Parse(Console.ReadLine());
                 try
                 {
-                    _Products.Delete(id);
+                    _dal.Product.Delete(id);
                 }
                 catch (Exception ex)
                 {
@@ -119,7 +117,7 @@ class Program
         }
     }
 
-    public static void OrderItemMenu()//תת תפריט של פריט 
+    public static void OrderItemMenu()
     {
         char choice = printMenu();
         OrderItem orderItem = new OrderItem();
@@ -142,7 +140,7 @@ class Program
 
                 try
                 {
-                    Program._items.Add(orderItem);
+                    Program._dal.OrderItem.Add(orderItem);
                 }
                 catch (Exception ex)
                 {
@@ -156,7 +154,7 @@ class Program
                 id = int.Parse(Console.ReadLine());
                 try
                 {
-                    OrderItem pr = Program._items.get(id);
+                    OrderItem pr = Program._dal.OrderItem.GetById(id);
                     Console.WriteLine(pr);
                 }
                 catch (Exception ex)
@@ -166,11 +164,11 @@ class Program
                 break;
 
             case 'c':
-                printAll(Program._items.GetItemslist());
+                printAll(Program._dal.OrderItem.GetAll());
                 break;
 
             case 'd':
-                Console.WriteLine("enter values to update object:");
+                Console.WriteLine("enter values to Update object:");
                 orderItem.ID = int.Parse(Console.ReadLine());
                 orderItem.ProductID = int.Parse(Console.ReadLine());
                 orderItem.OrderID = int.Parse(Console.ReadLine());
@@ -178,7 +176,7 @@ class Program
                 orderItem.Amount = int.Parse(Console.ReadLine());
                 try
                 {
-                    Program._items.update(orderItem);
+                    Program._dal.OrderItem.Update(orderItem);
                 }
                 catch (Exception ex)
                 {
@@ -190,7 +188,7 @@ class Program
                 int ID = int.Parse(Console.ReadLine());
                 try
                 {
-                    Program._items.delete(ID);
+                    Program._dal.OrderItem.Delete(ID);
                 }
                 catch (Exception ex)
                 {
@@ -205,7 +203,7 @@ class Program
     }
 
 
-    public static void OrderMenu()//תת תפריט של הזמנה
+    public static void OrderMenu()
     {
         char choice = printMenu();
         Order order = new Order();
@@ -224,7 +222,7 @@ class Program
 
                 try
                 {
-                    _order.Add(order);
+                    Program._dal.Order.Add(order);
                 }
                 catch (Exception ex)
                 {
@@ -235,7 +233,7 @@ class Program
                 try
                 {
                     int ID = int.Parse(Console.ReadLine());
-                    order = _order.GetOrder(ID);
+                    order = Program._dal.Order.GetById(ID);
                     Console.WriteLine(order);
                 }
                 catch (Exception ex)
@@ -244,10 +242,10 @@ class Program
                 }
                 break;
             case 'c':
-                printAll(Program._order.GetAll());
+                printAll(Program._dal.Order.GetAll());
                 break;
             case 'd':
-                Console.WriteLine("enter values to update object:");
+                Console.WriteLine("enter values to Update object:");
                 order.ID = int.Parse(Console.ReadLine());
                 order.CustomerName = Console.ReadLine();
                 order.CustomerEmail = Console.ReadLine();
@@ -258,7 +256,7 @@ class Program
 
                 try
                 {
-                    Program._order.Update(order);
+                    Program._dal.Order.Update(order);
                 }
                 catch (Exception ex)
                 {

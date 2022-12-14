@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DalApi;
 
 namespace Dal;
 
+/// <summary>
+/// 
+/// </summary>
 internal static class DataSource
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal static class config
     {
         internal static int NextOrderNumberOrderItem { get => ++LastIDnumberOrderitem; }
@@ -18,7 +25,6 @@ internal static class DataSource
         private static int OrderItemNumber = 0;
         private static int productNumber = 0;
         private static int LastIDnumberOrderitem = 10000;
-        private static int LastIDnumberOrders = 10000;
     }
 
     internal static List<Product> Products { get; set; } = new List<Product> { };
@@ -27,11 +33,16 @@ internal static class DataSource
 
     private static Random random = new Random(DateTime.Now.Millisecond);
 
-
+    /// <summary>
+    /// 
+    /// </summary>
     static DataSource() 
     {
         s_Initialize();
     }
+    /// <summary>
+    /// 
+    /// </summary>
     static private void addNewProduct()
     {
         List<List<string>> ProductsNames = new List<List<string>>
@@ -63,6 +74,9 @@ internal static class DataSource
             }
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     static private void addOrderItem()
     {
         string[] Names = new string[] {"Norit","Ron","Yael","Lior","Shlomo","Tamar","harry","Jacob","Lili","Rivka","Tal","Aharon","David"};
@@ -89,6 +103,9 @@ internal static class DataSource
 
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
     static private void addOrders()
     {
         for (int i = 0; i < 10; i++)
@@ -109,7 +126,9 @@ internal static class DataSource
             }
         }
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     static private void s_Initialize()
     {
         addNewProduct();

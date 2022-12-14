@@ -1,12 +1,15 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dal
+namespace DalApi
 {
-    internal class DalLisrt
+    public interface IOrder : ICrud<Order>
     {
+       
     }
 }
+
