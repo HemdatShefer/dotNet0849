@@ -10,14 +10,13 @@ namespace Dal;
 
 public class DalOrder : IOrder
 {
-
-    public static int Add(Order item)
+    public int Add(Order item)
     {
         DataSource.orders.Add(item);
         return item.ID;
     }
 
-    public static void Delete(int id)
+    public void Delete(int id)
     {
         foreach (Order order in DataSource.orders)
         {
@@ -30,24 +29,24 @@ public class DalOrder : IOrder
     }
 
 
-    public static IEnumerable<Order?>  GetAll()
+    public IEnumerable<Order> GetAll()
     {
-        return (IEnumerable<Order?>)(from Order item in DataSource.orders select item).ToList();
+        return (from Order item in DataSource.orders select item).ToList();
     }
 
-    public static Order GetByIdOrder(int id)
+    public Order GetByIdOrder(int id)
     {
         foreach (var order in DataSource.orders.Where(order => order.ID == id)){ return order;}
         throw new Exception("CANT FIND order");
     }
 
-    public static void Update(Order item)
+    public void Update(Order item)
     {
         Delete(item.ID);
         Add(item);
     }
 
-    Order ICrud<Order>.GetById(int id)
+    public Order GetById(int id)
     {
         foreach (var order in DataSource.orders.Where(order => order.ID == id)) { return order; }
         throw new NotImplementedException("CANT FIND order");
@@ -74,21 +73,6 @@ public class DalOrder : IOrder
     }
 
     public Order GetProduct(int IDorder)
-    {
-        throw new NotImplementedException();
-    }
-
-    public int Add(Order item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(Order item)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Delete(int id)
     {
         throw new NotImplementedException();
     }

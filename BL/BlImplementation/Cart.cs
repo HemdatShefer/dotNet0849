@@ -18,11 +18,12 @@ namespace BlImplementation
     public class Cart : ICart
     {
         private IDal _dal = new DalList();
+
         BO.Cart ICart.AddOrderItem(BO.Cart cart, int productId)
         {
             try
             {
-                DO.Product DOproduct = Dal.DalProduct.GetById(productId);
+                DO.Product DOproduct = _dal.Product.GetById(productId);
                 BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock };
                 BO.OrderItem orderItem = new BO.OrderItem { ID = DOproduct.ID, OrderID = cart.ID , Price = DOproduct.Price, Amount =  1, ProductID = productId };
                 if (product.InStock <= 0)
@@ -43,7 +44,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Product DOproduct = Dal.DalProduct.GetById(productId);
+                DO.Product DOproduct = _dal.Product.GetById(productId);
                 BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock };
                 BO.OrderItem orderItem = new BO.OrderItem { ID = DOproduct.ID, OrderID = cart.ID, Price = DOproduct.Price, Amount = amount, ProductID = productId };
                 

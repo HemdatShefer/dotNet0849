@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlApi;
 using BO;
+using Dal;
 using DalApi;
 using DO;
 using IOrder = BlApi.IOrder;
@@ -14,15 +15,17 @@ namespace BlImplementation
 
     public class Order : IOrder
     {
+        IDal _dal = new DalList();
+
         IEnumerable<OrderForList> IOrder.orderForLists()
         {
-            IEnumerable<DO.Order?> OrdersList = Dal.DalOrder.GetAll();
+            IEnumerable<DO.Order> OrdersList = new Dal.DalOrder().GetAll();
             List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
 
             BO.OrderForList CurrentOrder;
             foreach (DO.Order thisOrder in OrdersList)
             {
-                IEnumerable<DO.OrderItem?> OrdersItems = Dal.DalOrderItem.GetAll();
+                IEnumerable<DO.OrderItem> OrdersItems = _dal.OrderItem.GetAll();
                 BO.Enums.Status status = BO.Enums.Status.confirmed;
                 ordersForList.Add(new BO.OrderForList
                 {
@@ -38,14 +41,13 @@ namespace BlImplementation
         {
             if (validID(orderID))
             {
-                DO.Order order = Dal.DalOrder.GetByIdOrder(orderID);
-                IEnumerable<DO.OrderItem?> orderItems = Dal.DalOrderItem.GetAll();
-                IEnumerable<DO.OrderItem?> orderItemsFilter = Dal.DalOrderItem.GetAll();
-                foreach (var _ in orderItems.Where(item => item.Value.ID == orderID).Select(item => new { item })) { }
+                DO.Order order = _dal.Order.GetById(orderID);
+                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
+                IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
+                foreach (var _ in orderItems.Where(item => item.ID == orderID).Select(item => new { item })) { }
 
                 return new BO.Order
                 {
-                   
                     ID = order.ID,
                     CustomerName = order.CustomerName,
                     CustomerAddress = order.CustomerAddress,
@@ -54,14 +56,14 @@ namespace BlImplementation
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
                     Status = OrderStatus(order),
-                    totalPrice = orderItems.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount),
+                    totalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                     Items = orderItemsFilter.Select(orderItem => new BO.OrderItem
                     {
-                        ID = orderItem.Value.ID,
-                        ProductID = orderItem.Value.ProductID,
-                        OrderID = orderItem.Value.OrderID,
-                        Price = orderItem.Value.Price,
-                        Amount = orderItem.Value.Amount
+                        ID = orderItem.ID,
+                        ProductID = orderItem.ProductID,
+                        OrderID = orderItem.OrderID,
+                        Price = orderItem.Price,
+                        Amount = orderItem.Amount
                     }).ToList()
                 };
             }
@@ -74,10 +76,10 @@ namespace BlImplementation
         {
             if (validID(orderID))
             {
-                DO.Order order = Dal.DalOrder.GetByIdOrder(orderID);
-                IEnumerable<DO.OrderItem?> orderItems = Dal.DalOrderItem.GetAll();
-                IEnumerable<DO.OrderItem?> orderItemsFilter = Dal.DalOrderItem.GetAll();
-                foreach (var _ in orderItems.Where(item => item.Value.ID == orderID).Select(item => new { item })) { }
+                DO.Order order = _dal.Order.GetById(orderID);
+                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
+                IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
+                foreach (var _ in orderItems.Where(item => item.ID == orderID).Select(item => new { item })) { }
 
                 return new BO.Order
                 {
@@ -89,14 +91,14 @@ namespace BlImplementation
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
                     Status = OrderStatus(order),
-                    totalPrice = orderItems.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount),
+                    totalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                     Items = orderItemsFilter.Select(orderItem => new BO.OrderItem
                     {
-                        ID = orderItem.Value.ID,
-                        ProductID = orderItem.Value.ProductID,
-                        OrderID = orderItem.Value.OrderID,
-                        Price = orderItem.Value.Price,
-                        Amount = orderItem.Value.Amount
+                        ID = orderItem.ID,
+                        ProductID = orderItem.ProductID,
+                        OrderID = orderItem.OrderID,
+                        Price = orderItem.Price,
+                        Amount = orderItem.Amount
                     }).ToList()
                 };
             }
@@ -109,9 +111,9 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = Dal.DalOrder.GetByIdOrder(orderID);
-                IEnumerable<DO.OrderItem?> orderItems = Dal.DalOrderItem.GetAll();
-                IEnumerable<DO.OrderItem?> orderItemsFilter = Dal.DalOrderItem.GetAll();
+                DO.Order order = _dal.Order.GetById(orderID);
+                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
+                IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
                 return new BO.Order
                 {
                     ID = order.ID,
@@ -122,14 +124,14 @@ namespace BlImplementation
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
                     Status = BO.Enums.Status.shipped,
-                    totalPrice = orderItems.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount),
+                    totalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                     Items = orderItemsFilter.Select(orderItem => new BO.OrderItem
                     {
-                        ID = orderItem.Value.ID,
-                        ProductID = orderItem.Value.ProductID,
-                        OrderID = orderItem.Value.OrderID,
-                        Price = orderItem.Value.Price,
-                        Amount = orderItem.Value.Amount
+                        ID = orderItem.ID,
+                        ProductID = orderItem.ProductID,
+                        OrderID = orderItem.OrderID,
+                        Price = orderItem.Price,
+                        Amount = orderItem.Amount
                     }).ToList()
                 };
             }
@@ -142,9 +144,9 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = Dal.DalOrder.GetByIdOrder(orderID);
-                IEnumerable<DO.OrderItem?> orderItems = Dal.DalOrderItem.GetAll();
-                IEnumerable<DO.OrderItem?> orderItemsFilter = Dal.DalOrderItem.GetAll();
+                DO.Order order = _dal.Order.GetById(orderID);
+                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
+                IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
                 return new BO.Order
                 {
                     ID = order.ID,
@@ -155,14 +157,14 @@ namespace BlImplementation
                     ShipDate = order.ShipDate,
                     DeliveryDate = order.DeliveryDate,
                     Status = BO.Enums.Status.deliverd,
-                    totalPrice = orderItems.Sum(orderItem => orderItem.Value.Price * orderItem.Value.Amount),
+                    totalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                     Items = orderItemsFilter.Select(orderItem => new BO.OrderItem
                     {
-                        ID = orderItem.Value.ID,
-                        ProductID = orderItem.Value.ProductID,
-                        OrderID = orderItem.Value.OrderID,
-                        Price = orderItem.Value.Price,
-                        Amount = orderItem.Value.Amount
+                        ID = orderItem.ID,
+                        ProductID = orderItem.ProductID,
+                        OrderID = orderItem.OrderID,
+                        Price = orderItem.Price,
+                        Amount = orderItem.Amount
                     }).ToList()
                 };
             }
@@ -175,7 +177,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = Dal.DalOrder.GetByIdOrder(orderID);
+                DO.Order order = _dal.Order.GetById(orderID);
                 return new OrderTracking()
                 {
                     ID = orderID,
@@ -191,7 +193,7 @@ namespace BlImplementation
         IEnumerable<BO.OrderForList?> GetProductsForList(Func <OrderForList?, bool>filter)
         {
             List<BO.OrderForList> ProductForList = new List<BO.OrderForList>();
-            IEnumerable<DO.Order?> productsList = Dal.DalOrder.GetAll();
+            IEnumerable<DO.Order> productsList = _dal.Order.GetAll();
             return (IEnumerable<BO.OrderForList?>)(from ord in ProductForList where filter(ord) select ord).ToList();
         }
 
@@ -240,7 +242,7 @@ namespace BlImplementation
 
             return status;
         }
-        private static double GetTotalPrice(IEnumerable<DO.OrderItem?> OrdersItems)
+        private static double GetTotalPrice(IEnumerable<DO.OrderItem> OrdersItems)
         {
             double price = 0;
             foreach (DO.OrderItem thisOrderItem in OrdersItems)

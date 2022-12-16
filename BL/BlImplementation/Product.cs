@@ -16,12 +16,14 @@ namespace BlImplementation
 
     internal class Product : IProduct
     {
+        private Dal.DalProduct _dal = new Dal.DalProduct();
+
         public void AddProduct(BO.Product product)
         {
             CheckProduct(product);
             try
             {
-                Dal.DalProduct.Add(new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock });
+                _dal.Add(new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock });
             }
             catch (DO.ObjectNotFoundException)
             {
@@ -30,14 +32,14 @@ namespace BlImplementation
         }
         public void DeleteProduct(int idProduct)
         {
-            IEnumerable<DO.Order?> orderList = Dal.DalOrder.GetAll();
-            foreach (var _ in orderList.Where(item => item.Value.ID == idProduct).Select(item => new { }))
+            IEnumerable<DO.Order> orderList = new Dal.DalOrder().GetAll();
+            foreach (var _ in orderList.Where(item => item.ID == idProduct).Select(item => new { }))
             {
                 throw new DataException("product is in order");
             }
             try
             {
-                Dal.DalProduct.Delete(idProduct);
+                _dal.Delete(idProduct);
             }
             catch
             {
@@ -49,7 +51,7 @@ namespace BlImplementation
             try
             {
                CheckProduct(product);
-               Dal.DalProduct.update(new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock });
+                _dal.Update(new DO.Product { ID = product.ID, Name = product.Name, Price = product.Price, InStock = product.InStock });
             }
             catch 
             {
@@ -59,20 +61,20 @@ namespace BlImplementation
         }
         BO.Product IProduct.GetProduct(int id)
         {
-            DO.Product DOproduct = Dal.DalProduct.GetById(id);
+            DO.Product DOproduct = _dal.GetById(id);
             BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock };
             return product;
         }
         IEnumerable<ProductForList> IProduct.GetAllProductsForList()
         {
             List<BO.ProductForList> ProductForList = new List<BO.ProductForList>();
-            IEnumerable<DO.Product?> productsList = Dal.DalProduct.GetAll();
+            IEnumerable<DO.Product> productsList = _dal.GetAll();
             return (IEnumerable<BO.ProductForList>)(from product in ProductForList select product).ToList();
         }
         IEnumerable<BO.ProductForList> GetProductsForList(Func<ProductForList?, bool>? filter)
         {
             List<BO.ProductForList> ProductForList = new List<BO.ProductForList>();
-            IEnumerable<DO.Product?> productsList = Dal.DalProduct.GetAll();
+            IEnumerable<DO.Product> productsList = _dal.GetAll();
             return (IEnumerable<BO.ProductForList>)(from prod in ProductForList where filter(prod) select prod).ToList();
 
         }
