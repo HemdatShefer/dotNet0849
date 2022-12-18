@@ -30,7 +30,7 @@ class Program
         string name;
         Enums.Category category;
         int price;
-        int inStock; 
+        int inStock;
 
         switch (choice)
         {
@@ -61,7 +61,7 @@ class Program
                 try
                 {
                     int ID = int.Parse(Console.ReadLine());
-                    p = _dal.Product.GetById(ID); 
+                    p = _dal.Product.GetById(ID);
                     Console.WriteLine(p);
                 }
                 catch (Exception ex)
@@ -76,7 +76,7 @@ class Program
 
             case 'd':
                 Console.WriteLine("enter values to Update object:");
-            
+
                 while (!int.TryParse(Console.ReadLine(), out id))
                 {
                     Console.WriteLine("Wrong number enter again");
@@ -268,8 +268,8 @@ class Program
         }
 
     }
-        static void Main(string[] args)
-        {
+    static void Main(string[] args)
+    {
         try
         {
             for (int i = 0; i < 10; i++)
@@ -300,8 +300,8 @@ class Program
 
             throw;
         }
-        }
     }
+}
 
 
 

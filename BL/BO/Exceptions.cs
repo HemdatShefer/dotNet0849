@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace BlImplementation
 {
@@ -194,6 +188,26 @@ namespace BlImplementation
         }
 
         protected EmailUnvalidException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
+    internal class EmptyCartException : Exception
+    {
+        public EmptyCartException()
+        {
+        }
+
+        public EmptyCartException(string? message) : base(message)
+        {
+        }
+
+        public EmptyCartException(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected EmptyCartException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

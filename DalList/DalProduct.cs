@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using DalApi;
+﻿using DalApi;
 using DO;
 
 
@@ -52,7 +46,7 @@ public class DalProduct : IProduct
         foreach (var p in DataSource.Products.Where(p => p.ID == id))
         {
             DataSource.Products.Remove(p);
-            break;
+            return;
         }
 
         throw new ObjectNotFoundException("CANT FIND ITEM");

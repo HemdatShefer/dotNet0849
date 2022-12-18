@@ -1,10 +1,4 @@
 ﻿using DO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DalApi;
 
 namespace Dal;
 
@@ -36,14 +30,14 @@ internal static class DataSource
     /// <summary>
     /// 
     /// </summary>
-    static DataSource() 
+    static DataSource()
     {
         s_Initialize();
     }
     /// <summary>
     /// 
     /// </summary>
-    static private void addNewProduct()
+    static private void initProduct()
     {
         List<List<string>> ProductsNames = new List<List<string>>
             {
@@ -65,8 +59,8 @@ internal static class DataSource
                 {
                     ID = config.NextOrderNumberOrderItem,
                     Name = name,
-                    Categories = category, 
-                    Price = random.Next(100) + 0.90, 
+                    Categories = category,
+                    Price = random.Next(100) + 0.90,
                     InStock = pres-- > 0 ? 0 : random.Next(30, 100),
                 };
 
@@ -77,10 +71,10 @@ internal static class DataSource
     /// <summary>
     /// 
     /// </summary>
-    static private void addOrderItem()
+    static private void initOrders()
     {
-        string[] Names = new string[] {"Norit","Ron","Yael","Lior","Shlomo","Tamar","harry","Jacob","Lili","Rivka","Tal","Aharon","David"};
-        string[] Addresses = new string[] {"Heifa", "Ashkelon", "Ra'anana", "Eylat", "Jerusalem", "Tel Aviv", "Be'er Seva", "Bet Shemesh", "Ashdod","Dimona"};
+        string[] Names = new string[] { "Norit", "Ron", "Yael", "Lior", "Shlomo", "Tamar", "harry", "Jacob", "Lili", "Rivka", "Tal", "Aharon", "David" };
+        string[] Addresses = new string[] { "Heifa", "Ashkelon", "Ra'anana", "Eylat", "Jerusalem", "Tel Aviv", "Be'er Seva", "Bet Shemesh", "Ashdod", "Dimona" };
 
 
         for (int i = 0; i < 10; i++)
@@ -91,13 +85,13 @@ internal static class DataSource
 
             Order newOrder = new Order
             {
-                ID = config.NextOrderNumberOrderItem,
+                ID = config.nextOrderNumber,
                 CustomerName = newCustomerName,
                 CustomerEmail = newCustomerName + "@gmail.com",
                 CustomerAddress = Addresses[i],
                 OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-                ShipDate = percent_shiped-- > 0 ? DateTime.MinValue + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
-                DeliveryDate = percent_deliverd-- > 0 ? DateTime.MinValue + new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
+                ShipDate =   percent_shiped-- > 0 ? DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
+                DeliveryDate =  percent_deliverd-- > 0 ? DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
             };
             orders.Add(newOrder);
 
@@ -106,21 +100,22 @@ internal static class DataSource
     /// <summary>
     /// 
     /// </summary>
-    static private void addOrders()
+    static private void initOrderItems()
     {
         for (int i = 0; i < 10; i++)
         {
-            int orderId = random.Next(0, orders.Count);
-            for (int j = 0; j <random.Next(1,10); j++)
+            int orderId = orders[i].ID;
+            int number = random.Next(1, 10);
+            for (int j = 0; j < number; j++)
             {
-                Product? product = Products[random.Next(Products.Count)]; //choose random product to put into the orderitems list
+                Product? product = Products[random.Next(Products.Count)];
                 OrderItem _orderItem = new OrderItem
                 {
-                    ID = config.nextOrderNumber,
+                    ID = config.NextOrderNumberOrderItem,
                     OrderID = orderId,
                     ProductID = product?.ID ?? 0,
                     Price = product?.Price ?? 0,
-                    Amount = random.Next(1, 10),
+                    Amount = random.Next(1, 20),
                 };
                 OrderItem.Add(_orderItem);
             }
@@ -131,8 +126,8 @@ internal static class DataSource
     /// </summary>
     static private void s_Initialize()
     {
-        addNewProduct();
-        addOrderItem();
-        addOrders();
+        initProduct();
+        initOrders();
+        initOrderItems();
     }
 }

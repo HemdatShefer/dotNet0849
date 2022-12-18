@@ -1,17 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OtherFunctions;
 
 namespace BO
 {
     public class OrderItem
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int ID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int ProductID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int OrderID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public double Price { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int Amount { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalPrice { get; set; }
+
+        public override string ToString()
+        {
+            return this.toString();
+        }
     }
 }

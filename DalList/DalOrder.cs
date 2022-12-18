@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DalApi;
 using DO;
-using DalApi;
 
 namespace Dal;
 
 public class DalOrder : IOrder
 {
-    public int Add(Order item)
+    public int Add(Order order)
     {
-        DataSource.orders.Add(item);
-        return item.ID;
+        order.ID = DataSource.config.NextOrderNumberOrderItem;
+        DataSource.orders.Add(order);
+        return order.ID;
     }
 
     public void Delete(int id)
@@ -36,7 +32,7 @@ public class DalOrder : IOrder
 
     public Order GetByIdOrder(int id)
     {
-        foreach (var order in DataSource.orders.Where(order => order.ID == id)){ return order;}
+        foreach (var order in DataSource.orders.Where(order => order.ID == id)) { return order; }
         throw new Exception("CANT FIND order");
     }
 
@@ -52,28 +48,4 @@ public class DalOrder : IOrder
         throw new NotImplementedException("CANT FIND order");
     }
 
-    IEnumerable<Order> ICrud<Order>.GetAll()
-    {
-        return (from Order item in DataSource.orders select item).ToList();
-    }
-
-    public void AddOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void DeleteOrder(int IDorder)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateOrder(Order order)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Order GetProduct(int IDorder)
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BlImplementation;
-using BO;
-
-namespace BlApi
+﻿namespace BlApi
 {
 
     public interface IOrder
     {
         IEnumerable<BO.OrderForList?> orderForLists();
-        BO.Order GetOrderManger(int orderID);
-        BO.Order GetOrderClient(int orderID);
-        BO.Order UpdateDelivery(int orderID);
-        BO.Order UpdatSupplay(int orderID);
+        BO.Order GetOrder(int orderID);
+        BO.Order UpdateshippedDate(int orderID);
+        BO.Order UpdateDeliverdDate(int orderID);
         BO.OrderTracking GetOrderTracking(int orderID);
     }
 }

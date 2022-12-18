@@ -1,23 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OtherFunctions;
 
 namespace BO
 {
     public class Cart
     {
-        public int ID { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public List<OrderItem>? Items { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string? CustomerName { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string? CustomerAdress { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string? CustomerEmail { get; set; }
-        public double Total { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public double TotalPrice { get; set; }
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.toString();
         }
     }
 }

@@ -1,16 +1,7 @@
 ﻿using BlApi;
+using BO;
 using Dal;
 using DalApi;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using BlApi;
-using DO;
-using BO;
 
 namespace BlImplementation
 {
@@ -19,47 +10,88 @@ namespace BlImplementation
     {
         private IDal _dal = new DalList();
 
-        BO.Cart ICart.AddOrderItem(BO.Cart cart, int productId)
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotInStockException"></exception>
+        /// <exception cref="ObjectNotFoundException"></exception>
+        public BO.Cart AddOrderItem(BO.Cart cart, int productId)
         {
             try
             {
-                DO.Product DOproduct = _dal.Product.GetById(productId);
-                BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock };
-                BO.OrderItem orderItem = new BO.OrderItem { ID = DOproduct.ID, OrderID = cart.ID , Price = DOproduct.Price, Amount =  1, ProductID = productId };
-                if (product.InStock <= 0)
-                {
-                    throw new NotInStockException("stock is empty");
-                }
+                DO.Product dOproduct = _dal.Product.GetById(productId);
 
-                foreach (var item in cart.Items.Where(item => item.ID == productId)){ item.Amount++; return cart; }
-                cart.Items.Add(orderItem);
+                if (dOproduct.InStock <= 0)
+                    throw new NotInStockException("stock is empty");
+
+                OrderItem orderItem = getOrderItem(cart, productId);
+
+                if (orderItem is null)
+                    cart.Items!.Add(new BO.OrderItem { Price = dOproduct.Price, Amount = 1, ProductID = dOproduct.ID , ID = productId });
+
+                else
+                    orderItem.Amount++;
+
+                cart.TotalPrice += dOproduct.Price;
             }
-            catch
+            catch (DO.ObjectNotFoundException ex)
             {
-                throw new unValidException("id not valid");
+                throw new ObjectNotFoundException("", ex);
             }
             return cart;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        private OrderItem getOrderItem(BO.Cart cart, int productId)
+        {
+            foreach (OrderItem orderItem in cart.Items!)
+            {
+                if (orderItem.ProductID == productId)
+                {
+                    return orderItem;
+                }
+            }
+            return null;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="productId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        /// <exception cref="unValidException"></exception>
         public BO.Cart UpdateOrderItem(BO.Cart cart, int productId, int amount)
         {
             try
             {
-                DO.Product DOproduct = _dal.Product.GetById(productId);
-                BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock };
-                BO.OrderItem orderItem = new BO.OrderItem { ID = DOproduct.ID, OrderID = cart.ID, Price = DOproduct.Price, Amount = amount, ProductID = productId };
-                
-                if (product.InStock- amount <=0 )
+                OrderItem orderItem = getOrderItem(cart, productId);
+
+                if (orderItem is not null)
                 {
-                    throw new NotInStockException("Not enoge");
-                }
-                if (amount == 0)
-                {
-                    foreach (var item in cart.Items.Where(item => item.ProductID == productId)) { cart.Items.Remove(item); }
-                }
-                else
-                {
-                    foreach (BO.OrderItem item in cart.Items.Where(item => item.ProductID == productId)) { item.Amount = amount; }
-                    cart.Items.Add(orderItem);
+                    DO.Product DOproduct = _dal.Product.GetById(productId);
+
+                    if (DOproduct.InStock - amount <= 0)
+                    {
+                        throw new NotInStockException("Not enoge");
+                    }
+
+                    if (amount == 0)
+                    {
+                        cart.Items!.Remove(orderItem);
+                    }
+                    else
+                    {
+                        orderItem.Amount = amount;
+                    }
+                    cart.TotalPrice += -(orderItem.Price * orderItem.Amount) + orderItem.Price * amount;
                 }
             }
             catch
@@ -68,74 +100,112 @@ namespace BlImplementation
             }
             return cart;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <exception cref="EmptyCartException"></exception>
         public void CommitCart(BO.Cart cart)
         {
+            if (cart.Items!.Count() <= 0)
+            {
+                throw new EmptyCartException(" items are empty");
+            }
             try
             {
                 CheckClient(cart);
-                foreach(BO.OrderItem orderItem in cart.Items)
+                List<DO.Product> products = new List<DO.Product>();
+                foreach (BO.OrderItem item in cart.Items!)
                 {
-                    CheckProduct(orderItem);
+                    CheckProduct(item);
+                    products.Add(_dal.Product.GetById(item.ProductID));
                 }
-                    });
+                int OrderId = _dal.Order.Add(new DO.Order
+                {
+                    CustomerName = cart.CustomerName!,
+                    CustomerAddress = cart.CustomerAdress!,
+                    CustomerEmail = cart.CustomerEmail!,
+                    OrderDate = DateTime.Now,
+                    DeliveryDate = DateTime.MinValue,
+                    ShipDate = DateTime.MinValue
+                });
+                cart.Items.ForEach(orderItem =>
+                {
+                    _dal.OrderItem.Add(new DO.OrderItem
+                    {
+                        OrderID = OrderId,
+                        ProductID = orderItem.ProductID,
+                        Price = orderItem.Price,
+                        Amount = orderItem.Amount,
                     });
 
+                    DO.Product product = products.Find(product => product.ID == orderItem.ProductID);
+                    product.InStock -= orderItem.Amount;
+
+                    _dal.Product.Update(product);
+                });
+                cart.Items.Clear();
+                cart.TotalPrice = 0;
             }
             catch
             {
-                ////////
+                throw;
             }
-            DO.Order order = new DO.Order() {ID = 0,OrderDate = DateTime.Now, DeliveryDate = DateTime.MinValue, ShipDate = DateTime.MinValue, CustomerAddress = "", CustomerEmail = "", CustomerName ="" };
-
-
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <exception cref="EmailUnvalidException"></exception>
+        /// <exception cref="NameUnvalidException"></exception>
+        /// <exception cref="AdressUnvalidException"></exception>
+        /// <exception cref="TotalUnvalidException"></exception>
         private static void CheckClient(BO.Cart cart)
         {
-            if(cart.ID <= 0)
-            {
-                throw new IDNotAdmissibleException("invalid ID");
-            }
+
             if (cart.CustomerEmail == "")
             {
                 throw new EmailUnvalidException("invalid Customer Email");
             }
-            if(cart.CustomerName == "")
+            if (cart.CustomerName == "")
             {
                 throw new NameUnvalidException("invalid Name");
 
             }
-            if (cart.CustomerAdress =="")
+            if (cart.CustomerAdress == "")
             {
                 throw new AdressUnvalidException("invalid Customer Adress");
 
             }
-            if (cart.Total<0)
+            if (cart.TotalPrice < 0)
             {
                 throw new TotalUnvalidException("invalid total price");
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <exception cref="IDNotAdmissibleException"></exception>
+        /// <exception cref="NameNotAdmissibleException"></exception>
+        /// <exception cref="PriceNotAdmissibleException"></exception>
         private static void CheckProduct(BO.OrderItem product)
         {
-            if (product.ID <= 0 || product.ID.ToString().Length < 5)
+            if (product.ProductID <= 0)
             {
                 throw new IDNotAdmissibleException("invalid ID input");
             }
-            if (product.OrderID <=0)
+            if (product.Amount <= 0)
             {
                 throw new NameNotAdmissibleException("invalid name input");
             }
-            if (product.Price <= 0)
+            if (product.Price < 0)
             {
                 throw new PriceNotAdmissibleException("invalid price input");
             }
-            if (product.ProductID < 0)
-            {
-                throw new StockNotAdmissibleException("invalid stock input");
-            }
+
         }
     }
 
-  
 }
 

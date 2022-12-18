@@ -1,561 +1,324 @@
-﻿namespace BlTest
+﻿using BlApi;
+using BlImplementation;
+using BO;
+using Cart = BO.Cart;
+using Order = BO.Order;
+using Product = BO.Product;
+
+namespace BlTest
 {
     internal class Program
     {
+        private static IBl _bl = new Bl();
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            BO.Cart cart = new Cart { Items = new List<OrderItem>() };
+            BO.Order order = createNewOrder(cart);
+            string chosenEntity = entityMenu();
+
+            while (chosenEntity != "0")
+            {
+                try
+                {
+                    switch (chosenEntity)
+                    {
+                        case "1":
+                            productTester();
+                            break;
+                        case "2":
+                            orderTestser(order);
+                            break;
+                        case "3":
+                            cartTestser(cart);
+                            break;
+                        case "0":
+                            Console.WriteLine("goodbye");
+                            break;
+                        default:
+                            Console.WriteLine("Choice doesn't exist");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message.ToString());
+                }
+                chosenEntity = entityMenu();
+            }
+        }
+
+        private static string entityMenu()
+        {
+            Console.WriteLine($@"
+
+            choose entity performance to check:
+
+            1 - product
+            2 - order 
+            3 - cart
+            0 - exit
+            ");
+            return Console.ReadLine() ?? "";
+        }
+
+        private static string cartTestserMenu()
+        {
+            Console.WriteLine($@"
+
+            choose performance to check:
+
+            1 - add product to cart
+            2 - update amount of product 
+            3 - Commit cart
+            0 - back
+            ");
+            return Console.ReadLine() ?? "";
+        }
+
+        private static string orderTestserMenu()
+        {
+            Console.WriteLine(
+            $@"choose performance to check:
+
+            1 - get an order
+            2 - get all orders
+            3 - update shipped date
+            4 - update delivery date
+            5 - track order
+            0 - back");
+            return Console.ReadLine() ?? "";
+        }
+
+        private static string productTesterMenu()
+        {
+            Console.WriteLine(
+            $@"choose performance to check:
+
+            1 - add product
+            2 - delete product
+            3 - update product
+            4 - get all products
+            5 - get product for manager
+            6 - get product for customer
+            0 - back");
+            return Console.ReadLine() ?? "";
+        }
+
+
+        private static BO.Order createNewOrder(BO.Cart cart)
+        {
+            Order order = new Order()
+            {
+                CustomerAddress = cart.CustomerAdress,
+                CustomerName = cart.CustomerName,
+                CustomerEmail = cart.CustomerEmail,
+                Items = cart.Items,
+                DeliveryDate = DateTime.MinValue,
+                OrderDate = DateTime.MinValue,
+                ShipDate = DateTime.MinValue,
+                TotalPrice = 0,
+                Status = BO.Enums.Status.confirmed
+            };
+
+            return order;
+        }
+
+        private static void orderTestser(BO.Order order)
+        {
+            string choice = orderTestserMenu();
+            while (choice != "0")
+            {
+                switch (choice)
+                {
+                    case "1":
+                        int id = getIdForOrder();
+                        Console.WriteLine(_bl.Order.GetOrder(id));
+                        break;
+
+                    case "2":
+                        IEnumerable<OrderForList?> allProduct = _bl.Order.orderForLists();
+                        foreach (OrderForList? item in allProduct)
+                            Console.WriteLine(item);
+                        break;
+
+                    case "3":
+                        id = getIdForOrder();
+                        _bl.Order.UpdateshippedDate(id);
+                        break;
+
+                    case "4":
+                        id = getIdForOrder();
+                        _bl.Order.UpdateDeliverdDate(id);
+                        break;
+
+
+                    case "5":
+                        id = getIdForOrder();
+                        Console.WriteLine(_bl.Order.GetOrderTracking(id).OrderTrackingStatus);
+                        break;
+
+                    case "0":
+                        Console.WriteLine("return to main menu");
+                        break;
+                }
+                choice = orderTestserMenu();
+            }
+        }
+
+        private static int getIdForOrder()
+        {
+            bool flag;
+            int id = 0;
+            do
+            {
+                Console.Write("enter Order id: ");
+                flag = int.TryParse(Console.ReadLine(), out id);
+
+            } while (!flag);
+            return id;
+        }
+
+        private static void productTester()
+        {
+            string choice = productTesterMenu();
+            while (choice != "0")
+            {
+                switch (choice)
+                {
+                    case "1":
+                        Product product = getProduct();
+                        _bl.Product.AddProduct(product);
+                        break;
+
+                    case "2":
+                        int id = getIdForProduct();
+                        _bl.Product.DeleteProduct(id);
+                        break;
+
+                    case "3":
+                        product = getProduct();
+                        Console.WriteLine(product);
+                        Console.WriteLine();
+                        _bl.Product.UpdateProduct(product);
+                        break;
+
+                    case "4":
+                        Console.WriteLine(printList(_bl.Product.GetProductsForList()));
+                        break;
+
+                    case "5":
+                        id = getIdForProduct();
+                        Console.WriteLine(_bl.Product.GetProduct(id));
+                        break;
+
+                    case "6":
+                        id = getIdForProduct();
+                        Console.WriteLine(_bl.Product.GetProduct(id));
+                        break;
+
+                    case "0":
+                        Console.WriteLine("return to main menu");
+                        break;
+                }
+
+                choice = productTesterMenu();
+            }
+        }
+
+        private static string printList<T>(IEnumerable<T> values)
+        => string.Join('\n', values);
+
+        private static int getIdForProduct()
+        {
+            bool flag;
+            int id = 0;
+            do
+            {
+                Console.Write("enter product id: ");
+                flag = int.TryParse(Console.ReadLine(), out id);
+
+            } while (!flag);
+            return id;
+        }
+
+        private static Product getProduct()
+        {
+            Console.WriteLine(@"Enter id, Name, Category, Price, InStock");
+            Product newProduct = new Product
+            {
+                ID = getIdForProduct(),
+                Name = Console.ReadLine()!,
+                Categories = (BO.Enums.Category)(Convert.ToInt32(Console.ReadLine())),
+                Price = double.Parse(Console.ReadLine()!),
+                InStock = int.Parse(Console.ReadLine()!)
+            };
+            return newProduct;
+        }
+
+        private static void cartTestser(BO.Cart cart)
+        {
+            string choice = cartTestserMenu();
+
+            while (choice != "0")
+            {
+
+                switch (choice)
+                {
+                    case "1":
+                        addProductToCart(cart);
+                        break;
+                    case "2":
+                        updateProductInCart(cart);
+                        break;
+                    case "3":
+                        commitCart(cart);
+                        break;
+                    case "0":
+                        Console.WriteLine("return to main menu");
+                        break;
+                }
+
+                choice = cartTestserMenu();
+            }
+        }
+
+        private static void commitCart(BO.Cart cart)
+        {
+            Console.WriteLine("opening new cart, enter info \n");
+            Console.WriteLine("Name:");
+            cart.CustomerName = Console.ReadLine() ?? "";
+            Console.WriteLine("Home address:");
+            cart.CustomerAdress = Console.ReadLine() ?? "";
+            Console.WriteLine("Email address:");
+            cart.CustomerEmail = Console.ReadLine() ?? "";
+            cart.TotalPrice = 0;
+
+            _bl.Cart.CommitCart(cart);
+        }
+
+        private static void updateProductInCart(BO.Cart cart)
+        {
+            int amount;
+            bool flag;
+            int id = getIdForProduct();
+
+            do
+            {
+                Console.Write("new amount of product");
+                flag = int.TryParse(Console.ReadLine(), out amount);
+
+            } while (!flag);
+            Console.WriteLine(_bl.Cart.UpdateOrderItem(cart, id, amount));
+        }
+
+        private static void addProductToCart(BO.Cart cart)
+        {
+            int id = getIdForProduct();
+            Console.WriteLine(_bl.Cart.AddOrderItem(cart, id));
         }
     }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-//using BlApi;
-//using BlImplementation;
-//using BO;
-
-//namespace BlTest;
-
-//internal class Program
-//{
-//    static IBL accessor = new Bl();
-//    static void Main(string[] args)
-//    {
-//        string choice;
-//        do
-//        {
-//            Console.WriteLine($@"MAIN MENU: choose entity to test - 
-//a - product
-//b - order
-//c - cart
-//x - exit
-//");
-//            choice = Console.ReadLine() ?? "";
-//            switch (choice)
-//            {
-//                case "a":
-//                    proudactTests();
-//                    break;
-//                case "b":
-//                    orderTests();
-//                    break;
-//                case "c":
-//                    cartTests();
-//                    break;
-//                case "x":
-//                    Console.WriteLine("goodbye");
-//                    break;
-//                default:
-//                    Console.WriteLine("Choice does not exist");
-//                    break;
-//            }
-//        } while (choice != "x");
-//    }
-
-//    private static void proudactTests()
-//    {
-//        string choice;
-//        int intInput;
-//        bool formatFlag;
-//        Product product;
-//        Product? productN;
-
-//        do
-//        {
-//            Console.WriteLine($@"PRODUCT MENU: choose test - 
-//a - add product
-//b - delete product
-//c - update product
-//d - get all products
-//e - get a product for manager
-//f - get a product for customer
-//x - back to MAIN MENU
-//");
-//            choice = Console.ReadLine() ?? "";
-//            try
-//            {
-//                switch (choice)
-//                {
-//                    case "a": //add
-//                        product = getUserProduct();
-//                        accessor.Product.Add(product);
-//                        break;
-
-//                    case "b": //delete
-
-//                        Console.Write("enter product id to delete: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter product id to delete: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        accessor.Product.Delete(intInput);
-//                        break;
-
-//                    case "c": //update
-
-//                        Console.Write("enter product id to update: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter product id to update: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        productN = accessor.Product.GetProductByIdForManager(intInput);
-//                        Console.WriteLine(productN);
-
-//                        Product updatedProduct = getUserProduct(intInput);
-//                        //compare user product to existing product
-//                        updatedProduct.NameOfProduct = (updatedProduct.NameOfProduct != "") ? updatedProduct.NameOfProduct : productN?.NameOfProduct;
-//                        updatedProduct.Artist = (updatedProduct.Artist != "") ? updatedProduct.Artist : productN?.Artist;
-//                        updatedProduct.Categories = (updatedProduct.Categories != productN?.Categories) ? updatedProduct.Categories : productN.Categories;
-//                        updatedProduct.Price = (updatedProduct.Price != productN?.Price) ? updatedProduct.Price : productN.Price;
-//                        updatedProduct.AmountInStock = (updatedProduct.AmountInStock != productN?.AmountInStock) ? updatedProduct.AmountInStock : productN.AmountInStock;
-
-//                        accessor.Product.Update(updatedProduct);
-//                        break;
-
-//                    case "d": //get all
-//                        IEnumerable<ProductForList?> allProduct = accessor.Product.GetProductList();
-//                        foreach (ProductForList? item in allProduct)
-//                            Console.WriteLine(item);
-//                        break;
-
-//                    case "e": //get for manager
-
-//                        Console.Write("manager, enter product id to search: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nmanager, enter product id to search: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        productN = accessor.Product.GetProductByIdForManager(intInput);
-//                        Console.WriteLine(productN);
-//                        break;
-
-//                    case "f": //get for customer
-
-//                        Console.Write("customer, enter product id to search: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\ncustomer, enter product id to search: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        int randAmount = new Random().Next(4);
-//                        Cart cartForTesting = new Cart()
-//                        {
-//                            CustomerName = "Moshe",
-//                            CustomerEmail = "moshe@gmail.com",
-//                            CustomerAddress = "Jerusalem",
-//                            items = new List<OrderItem?>()
-//                            {
-//                                new OrderItem()
-//                                {
-//                                    IdOfOrderItem = 123,
-//                                    ProductID = intInput,
-//                                    ProductName = "aaa",
-//                                    Price = 29.90,
-//                                    Amount = randAmount,
-//                                    TotalPrice = 29.90 * randAmount
-//                                },
-//                                new OrderItem()
-//                                {
-//                                    IdOfOrderItem = 124,
-//                                    ProductID = 987654,
-//                                    ProductName = "bbb",
-//                                    Price = 15.50,
-//                                    Amount = 2,
-//                                    TotalPrice = 15.50 * 2
-//                                }
-//                            },
-//                            TotalPrice = 15.50 * 2 + 29.90 * randAmount
-//                        };
-
-//                        ProductItem? productItem = accessor.Product.GetProductByIdForCustomer(intInput, cartForTesting);
-//                        Console.WriteLine(productItem);
-//                        break;
-
-//                    case "x":
-//                        break;
-
-//                    default:
-//                        Console.WriteLine("Choice does not exist");
-//                        break;
-//                }
-//            }
-//            catch (ObjectNotFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (FormatIsIncorrectException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (ObjectPropertyOverflowException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (DoubleFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (CouldNotAddObjectException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-
-//        } while (choice != "x");
-//    }
-
-//    private static void cartTests()
-//    {
-//        string choice;
-//        int intInput;
-//        int intMoreInput;
-//        bool formatFlag;
-
-//        Console.WriteLine("CART MANU:\n");
-//        Cart? cart = new Cart();
-
-//        do
-//        {
-//            Console.WriteLine($@"CART MENU: choose test - 
-//a - add product to cart
-//b - update amount of product in cart
-//c - approve cart and payment
-//x - back to MAIN MENU
-//");
-//            choice = Console.ReadLine() ?? "";
-//            try
-//            {
-//                switch (choice)
-//                {
-//                    case "a": //add product to cart
-
-//                        Console.Write("enter product id to add to cart: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter product id to add to cart: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        cart = accessor.Cart.AddProductToCart(cart, intInput);
-//                        Console.WriteLine(cart);
-//                        break;
-
-//                    case "b": //update amount of product in cart
-
-//                        Console.Write("enter product id to update amount in cart: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter product id  to update amount in cart: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        Console.Write("enter new amount: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intMoreInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter now amount: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        cart = accessor.Cart.UpdateAmountOfProductInCart(cart, intInput, intMoreInput);
-//                        Console.WriteLine(cart);
-//                        break;
-
-//                    case "c": //approve cart and payment
-//                        cart = getBuyerInfo(cart);
-//                        accessor.Cart.CartPayment(cart);
-//                        Console.WriteLine(cart);
-//                        break;
-
-//                    case "x":
-//                        break;
-
-//                    default:
-//                        Console.WriteLine("Choice does not exist");
-//                        break;
-//                }
-//            }
-//            catch (ObjectNotFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (ObjectPropertyOverflowException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (DoubleFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (FormatIsIncorrectException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-
-
-
-
-//        } while (choice != "x");
-//    }
-
-//    private static void orderTests()
-//    {
-//        string choice;
-//        int intInput; /, intInput2, intInput3;/
-//        bool formatFlag;
-//        Order? order;
-
-//        do
-//        {
-//            Console.WriteLine($@"ORDER MENU: choose test - 
-//a - get an order
-//b - get all orders
-//c - update shipment date
-//d - update delivery date
-//e - track order
-//f - update order
-//x - back to MAIN MENU
-//");
-//            choice = Console.ReadLine() ?? "";
-//            try
-//            {
-//                switch (choice)
-//                {
-//                    case "a": //get an order
-
-//                        Console.Write("enter order id to search: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter order id to search: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        order = accessor.Order.GetOrder(intInput);
-//                        Console.WriteLine(order);
-//                        break;
-
-//                    case "b": //get all orders
-//                        IEnumerable<OrderForList?> allOrders = accessor.Order.GetOrders();
-//                        foreach (OrderForList? ord in allOrders)
-//                            Console.WriteLine(ord);
-//                        break;
-
-//                    case "c": //update ship date
-
-//                        Console.Write("enter order id to update shipment date: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter order id to update shipment date: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        order = accessor.Order.UpdateShipDate(intInput);
-//                        Console.WriteLine(order);
-//                        break;
-
-//                    case "d": //update delivery date
-
-//                        Console.Write("enter order id to update deleivery date: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter order id to update delivery date: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        order = accessor.Order.UpdateDeliveryDate(intInput);
-//                        Console.WriteLine(order);
-//                        break;
-
-//                    case "e": //track order
-
-//                        Console.Write("enter order id to track: ");
-//                        formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        while (!formatFlag)
-//                        {
-//                            Console.Write("incorrect format, only digits allowed\nenter order id to track: ");
-//                            formatFlag = int.TryParse(Console.ReadLine(), out intInput);
-//                        }
-
-//                        OrderTracking? track = accessor.Order.TrackOrder(intInput);
-//                        Console.WriteLine(track);
-//                        break;
-
-//                    case "f": 
-//                        Console.WriteLine("Method not implemented yet");
-//                        break;
-
-//                    case "x":
-//                        break;
-
-//                    default:
-//                        Console.WriteLine("Choice does not exist");
-//                        break;
-//                }
-//            }
-//            catch (ObjectNotFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (DatesNotChronologicalException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-//            catch (DoubleFoundException ex)
-//            {
-//                Console.WriteLine(ex.GetType() + ": " + ex.Message);
-//                if (ex.InnerException != null)
-//                    Console.WriteLine(ex.InnerException.GetType() + ": " + ex.InnerException.Message);
-//            }
-
-//        } while (choice != "x");
-//    }
-
-//    private static Product getUserProduct(int id = 0)
-//    {
-//        bool formatFlag;
-//        Product userProduct = new Product();
-//        Console.WriteLine(@"enter new data for PRODUCT or press enter to skip
-//(fields with * are required)");
-
-//        switch (id)
-//        {
-//            case 0://add new
-//                Console.Write("* ID: ");
-//                int productID;
-//                formatFlag = int.TryParse(Console.ReadLine(), out productID);
-//                while (!formatFlag)
-//                {
-//                    Console.Write("REQUIRED FIELD\n* ID: ");
-//                    formatFlag = int.TryParse(Console.ReadLine(), out productID);
-//                }
-//                userProduct.ID = productID;
-//                break;
-
-//            default://update existing
-//                Console.WriteLine("ID: " + id);
-//                userProduct.ID = id;
-//                break;
-//        }
-
-//        Console.Write("new name: ");
-//        userProduct.NameOfProduct = Console.ReadLine() ?? "";
-
-//        Console.Write("new artist name: ");
-//        userProduct.Artist = Console.ReadLine() ?? "";
-
-//        Console.Write(@"new category - enter a number: 
-//    1 - {0}
-//    2 - {1}
-//    3 - {2}
-//    4 - {3}
-//    5 - {4} 
-//",
-//            (Enums.ArtStyles)0, (Enums.ArtStyles)1, (Enums.ArtStyles)2, (Enums.ArtStyles)3, (Enums.ArtStyles)4);
-//        int productCategory;
-//        formatFlag = int.TryParse(Console.ReadLine(), out productCategory);
-//        while (!formatFlag || productCategory < 1 || productCategory > 5)
-//        {
-//            Console.WriteLine("REQUIRED FIELD\n* new category - enter a number (1-5): ");
-//            formatFlag = int.TryParse(Console.ReadLine(), out productCategory);
-//        }
-//        switch (productCategory)
-//        {
-//            case 1:
-//                userProduct.Categories = Enums.ArtStyles.Realism;
-//                break;
-//            case 2:
-//                userProduct.Categories = Enums.ArtStyles.Cartoon;
-//                break;
-//            case 3:
-//                userProduct.Categories = Enums.ArtStyles.SemiRealism;
-//                break;
-//            case 4:
-//                userProduct.Categories = Enums.ArtStyles.Cubism;
-//                break;
-//            case 5:
-//                userProduct.Categories = Enums.ArtStyles.Abstract;
-//                break;
-//            default: break;
-//        }
-
-//        Console.Write("new price: ");
-//        double productPrice;
-//        double.TryParse(Console.ReadLine(), out productPrice);
-//        userProduct.Price = productPrice;
-
-//        Console.Write("new amount in stock: ");
-//        int productStock;
-//        int.TryParse(Console.ReadLine(), out productStock);
-//        userProduct.AmountInStock = productStock;
-
-//        userProduct.isDeleted = false;
-
-//        return userProduct;
-//    }
-
-//    private static Cart? getBuyerInfo(Cart? c)
-//    {
-//        if (c != null)
-//        {
-//            Console.WriteLine("enter your info");
-
-//            Console.WriteLine("Name:");
-//            c.CustomerName = Console.ReadLine() ?? "";
-//            Console.WriteLine("Email address:");
-//            c.CustomerEmail = Console.ReadLine() ?? "";
-//            Console.WriteLine("Home address:");
-//            c.CustomerAddress = Console.ReadLine() ?? "";
-//        }
-//        return c;
-//    }
-
-//}
