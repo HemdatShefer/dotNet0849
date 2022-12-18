@@ -77,6 +77,8 @@ namespace BlImplementation
                 {
                     CheckProduct(orderItem);
                 }
+                    });
+                    });
 
             }
             catch
