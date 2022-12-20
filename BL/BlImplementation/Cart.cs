@@ -6,9 +6,9 @@ using DalApi;
 namespace BlImplementation
 {
 
-    public class Cart : ICart
+    internal class Cart : ICart
     {
-        private IDal _dal = new DalList();
+        DalApi.IDal? _dal = DalApi.Factory.Get();
 
         /// <summary>
         /// /
@@ -22,7 +22,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Product dOproduct = _dal.Product.GetById(productId);
+                DO.Product dOproduct = _dal!.Product.GetById(productId);
 
                 if (dOproduct.InStock <= 0)
                     throw new NotInStockException("stock is empty");
@@ -58,7 +58,7 @@ namespace BlImplementation
                     return orderItem;
                 }
             }
-            return null;
+            return null!;
         }
         /// <summary>
         /// 
@@ -76,7 +76,7 @@ namespace BlImplementation
 
                 if (orderItem is not null)
                 {
-                    DO.Product DOproduct = _dal.Product.GetById(productId);
+                    DO.Product DOproduct = _dal!.Product.GetById(productId);
 
                     if (DOproduct.InStock - amount <= 0)
                     {
@@ -118,9 +118,9 @@ namespace BlImplementation
                 foreach (BO.OrderItem item in cart.Items!)
                 {
                     CheckProduct(item);
-                    products.Add(_dal.Product.GetById(item.ProductID));
+                    products.Add(_dal!.Product.GetById(item.ProductID));
                 }
-                int OrderId = _dal.Order.Add(new DO.Order
+                int OrderId = _dal!.Order.Add(new DO.Order
                 {
                     CustomerName = cart.CustomerName!,
                     CustomerAddress = cart.CustomerAdress!,

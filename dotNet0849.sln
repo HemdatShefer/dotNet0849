@@ -8,11 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items (2)", "Solution Items (2)", "{E55F7DFB-9589-4954-9CFD-5926BE7A952C}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{BC02AD8C-0455-4444-9468-BA371343908F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{13523769-1C57-4650-8F70-ADCB12CE500E}"
@@ -27,6 +22,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{6D1AB61C-88F4-41DA-87E1-33735C3F45D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{964F8DD1-D9C4-4F3B-A2BC-B6C1F7B939D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{A50E48D8-E5CA-44FE-82B5-52C80E0250F5}"
+	ProjectSection(SolutionItems) = preProject
+		xml\dal-config.xml = xml\dal-config.xml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,10 @@ Global
 		{6D1AB61C-88F4-41DA-87E1-33735C3F45D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D1AB61C-88F4-41DA-87E1-33735C3F45D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D1AB61C-88F4-41DA-87E1-33735C3F45D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

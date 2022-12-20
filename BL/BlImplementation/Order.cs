@@ -6,13 +6,13 @@ using IOrder = BlApi.IOrder;
 namespace BlImplementation
 {
 
-    public class Order : IOrder
+    internal class Order : IOrder
     {
-        IDal _dal = new DalList();
+        DalApi.IDal? _dal = DalApi.Factory.Get();
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+                                                        /// 
+                                                        /// </summary>
+                                                        /// <returns></returns>
         IEnumerable<OrderForList> IOrder.orderForLists()
         {
             IEnumerable<DO.Order> ordersList = new Dal.DalOrder().GetAll();
@@ -20,7 +20,7 @@ namespace BlImplementation
             
             foreach (DO.Order order in ordersList)
             {
-                IEnumerable<DO.OrderItem> ordersItems = _dal.OrderItem.GetAll().Where(orderItem => orderItem.OrderID == order.ID);
+                IEnumerable<DO.OrderItem> ordersItems = _dal!.OrderItem.GetAll().Where(orderItem => orderItem.OrderID == order.ID);
                 ordersForList.Add(new BO.OrderForList
                 {
                     ID = order.ID,
@@ -43,7 +43,7 @@ namespace BlImplementation
         {
             if (validID(orderID))
             {
-                DO.Order order = _dal.Order.GetById(orderID);
+                DO.Order order = _dal!.Order.GetById(orderID);
                 IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll().Where(orderItem => orderItem.OrderID == orderID);
 
                 return new BO.Order
@@ -84,7 +84,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = _dal.Order.GetById(orderID);
+                DO.Order order = _dal!.Order.GetById(orderID);
                 IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
                 IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
                 return new BO.Order
@@ -124,9 +124,9 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = _dal.Order.GetById(orderID);
-                IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
-                IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
+                DO.Order order = _dal!.Order.GetById(orderID);
+                IEnumerable<DO.OrderItem> orderItems = _dal!.OrderItem.GetAll();
+                IEnumerable<DO.OrderItem> orderItemsFilter = _dal!.OrderItem.GetAll();
                 return new BO.Order
                 {
                     ID = order.ID,
@@ -164,7 +164,7 @@ namespace BlImplementation
         {
             try
             {
-                DO.Order order = _dal.Order.GetById(orderID);
+                DO.Order order = _dal!.Order.GetById(orderID);
                 return new OrderTracking()
                 {
                     ID = orderID,

@@ -5,7 +5,9 @@ namespace Dal;
 
 class Program
 {
-    private static IDal _dal = new DalList();
+  //  private static IDal dal = new DalList();
+    private static DalApi.IDal? dal = DalApi.Factory.Get();
+
     private static void printAll<T>(IEnumerable<T> values)
     {
         Console.WriteLine(string.Join('\n', values));
@@ -20,17 +22,13 @@ class Program
         Console.WriteLine("e - Delete object");
 
         Console.WriteLine("Enter your choice: ");
-        return char.Parse(Console.ReadLine());
+        return char.Parse(Console.ReadLine()!);
     }
     public static void ProductMenu()
     {
         char choice = printMenu();
         Product p = new Product();
         int id;
-        string name;
-        Enums.Category category;
-        int price;
-        int inStock;
 
         switch (choice)
         {
@@ -42,13 +40,13 @@ class Program
                     Console.WriteLine("Wrong input enter again");
                 }
                 p.ID = id;
-                p.Name = Console.ReadLine();
+                p.Name = Console.ReadLine()!;
                 p.Categories = (Enums.Category)(Convert.ToInt32(Console.ReadLine()));
-                p.Price = double.Parse(Console.ReadLine());
-                p.InStock = int.Parse(Console.ReadLine());
+                p.Price = double.Parse(Console.ReadLine()!);
+                p.InStock = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    _dal.Product.Add(p);
+                    dal!.Product.Add(p);
                 }
                 catch (Exception ex)
                 {
@@ -60,8 +58,8 @@ class Program
                 Console.WriteLine("Enter the ID of the product: ");
                 try
                 {
-                    int ID = int.Parse(Console.ReadLine());
-                    p = _dal.Product.GetById(ID);
+                    int ID = int.Parse(Console.ReadLine()!);
+                    p = dal!.Product.GetById(ID);
                     Console.WriteLine(p);
                 }
                 catch (Exception ex)
@@ -71,7 +69,7 @@ class Program
                 break;
 
             case 'c':
-                printAll(_dal.Product.GetAll());
+                printAll(dal!.Product.GetAll());
                 break;
 
             case 'd':
@@ -82,14 +80,14 @@ class Program
                     Console.WriteLine("Wrong number enter again");
                 }
                 p.ID = id;
-                p.Name = Console.ReadLine();
+                p.Name = Console.ReadLine()!;
                 p.Categories = (Enums.Category)(Convert.ToInt32(Console.ReadLine()));
-                p.Price = double.Parse(Console.ReadLine());
-                p.InStock = int.Parse(Console.ReadLine());
+                p.Price = double.Parse(Console.ReadLine()!);
+                p.InStock = int.Parse(Console.ReadLine()!);
 
                 try
                 {
-                    _dal.Product.Add(p);
+                    dal!.Product.Add(p);
                 }
                 catch (Exception ex)
                 {
@@ -99,10 +97,10 @@ class Program
 
             case 'e':
                 Console.WriteLine("Enter the ID of the product: ");
-                id = int.Parse(Console.ReadLine());
+                id = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    _dal.Product.Delete(id);
+                    dal!.Product.Delete(id);
                 }
                 catch (Exception ex)
                 {
@@ -133,14 +131,14 @@ class Program
                     Console.WriteLine("Wrong number enter again");
                 }
                 orderItem.ID = id;
-                orderItem.ProductID = int.Parse(Console.ReadLine());
-                orderItem.OrderID = int.Parse(Console.ReadLine());
-                orderItem.Price = double.Parse(Console.ReadLine());
-                orderItem.Amount = int.Parse(Console.ReadLine());
+                orderItem.ProductID = int.Parse(Console.ReadLine()!);
+                orderItem.OrderID = int.Parse(Console.ReadLine()!);
+                orderItem.Price = double.Parse(Console.ReadLine()!);
+                orderItem.Amount = int.Parse(Console.ReadLine()!);
 
                 try
                 {
-                    Program._dal.OrderItem.Add(orderItem);
+                    Program.dal!.OrderItem.Add(orderItem);
                 }
                 catch (Exception ex)
                 {
@@ -151,10 +149,10 @@ class Program
 
             case 'b':
                 Console.WriteLine("Enter the ID of the object: ");
-                id = int.Parse(Console.ReadLine());
+                id = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    OrderItem pr = Program._dal.OrderItem.GetById(id);
+                    OrderItem pr = Program.dal!.OrderItem.GetById(id);
                     Console.WriteLine(pr);
                 }
                 catch (Exception ex)
@@ -164,19 +162,19 @@ class Program
                 break;
 
             case 'c':
-                printAll(Program._dal.OrderItem.GetAll());
+                printAll(Program.dal!.OrderItem.GetAll());
                 break;
 
             case 'd':
                 Console.WriteLine("enter values to Update object:");
-                orderItem.ID = int.Parse(Console.ReadLine());
-                orderItem.ProductID = int.Parse(Console.ReadLine());
-                orderItem.OrderID = int.Parse(Console.ReadLine());
-                orderItem.Price = double.Parse(Console.ReadLine());
-                orderItem.Amount = int.Parse(Console.ReadLine());
+                orderItem.ID = int.Parse(Console.ReadLine()!);
+                orderItem.ProductID = int.Parse(Console.ReadLine()!);
+                orderItem.OrderID = int.Parse(Console.ReadLine()!);
+                orderItem.Price = double.Parse(Console.ReadLine()!);
+                orderItem.Amount = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    Program._dal.OrderItem.Update(orderItem);
+                    Program.dal!.OrderItem.Update(orderItem);
                 }
                 catch (Exception ex)
                 {
@@ -185,10 +183,10 @@ class Program
                 break;
             case 'e':
                 Console.WriteLine("Enter the ID of the object: ");
-                int ID = int.Parse(Console.ReadLine());
+                int ID = int.Parse(Console.ReadLine()!);
                 try
                 {
-                    Program._dal.OrderItem.Delete(ID);
+                    Program.dal!.OrderItem.Delete(ID);
                 }
                 catch (Exception ex)
                 {
@@ -212,17 +210,17 @@ class Program
         {
             case 'a':
                 Console.WriteLine("enter values to add object:");
-                order.ID = int.Parse(Console.ReadLine());
-                order.CustomerName = Console.ReadLine();
-                order.CustomerEmail = Console.ReadLine();
-                order.CustomerAddress = Console.ReadLine();
-                order.OrderDate = DateTime.Parse(Console.ReadLine());
-                order.ShipDate = DateTime.Parse(Console.ReadLine());
-                order.DeliveryDate = DateTime.Parse(Console.ReadLine());
+                order.ID = int.Parse(Console.ReadLine()!);
+                order.CustomerName = Console.ReadLine()!;
+                order.CustomerEmail = Console.ReadLine()!;
+                order.CustomerAddress = Console.ReadLine()!;
+                order.OrderDate = DateTime.Parse(Console.ReadLine()!);
+                order.ShipDate = DateTime.Parse(Console.ReadLine()!);
+                order.DeliveryDate = DateTime.Parse(Console.ReadLine()!);
 
                 try
                 {
-                    Program._dal.Order.Add(order);
+                    Program.dal!.Order.Add(order);
                 }
                 catch (Exception ex)
                 {
@@ -232,8 +230,8 @@ class Program
             case 'b':
                 try
                 {
-                    int ID = int.Parse(Console.ReadLine());
-                    order = Program._dal.Order.GetById(ID);
+                    int ID = int.Parse(Console.ReadLine()!);
+                    order = Program.dal!.Order.GetById(ID);
                     Console.WriteLine(order);
                 }
                 catch (Exception ex)
@@ -242,21 +240,21 @@ class Program
                 }
                 break;
             case 'c':
-                printAll(Program._dal.Order.GetAll());
+                printAll(Program.dal!.Order.GetAll());
                 break;
             case 'd':
                 Console.WriteLine("enter values to Update object:");
-                order.ID = int.Parse(Console.ReadLine());
-                order.CustomerName = Console.ReadLine();
-                order.CustomerEmail = Console.ReadLine();
-                order.CustomerAddress = Console.ReadLine();
-                order.OrderDate = DateTime.Parse(Console.ReadLine());
-                order.ShipDate = DateTime.Parse(Console.ReadLine());
-                order.DeliveryDate = DateTime.Parse(Console.ReadLine());
+                order.ID = int.Parse(Console.ReadLine()!);
+                order.CustomerName = Console.ReadLine()!;
+                order.CustomerEmail = Console.ReadLine()!;
+                order.CustomerAddress = Console.ReadLine()!;
+                order.OrderDate = DateTime.Parse(Console.ReadLine()!);
+                order.ShipDate = DateTime.Parse(Console.ReadLine()!);
+                order.DeliveryDate = DateTime.Parse(Console.ReadLine()!);
 
                 try
                 {
-                    Program._dal.Order.Update(order);
+                    Program.dal!.Order.Update(order);
                 }
                 catch (Exception ex)
                 {
@@ -275,7 +273,7 @@ class Program
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine("Enter your choice from 0-3:");
-                char ch = char.Parse(Console.ReadLine());
+                char ch = char.Parse(Console.ReadLine()!);
 
                 if (ch == '0')
                 {

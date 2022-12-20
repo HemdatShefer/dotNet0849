@@ -7,7 +7,7 @@ namespace BlImplementation
 
     internal class Product : IProduct
     {
-        private Dal.DalProduct _dal = new Dal.DalProduct();
+     private Dal.DalProduct _dal = new Dal.DalProduct();
         /// <summary>
         /// 
         /// </summary>

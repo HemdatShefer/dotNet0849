@@ -9,8 +9,8 @@ namespace BlTest
 {
     internal class Program
     {
-        private static IBl _bl = new Bl();
-
+        // private static IBl dal = new Bl();
+        private static BlApi.IBl? dal = BlApi.Factory.Get();
         static void Main(string[] args)
         {
             BO.Cart cart = new Cart { Items = new List<OrderItem>() };
@@ -133,29 +133,30 @@ namespace BlTest
                 {
                     case "1":
                         int id = getIdForOrder();
-                        Console.WriteLine(_bl.Order.GetOrder(id));
+                        
+                        Console.WriteLine(dal?.Order.GetOrder(id));
                         break;
 
                     case "2":
-                        IEnumerable<OrderForList?> allProduct = _bl.Order.orderForLists();
-                        foreach (OrderForList? item in allProduct)
+                        IEnumerable<OrderForList?> allProduct = dal?.Order.orderForLists()!;  
+                        foreach (OrderForList? item in allProduct!)
                             Console.WriteLine(item);
                         break;
 
                     case "3":
                         id = getIdForOrder();
-                        _bl.Order.UpdateshippedDate(id);
+                        dal!.Order.UpdateshippedDate(id);
                         break;
 
                     case "4":
                         id = getIdForOrder();
-                        _bl.Order.UpdateDeliverdDate(id);
+                        dal!.Order.UpdateDeliverdDate(id);
                         break;
 
 
                     case "5":
                         id = getIdForOrder();
-                        Console.WriteLine(_bl.Order.GetOrderTracking(id).OrderTrackingStatus);
+                        Console.WriteLine(dal!.Order.GetOrderTracking(id).OrderTrackingStatus);
                         break;
 
                     case "0":
@@ -179,6 +180,7 @@ namespace BlTest
             return id;
         }
 
+
         private static void productTester()
         {
             string choice = productTesterMenu();
@@ -187,34 +189,34 @@ namespace BlTest
                 switch (choice)
                 {
                     case "1":
-                        Product product = getProduct();
-                        _bl.Product.AddProduct(product);
+                        BO.Product product = getProduct();
+                        dal?.Product.AddProduct(product);
                         break;
 
                     case "2":
                         int id = getIdForProduct();
-                        _bl.Product.DeleteProduct(id);
+                        dal?.Product.DeleteProduct(id);
                         break;
 
                     case "3":
                         product = getProduct();
                         Console.WriteLine(product);
                         Console.WriteLine();
-                        _bl.Product.UpdateProduct(product);
+                        dal?.Product.UpdateProduct(product);
                         break;
 
                     case "4":
-                        Console.WriteLine(printList(_bl.Product.GetProductsForList()));
+                        Console.WriteLine(printList(dal?.Product.GetProductsForList()!));
                         break;
 
                     case "5":
                         id = getIdForProduct();
-                        Console.WriteLine(_bl.Product.GetProduct(id));
+                        Console.WriteLine(dal?.Product.GetProduct(id));
                         break;
 
                     case "6":
                         id = getIdForProduct();
-                        Console.WriteLine(_bl.Product.GetProduct(id));
+                        Console.WriteLine(dal?.Product.GetProduct(id));
                         break;
 
                     case "0":
@@ -294,7 +296,7 @@ namespace BlTest
             cart.CustomerEmail = Console.ReadLine() ?? "";
             cart.TotalPrice = 0;
 
-            _bl.Cart.CommitCart(cart);
+            dal!.Cart.CommitCart(cart);
         }
 
         private static void updateProductInCart(BO.Cart cart)
@@ -309,13 +311,13 @@ namespace BlTest
                 flag = int.TryParse(Console.ReadLine(), out amount);
 
             } while (!flag);
-            Console.WriteLine(_bl.Cart.UpdateOrderItem(cart, id, amount));
+            Console.WriteLine(dal!.Cart.UpdateOrderItem(cart, id, amount));
         }
 
         private static void addProductToCart(BO.Cart cart)
         {
             int id = getIdForProduct();
-            Console.WriteLine(_bl.Cart.AddOrderItem(cart, id));
+            Console.WriteLine(dal!.Cart.AddOrderItem(cart, id));
         }
     }
 }

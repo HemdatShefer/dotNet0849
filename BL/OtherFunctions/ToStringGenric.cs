@@ -18,7 +18,7 @@ namespace OtherFunctions
 
                     str += '\n' + "Items:" + '\n';
 
-                    str += string.Join('\n', items.Cast<object>());
+                    str += string.Join('\n', items!.Cast<object>());
                 }
                 else
                 {
