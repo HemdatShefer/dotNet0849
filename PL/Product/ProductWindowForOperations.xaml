@@ -1,0 +1,60 @@
+﻿<Window x:Class="PL.Product.ProductWindowForOperations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Product"
+        mc:Ignorable="d"
+        Title="ProductWindowForOperations" Height="450" Width="450">
+    <StackPanel Margin="10">
+        <Grid x:Name="ProductProperties">
+            <!-- Row definitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- ID -->
+            <StackPanel Grid.Row="0">
+                <TextBlock Text="Product ID" Margin="0 0 0 5"/>
+                <TextBox x:Name="ProductID" Padding="2" HorizontalAlignment="Left" Width="100" MaxLength="9"/>
+            </StackPanel>
+            <!-- Name -->
+            <StackPanel Grid.Row="1">
+                <TextBlock  Text="Product Name" Margin="0 5 0 5"/>
+                <TextBox x:Name="ProductName" Padding="2" HorizontalAlignment="Left" Width="150" TextChanged="ProductNameChanged"/>
+            </StackPanel>
+            <!-- Name of Artist -->
+            <StackPanel Grid.Row="2">
+                <TextBlock  Text="Name of Artist" Margin="0 5 0 5"/>
+                <TextBox x:Name="ArtistName" Padding="2" HorizontalAlignment="Left" Width="150" />
+            </StackPanel>
+            <!-- Price -->
+            <StackPanel Grid.Row="3">
+                <TextBlock  Text="Product Price" Margin="0 5 0 5"/>
+                <TextBox x:Name="ProductPrice" Padding="2" HorizontalAlignment="Left" Width="100" TextChanged="ProductPriceChanged"/>
+            </StackPanel>
+            <!--Category -->
+            <StackPanel Grid.Row="4">
+                <TextBlock  Text="Product Category" Margin="0 5 0 5"/>
+                <ComboBox x:Name="ProductCategory" HorizontalAlignment="Left" Width="150" SelectionChanged="ProductCategory_SelectionChanged">
+                    <ComboBoxItem Content="Cheese Pot"/>
+                    <ComboBoxItem Content="thermometer"/>
+                    <ComboBoxItem Content="Measuring Cup"/>
+                    <ComboBoxItem Content="curd_knife"/>
+                    <ComboBoxItem Content="cheese_Molds"/>
+                </ComboBox>
+            </StackPanel>
+            <!-- Amount of Product in stock -->
+            <StackPanel Grid.Row="5">
+                <TextBlock  Text="Amount of Product in stock" Margin="0 5 0 5"/>
+                <TextBox x:Name="ProductAmountInStock" Padding="2" HorizontalAlignment="Left" Width="100" TextChanged="ProductAmountInStock_TextChanged" />
+            </StackPanel>
+        </Grid>
+        <Button x:Name="AddProduct" Content="Add" Width="80" Click="AddProductClick" />
+        <Button x:Name="UpdateProduct" Content="Update" Width="80" Margin="10" Click="UpdateProductClick"/>
+    </StackPanel>
+</Window>

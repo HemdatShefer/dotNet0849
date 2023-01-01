@@ -6,7 +6,29 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Name="MainGrid" HorizontalAlignment="Right" Width="800">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="180*"/>
+            <ColumnDefinition Width="180*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="Auto" MinHeight="174.039"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+        VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+        </Grid>
+        <ComboBox Name="AttributeSelector"  Grid.Row="2" Margin="0,1,0,0"/>
+        <Label Content="Label" Margin="0,0,0,86" Grid.RowSpan="2"/>
 
+        <Button Grid.Column="1" Click="MainClick" Content="Admin" Grid.ColumnSpan="2" Margin="100,81,100,4" Grid.RowSpan="2" Grid.Row="1"/>
     </Grid>
+
 </Window>

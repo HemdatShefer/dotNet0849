@@ -87,7 +87,7 @@ namespace BlImplementation
             IEnumerable<DO.Product> productsList = _dal.GetAll();
 
             return from prod in productsList
-                   select new BO.ProductForList
+                   select new ProductForList
                    {
                        ID = prod.ID,
                        Name = prod.Name,

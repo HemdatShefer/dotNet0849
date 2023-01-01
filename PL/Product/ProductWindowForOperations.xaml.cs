@@ -12,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL
+namespace PL.Product
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductWindowForOperations.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductWindowForOperations : Window
     {
-        public BlApi.IBl? bl = BlApi.Factory.Get();
-        public MainWindow()
+        public ProductWindowForOperations()
         {
             InitializeComponent();
         }
-        private void MainClick(object sender, RoutedEventArgs e) => new PL.Product.ProductWindowForOperations().Show();
-
     }
 }
