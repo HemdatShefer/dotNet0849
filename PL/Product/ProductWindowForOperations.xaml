@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
-        Title="ProductWindowForOperations" Height="450" Width="450">
+        Title="ProductWindowForOperations" Height="450" Width="450" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <StackPanel Margin="10">
         <Grid x:Name="ProductProperties">
             <!-- Row definitions -->
@@ -20,41 +20,33 @@
             <!-- ID -->
             <StackPanel Grid.Row="0">
                 <TextBlock Text="Product ID" Margin="0 0 0 5"/>
-                <TextBox x:Name="ProductID" Padding="2" HorizontalAlignment="Left" Width="100" MaxLength="9"/>
+                <TextBox x:Name="ProductID" Text="{Binding Product.ID}" Padding="2" HorizontalAlignment="Left" Width="100" MaxLength="9"/>
             </StackPanel>
             <!-- Name -->
             <StackPanel Grid.Row="1">
                 <TextBlock  Text="Product Name" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductName" Padding="2" HorizontalAlignment="Left" Width="150" TextChanged="ProductNameChanged"/>
+                <TextBox x:Name="ProductName" Text="{Binding Product.Name}" Padding="2" HorizontalAlignment="Left" Width="150" />
             </StackPanel>
-            <!-- Name of Artist -->
-            <StackPanel Grid.Row="2">
-                <TextBlock  Text="Name of Artist" Margin="0 5 0 5"/>
-                <TextBox x:Name="ArtistName" Padding="2" HorizontalAlignment="Left" Width="150" />
-            </StackPanel>
+           
             <!-- Price -->
             <StackPanel Grid.Row="3">
                 <TextBlock  Text="Product Price" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductPrice" Padding="2" HorizontalAlignment="Left" Width="100" TextChanged="ProductPriceChanged"/>
+                <TextBox x:Name="ProductPrice" Text="{Binding Product.Price}" Padding="2" HorizontalAlignment="Left" Width="100" />
             </StackPanel>
             <!--Category -->
             <StackPanel Grid.Row="4">
                 <TextBlock  Text="Product Category" Margin="0 5 0 5"/>
-                <ComboBox x:Name="ProductCategory" HorizontalAlignment="Left" Width="150" SelectionChanged="ProductCategory_SelectionChanged">
-                    <ComboBoxItem Content="Cheese Pot"/>
-                    <ComboBoxItem Content="thermometer"/>
-                    <ComboBoxItem Content="Measuring Cup"/>
-                    <ComboBoxItem Content="curd_knife"/>
-                    <ComboBoxItem Content="cheese_Molds"/>
+                <ComboBox x:Name="ProductCategory" ItemsSource="{Binding Categories}" SelectedItem="{Binding Product.Categories}" HorizontalAlignment="Left" Width="150" >
+               
                 </ComboBox>
             </StackPanel>
             <!-- Amount of Product in stock -->
             <StackPanel Grid.Row="5">
                 <TextBlock  Text="Amount of Product in stock" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductAmountInStock" Padding="2" HorizontalAlignment="Left" Width="100" TextChanged="ProductAmountInStock_TextChanged" />
+                <TextBox x:Name="ProductAmountInStock" Text="{Binding Product.InStock}" Padding="2" HorizontalAlignment="Left" Width="100" />
             </StackPanel>
         </Grid>
-        <Button x:Name="AddProduct" Content="Add" Width="80" Click="AddProductClick" />
+        <Button x:Name="AddProduct"  Content="Add" Width="80" Click="AddProductClick" />
         <Button x:Name="UpdateProduct" Content="Update" Width="80" Margin="10" Click="UpdateProductClick"/>
     </StackPanel>
 </Window>

@@ -1,20 +1,8 @@
-﻿using BlApi;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Globalization;
-using System.Collections.ObjectModel;
 
 namespace PL.Product
 {
@@ -23,31 +11,44 @@ namespace PL.Product
     /// </summary>
     public partial class ProductForList : Window
     {
-        public BlApi.IBl? bl1 = BlApi.Factory.Get();
-        public delegate void EventHandler(object? sender, EventArgs e);
+        public BlApi.IBl? bl = BlApi.Factory.Get();
+
+        public IEnumerable<BO.ProductForList> ProductForLists;
+
         public ProductForList(BlApi.IBl bl)
         {
-          }
+            InitializeComponent();
+            this.bl = bl;
+            ProductForLists = bl.Product.GetProductsForList();
+            ProductListView.ItemsSource = ProductForLists;
+            ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
+        }
 
         private void ProductSelector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
         {
-
+            ProductListView.ItemsSource = bl.Product.GetProductsForListByCond(ProductForLists, product => product.Categories == (BO.Enums.Category)ProductSelector.SelectedItem);
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            //open operations window in add mode
-            ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations();
-            productWindowForOperations.Show();
-            this.Close();
-            productWindowForOperations.UpdateProduct.Visibility = Visibility.Collapsed;
-            productWindowForOperations.AddProduct.Visibility = Visibility.Visible;
+            ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl);
+
+            productWindowForOperations.ShowDialog();
+            ProductForLists = bl.Product.GetProductsForList();
+            ProductListView.ItemsSource = ProductForLists;
 
         }
 
         private void ProductListView_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-   
+            //open operations window in add mode
+            if (IsMouseCaptureWithin)
+            {
+                new ProductWindowForOperations(bl, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
+                ProductForLists = bl.Product.GetProductsForList();
+                ProductListView.ItemsSource = ProductForLists;
+            }
+
         }
     }
 }

@@ -7,7 +7,7 @@ namespace BlImplementation
 
     internal class Product : IProduct
     {
-     private Dal.DalProduct _dal = new Dal.DalProduct();
+        private Dal.DalProduct _dal = new Dal.DalProduct();
         /// <summary>
         /// 
         /// </summary>
@@ -58,7 +58,7 @@ namespace BlImplementation
             try
             {
                 checkProduct(product);
-                _dal.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock });
+                _dal.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, Categories = (DO.Enums.Category)product.Categories });
             }
             catch
             {
@@ -123,6 +123,11 @@ namespace BlImplementation
             {
                 throw new StockNotAdmissibleException("invalid stock input");
             }
+        }
+
+        public IEnumerable<ProductForList> GetProductsForListByCond(IEnumerable<ProductForList> productForLists, Func<ProductForList?, bool>? filter)
+        {
+            return productForLists.Where(filter);
         }
     }
 

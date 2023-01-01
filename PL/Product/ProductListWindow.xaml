@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
         Title="ProductListWindow" Height="640" Width="800">
+    
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -17,22 +18,25 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
+
             <ComboBox Name="ProductSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="ProductSelector_SelectionChanged">
-                <ComboBoxItem Content="Cheese Pot"/>
-                <ComboBoxItem Content="thermometer"/>
-                <ComboBoxItem Content="Measuring Cup"/>
-                <ComboBoxItem Content="curd_knife"/>
-                <ComboBoxItem Content="cheese_Molds"/>
+
             </ComboBox>
+
             <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="127,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="120"/>
+
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=1}" MouseDoubleClick="ProductListView_DoubleClick" >
+        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Categories}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding InStock}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="BtnAdd_Click"/>
+        <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="2" HorizontalAlignment="Left" Margin="355,5,0,0" Padding="5" Click="BtnAdd_Click" Height="28" VerticalAlignment="Top" Width="440"/>
     </Grid>
 </Window>
