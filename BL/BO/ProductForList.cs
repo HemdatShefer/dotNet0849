@@ -5,12 +5,6 @@ namespace BO
 {
     public class ProductForList
     {
-        private IBl bl;
-
-        public ProductForList(IBl bl)
-        {
-            this.bl = bl;
-        }
 
         /// <summary>
         /// 
