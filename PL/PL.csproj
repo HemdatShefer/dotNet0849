@@ -10,8 +10,8 @@
 	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
-	  
+	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>   <!-- dont forget to delete before submision-->
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +22,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <Folder Include="OrderTracking\" />
   </ItemGroup>
 
 </Project>

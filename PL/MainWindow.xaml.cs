@@ -12,7 +12,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void MainClick(object sender, RoutedEventArgs e) => new PL.Product.ProductForList(bl).Show();
-
+        private void MainClick(object sender, RoutedEventArgs e) => new PL.Product.ProductForList(bl!).Show();
+        private void NewOrderClick(object sender, RoutedEventArgs e) => new PL.Order.NewOrderWindow(bl!).Show();
     }
 }
