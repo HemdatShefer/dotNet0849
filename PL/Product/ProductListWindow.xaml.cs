@@ -21,6 +21,7 @@ namespace PL.Product
             this.bl = bl;
             ProductForLists = bl.Product.GetProductsForList();
             ProductListView.ItemsSource = ProductForLists;
+
             ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Enums.Category));
         }
 
@@ -32,7 +33,6 @@ namespace PL.Product
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl);
-
             productWindowForOperations.ShowDialog();
             ProductForLists = bl.Product.GetProductsForList();
             ProductListView.ItemsSource = ProductForLists;

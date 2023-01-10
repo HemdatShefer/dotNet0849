@@ -15,19 +15,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
+    <Compile Remove="OrderTracking\**" />
+    <EmbeddedResource Remove="OrderTracking\**" />
+    <None Remove="OrderTracking\**" />
+    <Page Remove="OrderTracking\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.7.0" />
   </ItemGroup>
 
 
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
-  </ItemGroup>
-
-
-
-  <ItemGroup>
-    <Folder Include="OrderTracking\" />
   </ItemGroup>
 
 </Project>

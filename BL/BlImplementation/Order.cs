@@ -27,7 +27,7 @@ namespace BlImplementation
                     Name = order.CustomerName,
                     Status = OrderStatus(order),
                     Amount = ordersItems.Count(),
-                    ToalPrice = GetTotalPrice(ordersItems)
+                    TotalPrice = GetTotalPrice(ordersItems)
                 });
             }
             return ordersForList;

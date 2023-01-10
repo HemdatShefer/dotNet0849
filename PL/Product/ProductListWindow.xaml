@@ -34,8 +34,16 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Categories}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Price}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding InStock}"/>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path}" Width="50" Height="50"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
+           
         </ListView>
         <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="2" HorizontalAlignment="Left" Margin="355,5,0,0" Padding="5" Click="BtnAdd_Click" Height="28" VerticalAlignment="Top" Width="440"/>
     </Grid>

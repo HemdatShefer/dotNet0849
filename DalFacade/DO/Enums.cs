@@ -5,7 +5,7 @@
     /// </summary>
     public struct Enums
     {
-        public enum Category { Cheese_Pot, thermometer, Measuring_Cup, curd_knife, cheese_Molds, cheese_wax }
+        public enum Category { Necklaces, Earrings, Rings , Bracelets, Mens_jewelry }
     }
 
 }

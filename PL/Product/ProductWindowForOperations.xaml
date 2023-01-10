@@ -48,7 +48,7 @@
             </StackPanel>
         </Grid>
         
-        <Button x:Name="AddProduct"  Content="Add" Width="80" Click="AddProductClick" />
-        <Button x:Name="UpdateProduct" Content="Update" Width="80" Margin="10" Click="UpdateProductClick"/>
+        <Button x:Name="AddProduct"  Content="Add" Click="AddProductClick"/>
+        <Button x:Name="UpdateProduct" Content="Update"  Click="AddProductClick"/>
     </StackPanel>
 </Window>

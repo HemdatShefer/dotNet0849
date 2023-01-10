@@ -19,7 +19,7 @@ namespace BO
         /// <summary>
         /// 
         /// </summary>
-        public double ToalPrice { get; set; }
+        public double TotalPrice { get; set; }
         /// <summary>
         /// 
         /// </summary>
