@@ -190,12 +190,12 @@ namespace BlImplementation
                 string? date_str = order.OrderDate.ToString("dd/MM/yyyy HH:mm:ss");
                 return date_str + " order created";
             }
-            if (order.ShipDate == DateTime.MinValue)
+            if (order.ShipDate != DateTime.MinValue)
             {
                 string? date_str = order.ShipDate.ToString("dd/MM/yyyy HH:mm:ss");
                 return date_str + " order sent";
             }
-            if (order.DeliveryDate == DateTime.MinValue)
+            if (order.DeliveryDate != DateTime.MinValue)
             {
                 string date_str = order.DeliveryDate.ToString("dd/MM/yyyy HH:mm:ss");
                 return date_str + " order deliverd";

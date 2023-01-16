@@ -209,3 +209,4 @@ namespace BlImplementation
 
 }
 
+//add ListView in xaml for AddToCartWindow like in ProductForList that show binding product ID Name  Categories Price InStock and if user click on a SelectedItem In the ListView the SelectedItem 

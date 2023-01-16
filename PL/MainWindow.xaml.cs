@@ -13,6 +13,8 @@ namespace PL
             InitializeComponent();
         }
         private void adminClick(object sender, RoutedEventArgs e) => new PL.Admin.AuthorizationWindow(bl!).Show();
-        private void NewOrderClick(object sender, RoutedEventArgs e) => new PL.Product.ProductForList(bl!).Show();
+        private void NewOrderClick(object sender, RoutedEventArgs e) => new PL.Cart.AddToCartWindow(bl!).Show();
+
+        private void Button_Click(object sender, RoutedEventArgs e) => new PL.Order.OrderTracking(bl!).Show();
     }
 }
