@@ -32,9 +32,9 @@ namespace PL.Product
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl);
+            ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl!);
             productWindowForOperations.ShowDialog();
-            ProductForLists = bl.Product.GetProductsForList();
+            ProductForLists = bl!.Product.GetProductsForList();
             ProductListView.ItemsSource = ProductForLists;
 
         }
@@ -44,7 +44,7 @@ namespace PL.Product
             //open operations window in add mode
             if (IsMouseCaptureWithin)
             {
-                new ProductWindowForOperations(bl, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
+                new ProductWindowForOperations(bl!, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
                 ProductForLists = bl.Product.GetProductsForList();
                 ProductListView.ItemsSource = ProductForLists;
             }

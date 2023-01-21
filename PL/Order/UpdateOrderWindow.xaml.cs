@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BlApi;
+using Dal;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,27 +27,50 @@ namespace PL.Order
 
         public IEnumerable<BO.ProductForList> ProductForLists;
         BO.Order order;
-        public UpdateOrderWindow(BO.Order _order)
+        public UpdateOrderWindow(BlApi.IBl bl, Visibility Shipped, Visibility Deliverd, BO.Order _order)
         {
-            InitializeComponent();
             this.bl = bl;
             order = _order;
+            InitializeComponent();
+            UpdateToDeliverd.Visibility = Deliverd;
+            UpdateToShipped.Visibility = Shipped;
         }
 
-        private void customerAddressTextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        public UpdateOrderWindow(IBl bl, BO.Order order) : this(bl, Visibility.Collapsed, Visibility.Visible, order)
         {
-            customerAddressTextBox1.Text = order.CustomerAddress;
+
         }
 
-        private void customerEmailTextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        private void OrderStatus_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            customerEmailTextBox1.Text = order.CustomerEmail;
-        }
 
-        private void customerNameTextBox1_TextChanged(object sender, TextChangedEventArgs e)
+        }
+        private void UpdateToDeliverd_Click(object sender, RoutedEventArgs e)
         {
-            customerNameTextBox1.Text = order.CustomerName;
+            try
+            {
+                bl.Order.UpdateDeliverdDate(order.ID);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
         }
 
+        private void UpdateToShipped_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bl.Order.UpdateDeliverdDate(order.ID);
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
+        }
     }
 }

@@ -6,8 +6,46 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="OrderListWindow" Height="450" Width="800" Foreground="{DynamicResource MaterialDesignLightForeground}">
-    
-    
+    <Window.Resources>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+    </Window.Resources>
+
+
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -20,8 +58,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
-        <ListView x:Name="OrderListView" Grid.Row="1" 
-                  MouseDoubleClick="OrderView_MouseDoubleClick" SelectionChanged="OrderListView_SelectionChanged_1">
+        <ListView x:Name="OrderListView" Grid.Row="1" MouseDoubleClick="OrderView_MouseDoubleClick" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,10,-10,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding ID}"/>
@@ -29,10 +66,18 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Status}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding TotalPrice}"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Update" Click="Button_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
                 </GridView>
             </ListView.View>
         </ListView>
+
     </Grid>
 </Window>
     

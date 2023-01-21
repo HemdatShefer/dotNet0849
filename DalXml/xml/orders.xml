@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<orders>
+	<Order>
+		<ID>0</ID>
+		<CustomerName>Norit</CustomerName>
+		<CustomerEmail>Norit@gmail.com</CustomerEmail>
+		<CustomerAddress>Heifa</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+	<Order>
+		<ID>1</ID>
+		<CustomerName>Ron</CustomerName>
+		<CustomerEmail>Ron@gmail.com</CustomerEmail>
+		<CustomerAddress>Ashkelon</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>2</ID>
+		<CustomerName>Lior</CustomerName>
+		<CustomerEmail>Lior@gmail.com</CustomerEmail>
+		<CustomerAddress>Ra'anana</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>3</ID>
+		<CustomerName>Yael</CustomerName>
+		<CustomerEmail>Yael@gmail.com</CustomerEmail>
+		<CustomerAddress>Jerusalem</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>4</ID>
+		<CustomerName>Shlomo</CustomerName>
+		<CustomerEmail>Shlomo@gmail.com</CustomerEmail>
+		<CustomerAddress>Jerusalem</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>5</ID>
+		<CustomerName>Tamar</CustomerName>
+		<CustomerEmail>Tamar@gmail.com</CustomerEmail>
+		<CustomerAddress>Tel Aviv</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>6</ID>
+		<CustomerName>harry</CustomerName>
+		<CustomerEmail>harry@gmail.com</CustomerEmail>
+		<CustomerAddress>Bet Shemesh</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>7</ID>
+		<CustomerName>Jacob</CustomerName>
+		<CustomerEmail>Jacob@gmail.com</CustomerEmail>
+		<CustomerAddress>Ashdod</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>8</ID>
+		<CustomerName>Rivka</CustomerName>
+		<CustomerEmail>Rivka@gmail.com</CustomerEmail>
+		<CustomerAddress>Tel Aviv</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>9</ID>
+		<CustomerName>David</CustomerName>
+		<CustomerEmail>David@gmail.com</CustomerEmail>
+		<CustomerAddress>Ashdod</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+	<Order>
+		<ID>10</ID>
+		<CustomerName>Tal</CustomerName>
+		<CustomerEmail>Tal@gmail.com</CustomerEmail>
+		<CustomerAddress>Bet Shemesh</CustomerAddress>
+		<OrderDate></OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+
+
+
+
+
+</orders>

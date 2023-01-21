@@ -1,4 +1,5 @@
-﻿using PL.Product;
+﻿using BO;
+using PL.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,20 +36,47 @@ namespace PL.Admin
             OrderListView.ItemsSource = OrderForList;
         }
 
-        private void OrderListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
         private void OrderView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Order order= bl!.Order.GetOrder(((BO.OrderForList)OrderListView.SelectedItem).ID);
-            new PL.Order.UpdateOrderWindow(order).Show();
+            if (IsMouseCaptureWithin)
+            {
+                BO.Order order = bl!.Order.GetOrder(((BO.OrderForList)OrderListView.SelectedItem).ID);
+                BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+                if (status == BO.Enums.Status.shipped)
+                {
+                    new PL.Order.UpdateOrderWindow(bl, Visibility.Collapsed, Visibility.Visible, order).ShowDialog();
+                }
+                if (status == BO.Enums.Status.confirmed)
+                {
+                    new PL.Order.UpdateOrderWindow(bl, Visibility.Visible, Visibility.Collapsed, order).ShowDialog();
+                }
+                OrderForList = bl!.Order.orderForLists();
+                OrderListView.ItemsSource = OrderForList;
+            }
         }
 
-        private void OrderListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            BO.Order order = bl!.Order.GetOrder(((BO.OrderForList)OrderListView.SelectedItem).ID);
-            new PL.Order.UpdateOrderWindow(order).Show();
+            // Get the selected item in the ListView
+            var selectedItem = OrderListView.SelectedItem as BO.OrderForList;
+
+            // Retrieve the order from the BL
+            BO.Order order = bl!.Order.GetOrder(selectedItem.ID);
+            BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+
+            // Check the order's status and open the appropriate window
+            if (status == BO.Enums.Status.shipped)
+            {
+                new PL.Order.UpdateOrderWindow(bl, Visibility.Collapsed, Visibility.Visible, order).ShowDialog();
+            }
+            else if (status == BO.Enums.Status.confirmed)
+            {
+                new PL.Order.UpdateOrderWindow(bl, Visibility.Visible, Visibility.Collapsed, order).ShowDialog();
+            }
+
+            // Refresh the ListView
+            OrderForList = bl!.Order.orderForLists();
+            OrderListView.ItemsSource = OrderForList;
         }
 
     }

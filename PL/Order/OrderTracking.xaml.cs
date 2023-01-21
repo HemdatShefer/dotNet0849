@@ -25,7 +25,7 @@ namespace PL.Order
         public BlApi.IBl? bl = BlApi.Factory.Get();
         public IEnumerable<BO.Order?> OrderList;
         public IEnumerable<BO.OrderForList?> OrderForList;
-        public BO.Order orderTracking;
+        public BO.Order orderToTrack;
         public OrderTracking(BlApi.IBl bl)
         {
             InitializeComponent();
@@ -36,14 +36,25 @@ namespace PL.Order
 
         public void SetSelectedOrderID(int value)
         {
-            _orderTracking.Text = bl.Order.GetOrderTracking(value).OrderTrackingStatus; ;
+            BO.OrderForList order;
+            BO.OrderTracking tracking = bl.Order.GetOrderTracking(value);
+            _orderTracking.Text = bl.Order.GetOrderTracking(value).OrderTrackingStatus; 
             BO.Order OrderTracking = bl.Order.GetOrder(value);
-           
+            orderToTrack = OrderTracking;
         }
 
         private void _orderTracking_TextChanged(object sender, TextChangedEventArgs e)
         {
+        }
 
+        private void ProductID_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedProductID = (sender as ComboBox).SelectedValue;
+            if (selectedProductID != null)
+            {
+                var tracking = bl.Order.GetOrderTracking((int)(selectedProductID)); 
+                _orderTracking.Text = tracking.OrderTrackingStatus;
+            }
         }
     }
 

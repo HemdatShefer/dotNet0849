@@ -3,7 +3,7 @@
 namespace BlImplementation
 {
     [Serializable]
-    internal class unValidException : Exception
+    public class unValidException : Exception
     {
         public unValidException() { }
         public unValidException(string? message) : base(message) { }
@@ -11,7 +11,7 @@ namespace BlImplementation
         protected unValidException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
     [Serializable]
-    internal class NotInStockException : Exception
+    public class NotInStockException : Exception
     {
         public NotInStockException() { }
         public NotInStockException(string? message) : base(message) { }
@@ -19,7 +19,7 @@ namespace BlImplementation
         protected NotInStockException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
     [Serializable]
-    internal class IDNotAdmissibleException : Exception
+    public class IDNotAdmissibleException : Exception
     {
         public IDNotAdmissibleException() { }
         public IDNotAdmissibleException(string? message) : base(message) { }
@@ -27,7 +27,7 @@ namespace BlImplementation
         protected IDNotAdmissibleException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
     [Serializable]
-    internal class StockNotAdmissibleException : Exception
+    public class StockNotAdmissibleException : Exception
     {
         public StockNotAdmissibleException()
         {
@@ -41,12 +41,12 @@ namespace BlImplementation
         {
         }
 
-        protected StockNotAdmissibleException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public StockNotAdmissibleException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
     [Serializable]
-    internal class PriceNotAdmissibleException : Exception
+    public class PriceNotAdmissibleException : Exception
     {
         public PriceNotAdmissibleException()
         {
@@ -65,7 +65,7 @@ namespace BlImplementation
         }
     }
     [Serializable]
-    internal class NameNotAdmissibleException : Exception
+    public class NameNotAdmissibleException : Exception
     {
         public NameNotAdmissibleException()
         {
@@ -84,7 +84,7 @@ namespace BlImplementation
         }
     }
     [Serializable]
-    internal class ObjectNotFoundException : Exception
+    public class ObjectNotFoundException : Exception
     {
         public ObjectNotFoundException() { }
         public ObjectNotFoundException(string? message) : base(message) { }
@@ -92,7 +92,7 @@ namespace BlImplementation
         protected ObjectNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
     [Serializable]
-    internal class unValidProductException : Exception
+    public class unValidProductException : Exception
     {
         public unValidProductException()
         {
@@ -113,7 +113,7 @@ namespace BlImplementation
 
 
     [Serializable]
-    internal class TotalUnvalidException : Exception
+    public class TotalUnvalidException : Exception
     {
         public TotalUnvalidException()
         {
@@ -133,7 +133,7 @@ namespace BlImplementation
     }
 
     [Serializable]
-    internal class AdressUnvalidException : Exception
+    public class AdressUnvalidException : Exception
     {
         public AdressUnvalidException()
         {
@@ -153,7 +153,7 @@ namespace BlImplementation
     }
 
     [Serializable]
-    internal class NameUnvalidException : Exception
+    public class NameUnvalidException : Exception
     {
         public NameUnvalidException()
         {
@@ -173,7 +173,7 @@ namespace BlImplementation
     }
 
     [Serializable]
-    internal class EmailUnvalidException : Exception
+    public class EmailUnvalidException : Exception
     {
         public EmailUnvalidException()
         {
@@ -193,7 +193,7 @@ namespace BlImplementation
     }
 
     [Serializable]
-    internal class EmptyCartException : Exception
+    public class EmptyCartException : Exception
     {
         public EmptyCartException()
         {

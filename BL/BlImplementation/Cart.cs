@@ -51,7 +51,11 @@ namespace BlImplementation
         /// <returns></returns>
         private OrderItem getOrderItem(BO.Cart cart, int productId)
         {
-            foreach (OrderItem orderItem in cart.Items!)
+            if (cart.Items == null)
+            {
+                return null;
+            }
+            foreach (OrderItem orderItem in cart.Items)
             {
                 if (orderItem.ProductID == productId)
                 {

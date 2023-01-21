@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Product"
         mc:Ignorable="d"
-        Title="ProductListWindow" Height="640" Width="800">
-    
+        Title="ProductListWindow" Height="600" Width="765">
+    <Window.Resources>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+    </Window.Resources>
+
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -23,10 +61,10 @@
 
             </ComboBox>
 
-            <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="127,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="120"/>
+            <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="336" Height="44" Grid.Column="1"/>
 
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" >
+        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" d:ItemsSource="{d:SampleData ItemCount=7}" Margin="295,21,10,10" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding ID}"/>
@@ -37,14 +75,20 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Path}" Width="50" Height="50"/>
+                                <Image>
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding Path}"  CacheOption="OnLoad" />
+                                    </Image.Source>
+                                </Image>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-           
+
         </ListView>
-        <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="2" HorizontalAlignment="Left" Margin="355,5,0,0" Padding="5" Click="BtnAdd_Click" Height="28" VerticalAlignment="Top" Width="440"/>
+        <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="1" Margin="25,0,490,0" Padding="5" Click="BtnAdd_Click" Height="42" VerticalAlignment="Center"/>
+        <Button x:Name="update" Content="Update Item" Grid.Row="1" Margin="25,191,490,0" Padding="5" Click="BtnAdd_Click" Height="42" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.Product"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class= "PL.Product.ProductWindowForOperations"
+        xmlns:local="clr-namespace:PL.Cart"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class= "PL.Cart.NewCostumerCart"
         mc:Ignorable="d"
-        Title="ProductWindowForOperations" Height="450" Width="450" DataContext="{Binding RelativeSource={RelativeSource self}}">
+        Title="NewCostumerCart" Height="450" Width="450" DataContext="{Binding RelativeSource={RelativeSource self}}">
     <Window.Resources>
 
         <Style x:Name="_comboStyle" TargetType="ComboBox" >
@@ -47,17 +47,7 @@
     </Window.Resources>
 
     <StackPanel Margin="10">
-        <Grid x:Name="ProductProperties">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
-               Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
-               HorizontalContentAlignment ="Center" Height="40"/>
-        </Grid>
-        <Grid>
+        <Grid x:Name="CartProperties">
             <!-- Row definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -65,39 +55,29 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <!-- ID -->
+            <!-- Customer Name -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Product ID" Margin="0 0 0 5"/>
-                <TextBox x:Name="ProductID" Text="{Binding Product.ID}" Padding="2" HorizontalAlignment="Left" Width="100" MaxLength="9"/>
+                <TextBlock Text="Customer Name" Margin="0 0 0 5"/>
+                <TextBox x:Name="CustomerName" Text="{Binding Cart.CustomerName}" Padding="2" HorizontalAlignment="Left" Width="430" MaxLength="30"/>
             </StackPanel>
-            <!-- Name -->
+            <!-- Customer Address -->
             <StackPanel Grid.Row="1">
-                <TextBlock  Text="Product Name" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductName" Text="{Binding Product.Name}" Padding="2" HorizontalAlignment="Left" Width="150" />
+                <TextBlock  Text="Customer Address" Margin="0 5 0 5"/>
+                <TextBox x:Name="CustomerAddress" Text="{Binding Cart.CustomerAdress}" Padding="2" HorizontalAlignment="Left" Width="430" />
             </StackPanel>
-           
-            <!-- Price -->
-            <StackPanel Grid.Row="3">
-                <TextBlock  Text="Product Price" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductPrice" Text="{Binding Product.Price}" Padding="2" HorizontalAlignment="Left" Width="100" />
+            <!-- Customer Email -->
+            <StackPanel Grid.Row="2">
+                <TextBlock  Text="Customer Email" Margin="0 5 0 5"/>
+                <TextBox x:Name="CustomerEmail" Text="{Binding Cart.CustomerEmail}" Padding="2" HorizontalAlignment="Left" Width="435" />
             </StackPanel>
-            <!--Category -->
+            
+            <!-- Total Price -->
             <StackPanel Grid.Row="4">
-                <TextBlock  Text="Product Category" Margin="0 5 0 5"/>
-                <ComboBox x:Name="ProductCategory" ItemsSource="{Binding Categories}" SelectedItem="{Binding Product.Categories}" HorizontalAlignment="Left" Width="150" >
-               
-                </ComboBox>
+                <TextBlock  Text="Total Price" Margin="0 5 0 5"/>
+                <TextBlock x:Name="TotalPrice" Text="{Binding Cart.TotalPrice}" Padding="2" Width="435" HorizontalAlignment="Left" />
             </StackPanel>
-            <!-- Amount of Product in stock -->
-            <StackPanel Grid.Row="5">
-                <TextBlock  Text="Amount of Product in stock" Margin="0 5 0 5"/>
-                <TextBox x:Name="ProductAmountInStock" Text="{Binding Product.InStock}" Padding="2" HorizontalAlignment="Left" Width="100" />
-            </StackPanel>
+                <Button x:Name="Checkout" Content="Checkout" Margin="0,64,0,-59" Grid.Row="4" Click="Checkout_Click" />
         </Grid>
-        
-        <Button x:Name="AddProduct"  Content="Add" Click="AddProductClick"/>
-        <Button x:Name="UpdateProduct" Content="Update"  Click="AddProductClick"/>
     </StackPanel>
 </Window>

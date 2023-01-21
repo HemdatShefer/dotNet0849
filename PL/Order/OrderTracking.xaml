@@ -6,6 +6,45 @@
         xmlns:local="clr-namespace:PL.Order"
         mc:Ignorable="d"
         Title="OrderTracking" Height="450" Width="800">
+    <Window.Resources>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+    </Window.Resources>
+
     <Grid x:Name="grid2"
               HorizontalAlignment="Center"
               VerticalAlignment="Top"
@@ -27,12 +66,12 @@
         <!-- ID -->
         <StackPanel
             x:Name="enterID" Grid.Row="0">
-            <TextBlock Text="Product ID" Margin="0 0 0 5" Height="14" Width="210"/>
+            <TextBlock Text="Product ID" Margin="0 0 0 5" Height="14" Width="260"/>
             <ComboBox x:Name="ProductID" 
                       ItemsSource="{Binding OrderForList}" 
                       DisplayMemberPath="ID" 
                       SelectedValuePath="ID" 
-                      SelectedValue="{Binding SelectedOrderID}">
+                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="ProductID_SelectionChanged">
             </ComboBox>
         </StackPanel>
 
@@ -41,8 +80,8 @@
             x:Name="_orderTracking" 
             Text="{Binding OrderTrackingStatus}" 
             Padding="2" 
-            HorizontalAlignment="Left" 
-            Width="220" Grid.ColumnSpan="2" Margin="0,5,0,-132" TextChanged="_orderTracking_TextChanged" Grid.Row="7" />
+            HorizontalAlignment="Center" 
+            Width="233" Margin="0,5,0,-51" TextChanged="_orderTracking_TextChanged" Grid.Row="7" IsReadOnly="True"/>
 
     </Grid>
 </Window>

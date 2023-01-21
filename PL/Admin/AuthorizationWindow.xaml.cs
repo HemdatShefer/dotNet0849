@@ -25,16 +25,22 @@ namespace PL.Admin
         {
             InitializeComponent();
         }
-        private void loginClick(object sender, RoutedEventArgs e) => new PL.Admin.AdminOperationWindow(bl!).Show();  
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void loginClick(object sender, RoutedEventArgs e)
         {
-
+            PasswordBox passwordBox = MyPassword;
+            if (passwordBox != null)
+            {
+                if (passwordBox.Password == "123456")
+                {
+                    new PL.Admin.AdminOperationWindow(bl!).Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Password", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }

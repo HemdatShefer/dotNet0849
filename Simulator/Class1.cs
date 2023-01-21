@@ -1,4 +1,4 @@
-﻿namespace DalXml
+﻿namespace Simulator
 {
     public class Class1
     {

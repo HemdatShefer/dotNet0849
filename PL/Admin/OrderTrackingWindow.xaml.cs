@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,14 @@ namespace Admin
     /// </summary>
     public partial class OrderTrackingWindow : Window
     {
-        public OrderTrackingWindow()
+        private IBl bl;
+        public BO.Order Order { set; get; }
+        public IEnumerable<BO.Enums.Category> Categories { get; set; }
+
+        public OrderTrackingWindow(IBl bl, BO.Order order)
         {
+            this.bl = bl;
+            Order = order;
             InitializeComponent();
         }
 

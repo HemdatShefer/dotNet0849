@@ -8,21 +8,46 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <Style x:Key="myButtonStyle"
-           TargetType="Button">
-            <Setter Property="FontSize"
-              Value="32" />
-            <Setter Property="FontFamily"
-              Value="Consolas" />
-            <Setter Property="FontWeight"
-              Value="Bold" />
-            <Setter Property = "Background"
-              Value="SeaShell"/>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
         </Style>
     </Window.Resources>
     <Grid x:Name="MainGrid" HorizontalAlignment="Right" Width="800" Background="Black">
-            
-            <Grid.ColumnDefinitions>
+
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180*"/>
             <ColumnDefinition Width="100*"/>
             <ColumnDefinition Width="180*"/>
@@ -33,39 +58,18 @@
             <RowDefinition Height="100*"/>
             <RowDefinition Height="Auto" MinHeight="208.47"/>
         </Grid.RowDefinitions>
+        <Image Source="D:\repos\dotNet0849\photos\home.png" Stretch="Fill" Height="NaN" Margin="0,10,10,10" Width="NaN" Grid.ColumnSpan="3" Grid.RowSpan="4"  />
         <Grid x:Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,87" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
-            
+
+
         </Grid>
 
-        <Button  Style="{StaticResource myButtonStyle}"  Click="adminClick" Content="Admin" Grid.ColumnSpan="3" Margin="232,1,232,0" Grid.Row="1">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button Style="{StaticResource myButtonStyle}" Click ="NewOrderClick"  Content="New order" Grid.ColumnSpan="3" Margin="231,75,232,208" Grid.Row="1" Grid.RowSpan="3">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button Style="{StaticResource myButtonStyle}"  Content="Tracking order" Grid.ColumnSpan="3" Margin="231,75,232,130" Grid.Row="2" Grid.RowSpan="2" Click="Button_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Image Source="D:\repos\dotNet0849\photos\home.png" Stretch="Fill"  />
+        <Button Click="adminClick" Content="Admin" Margin="10,10,10,10" Grid.Row="1" Grid.Column="1"/>
+        <Button  Click ="NewOrderClick"  Content="New order" Margin="10,5,10,10" Grid.Row="2" Grid.Column="1"/>
+        <Button Content="Tracking order" Margin="10,0,10,145" Grid.Row="3" Click="Button_Click" Grid.Column="1"/>
 
     </Grid>
 

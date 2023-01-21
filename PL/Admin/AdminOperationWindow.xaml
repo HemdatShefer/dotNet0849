@@ -6,54 +6,51 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="AdminOperationWindow" Height="450" Width="800">
+
     <Window.Resources>
-        <Style x:Key="myButtonStyle"
-           TargetType="Button">
-            <Setter Property="FontSize"
-              Value="32" />
-            <Setter Property="FontFamily"
-              Value="Consolas" />
-            <Setter Property="FontWeight"
-              Value="Bold" />
-            <Setter Property = "Background"
-              Value="SeaShell"/>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
         </Style>
     </Window.Resources>
-    <Grid x:Name="MainGrid" HorizontalAlignment="Right" Width="800" Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="180*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="Auto" MinHeight="208.47"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,87" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-        </Grid>
+    <Grid>
+        <Label Content="The pink pearl" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
+               Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
+               HorizontalContentAlignment ="Center" Height="40"/>
 
-        <Button  Style="{StaticResource myButtonStyle}"  Click="productListClick" Content="product List" Grid.ColumnSpan="3" Margin="232,1,232,0" Grid.Row="1">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-        <Button Style="{StaticResource myButtonStyle}" Click ="orderListClick"  Content="Order list" Grid.ColumnSpan="3" Margin="231,75,232,208" Grid.Row="1" Grid.RowSpan="3">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
-
+        <Button Click="productListClick" Content="product List" Grid.ColumnSpan="3" Margin="232,0,232,0" Grid.Row="1" Height="55" VerticalAlignment="Center"/>
+        <Button Click ="orderListClick"  Content="Order list" Margin="231,104,232,274"/>
     </Grid>
-
 </Window>

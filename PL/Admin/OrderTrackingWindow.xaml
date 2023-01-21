@@ -6,12 +6,92 @@
         xmlns:local="clr-namespace:Admin"
         mc:Ignorable="d"
         Title="OrderTrackingWindow" Height="450" Width="450" DataContext="{Binding RelativeSource={RelativeSource self}}">
+    <Window.Resources>
+
+        <Style x:Name="_comboStyle" TargetType="ComboBox" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_buttonStyle" TargetType="Button" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Wheat"/>
+        </Style>
+        <Style x:Name="_listViewStyle" TargetType="ListView" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_labelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+        <Style x:Name="_textBlock" TargetType="TextBlock" >
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="LightCoral"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
-        <Grid x:Name="grid2"
+        <StackPanel Margin="10">
+            <Grid x:Name="OrderProperties">
+                <!-- Row definitions -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- ID -->
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="Order ID" Margin="0 0 0 5"/>
+                    <TextBox x:Name="OrderID" Text="{Binding Order.ID}" Padding="2" HorizontalAlignment="Left" Width="100" MaxLength="9"/>
+                </StackPanel>
+                <!-- Name -->
+                <StackPanel Grid.Row="1">
+                    <TextBlock  Text="Customer Name" Margin="0 5 0 5"/>
+                    <TextBox x:Name="CustomerName" Text="{Binding Order.CustomerName}" Padding="2" HorizontalAlignment="Left" Width="150" />
+                </StackPanel>
+                <!-- Email -->
+                <StackPanel Grid.Row="2">
+                    <TextBlock  Text="Customer Email" Margin="0 5 0 5"/>
+                    <TextBox x:Name="CustomerEmail" Text="{Binding Order.CustomerEmail}" Padding="2" HorizontalAlignment="Left" Width="150" />
+                </StackPanel>
+                <!-- Address -->
+                <StackPanel Grid.Row="3">
+                    <TextBlock  Text="Customer Address" Margin="0 5 0 5"/>
+                    <TextBox x:Name="CustomerAddress" Text="{Binding Order.CustomerAddress}" Padding="2" HorizontalAlignment="Left" Width="150" />
+                </StackPanel>
+                <!-- Status -->
+                <StackPanel Grid.Row="4">
+                    <TextBlock  Text="Order Status" Margin="0 5 0 5"/>
+                    <ComboBox x:Name="OrderStatus" ItemsSource="{Binding Statuses}" SelectedItem="{Binding Order.Status}" Width="150" Margin="0 0 0 5"/>
+                </StackPanel>
+                <!-- Total Price -->
+                <StackPanel Grid.Row="5">
+                    <TextBlock  Text="Total Price" Margin="0 5 0 5"/>
+                    <TextBox x:Name="TotalPrice" Text="{Binding Order.TotalPrice}" Padding="2" HorizontalAlignment="Left" Width="150" IsEnabled="False"/>
+                </StackPanel>
+
+                <!--<Grid x:Name="grid2"
               HorizontalAlignment="Center"
               VerticalAlignment="Top"
-              Height="254" Width="290" Margin="0,43,0,0">
+              Height="284" Width="300" Margin="0,44,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -141,7 +221,9 @@
                      VerticalAlignment="Center" 
                      Width="120"/>
 
-        </Grid>
-        <Button x:Name="UpdateProduct" Content="Update"  Margin="0,342,0,60"/>
+        </Grid>-->
+                <Button x:Name="UpdateProduct" Content="Update"  Margin="0,342,0,60"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

@@ -42,7 +42,7 @@ internal static class DataSource
         List<List<string>> ProductsNames = new List<List<string>>
             {
                 new List<string>{ "pearl golden necklace", "amber necklace","haze necklace", "14k pearl necklace", "14k gold rope necklace"},
-                new List<string>{"bubble errings", "purple haze errings", "heavan errings", "mini moon errings","roxen errings" ,"breeze errings"},
+                new List<string>{"bubble errings", "purple haze errings", "mini moon errings","roxen errings" ,"breeze errings"},
                 new List<string>{"14k gold buble ring", "pearl ring", "braid ring", "dimond ring", "wedding rings silver"},
                 new List<string>{"bridal bracelet","lia bracelet", "pearl bracelet", "mermaid bracelet"},
                 new List<string>{ "jacob bracelet", "men chain", "signature ring" }
@@ -62,7 +62,7 @@ internal static class DataSource
                     Categories = category,
                     Price = random.Next(100) + 0.90,
                     InStock = pres-- > 0 ? 0 : random.Next(30, 100),
-                    Path = "D:\\repos\\dotNet0849\\photos\\" + name +".png"
+                    Path = "D:\\repos\\dotNet0849\\photos\\" + name + ".png"
                 }; 
 
                 Products.Add(_product);
