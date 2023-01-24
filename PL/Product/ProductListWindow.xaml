@@ -64,7 +64,7 @@
             <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="336" Height="44" Grid.Column="1"/>
 
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" ><!--ItemContainerStyleSelector="{StaticResource styleForListViewItem}">-->
+        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}">
           
             <ListView.View>
                 <GridView>

@@ -66,12 +66,12 @@
         <!-- ID -->
         <StackPanel
             x:Name="enterID" Grid.Row="0">
-            <TextBlock Text="Product ID" Margin="0 0 0 5" Height="14" Width="260"/>
-            <ComboBox x:Name="ProductID" 
+            <TextBlock Text="Order ID" Margin="0 0 0 5" Height="14" Width="260"/>
+            <ComboBox x:Name="OrderID" 
                       ItemsSource="{Binding OrderForList}" 
                       DisplayMemberPath="ID" 
                       SelectedValuePath="ID" 
-                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="ProductID_SelectionChanged">
+                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="OrderID_SelectionChanged">
             </ComboBox>
         </StackPanel>
 

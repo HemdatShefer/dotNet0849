@@ -37,7 +37,7 @@ namespace PL.Cart
             this.bl = bl;
             cart = _cart;
 
-            ProductForLists = bl.Product.GetProductItems(cart);
+            ProductForLists = bl.Product.GetProductItems(cart );
             ProductListView.ItemsSource = ProductForLists;
             ProductListView.DataContext = ProductForLists;
 
@@ -63,8 +63,8 @@ namespace PL.Cart
 
         private void ProductListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            var selectedProduct = ((Selector)sender).SelectedItem as BO.ProductForList;
-            var select = (BO.ProductForList)ProductListView.SelectedItem;
+            var selectedProduct = ((Selector)sender).SelectedItem as BO.ProductItem;
+            var select = (BO.ProductItem)ProductListView.SelectedItem;
             if (selectedProduct is null)
             {
                 MessageBox.Show("Please select a product to add to cart.");

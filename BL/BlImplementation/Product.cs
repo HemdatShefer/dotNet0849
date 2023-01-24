@@ -155,7 +155,7 @@ namespace BlImplementation
             //, Func<ProductItem?, bool>? filter
             return from prod in productsList
                    let productItem = GetProductItem(prod.ID, cart)
-                   where filter(productItem)
+                   where filter is null? true : filter(productItem)
                    select productItem;
         }
     }

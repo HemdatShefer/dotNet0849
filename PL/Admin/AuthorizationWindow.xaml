@@ -65,7 +65,7 @@
         <TextBox  HorizontalAlignment="Left" Margin="328,56,0,0" TextWrapping="WrapWithOverflow" Text="manager accesss" VerticalAlignment="Top" Width="144" Height="43" Background="White"   />
         <TextBox  HorizontalAlignment="Left" Margin="203,124,0,0" TextWrapping="WrapWithOverflow" Text="Password" VerticalAlignment="Top" Width="147" Height="37" />
 
-        <Button Click="loginClick" Content="login"  Margin="328,177,128,217">
+        <Button Click="loginClick" Content="login"  Margin="328,177,128,190">
 
         </Button>
 

@@ -45,9 +45,6 @@
         </Style>
     </Window.Resources>
 
-    <Window.DataContext>
-        <BO:Cart/>
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -57,13 +54,20 @@
         <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
                HorizontalContentAlignment ="Center" Height="40"/>
-        <ListView x:Name="itemsInCart"  MouseDoubleClick= "itemsInCart_MouseDoubleClick" IsMouseDirectlyOverChanged="itemsInCart_IsMouseDirectlyOverChanged" d:ItemsSource="{d:SampleData ItemCount=7}"  ItemsSource="{Binding Items}"
- Margin="390,39,45,10" SelectionChanged="itemsInCart_SelectionChanged" Grid.ColumnSpan="2" >
+
+        <ListView x:Name="itemsInCart"  MouseDoubleClick= "itemsInCart_MouseDoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}"
+                  IsMouseDirectlyOverChanged="itemsInCart_IsMouseDirectlyOverChanged" d:ItemsSource="{d:SampleData ItemCount=7}"  ItemsSource="{Binding Items}"
+ Margin="340,39,10,10" SelectionChanged="itemsInCart_SelectionChanged" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ProductID}" Width="75" Header="ProductID" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="75" Header ="Price" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Amount}"  Width="75" Header="Amount" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Total}" Width="75" Header="Total Price" />
+                    <GridViewColumn Width="120"   Header="Update amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
+                                <ScrollBar Maximum="{Binding Amount}" Minimum="1" Value="{Binding Amount}"></ScrollBar>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -71,13 +75,14 @@
             </ListView.View>
         </ListView>
 
+
         <Button Name="commitCart" Content="commit order" HorizontalAlignment="Left" Margin="92,364,0,0" VerticalAlignment="Top" Click="commitCart_Click"
                 Height="26" Width="232"/>
-        <TextBlock Text="Total price"  Margin="45,168,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.462,0.927" Width="325"/>
-        <TextBox x:Name="total" DataContext="{Binding TotalPrice}" Text="{Binding TotalPrice}"  Margin="45,191,230,175" TextChanged="total_TextChanged" />
+        <TextBlock Text="Total price"  Margin="10,168,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.462,0.927" Width="325"/>
+        <TextBox x:Name="total" DataContext="{Binding TotalPrice}" Text="{Binding TotalPrice}"  Margin="10,186,265,180" TextChanged="total_TextChanged" />
 
-        <TextBlock Text="Name" Margin="45,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
-        <TextBox x:Name="CustomerName" DataContext="{Binding CustomerName}" Text="{Binding CustomerName}"  Margin="45,83,230,295" TextChanged="CustomerName_TextChanged" />
+        <TextBlock Text="Name" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
+        <TextBox x:Name="CustomerName" DataContext="{Binding CustomerName}" Text="{Binding CustomerName}"  Margin="10,83,265,295" TextChanged="CustomerName_TextChanged" />
 
 
 

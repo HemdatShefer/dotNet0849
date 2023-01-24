@@ -37,27 +37,7 @@ namespace PL.Cart
             string s_total = string.Format("{0:0.00}", cart.TotalPrice);
             total.Text = s_total;
         }
-        private void Amount_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
 
-                int amount = (int)((ComboBox)sender).SelectedItem;
-                int productId = (int)((ComboBox)sender).Tag;
-                new PL.Cart.UpdateAmountItems(bl!, cart, productId).Show();
-
-                //cart = bl.Cart.UpdateOrderItem(cart, productId, amount);
-            }
-            catch (NotInStockException ex) 
-            {
-                MessageBox.Show("Not enough stock to add this product to the cart.");
-
-            }
-            catch (unValidException ex)
-            {
-                MessageBox.Show("unValid values enterd! \n closing cart");
-            }
-        }
 
 
         private void CartView_Loaded(object sender, RoutedEventArgs e)
@@ -95,7 +75,7 @@ namespace PL.Cart
         {
             var selectedItem = ((Selector)sender).SelectedItem as BO.OrderItem;
             var select = (BO.OrderItem)itemsInCart.SelectedItem;
-            new PL.Cart.UpdateAmountItems(bl!, cart, selectedItem.ProductID).Show();
+           // new PL.Cart.UpdateAmountItems(bl!, cart, selectedItem.ProductID).Show();
 
             if (selectedItem is null)
             {

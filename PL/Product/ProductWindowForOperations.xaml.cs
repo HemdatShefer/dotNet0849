@@ -65,9 +65,6 @@ namespace PL.Product
             }
         }
 
-        private void ProductCategory_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
 
-        }
     }
 }

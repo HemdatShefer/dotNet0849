@@ -30,7 +30,7 @@ namespace PL.Order
         {
             InitializeComponent();
             OrderForList = bl!.Order.orderForLists();
-            ProductID.ItemsSource = OrderForList;
+            OrderID.ItemsSource = OrderForList;
             this.DataContext = this;
         }
 
@@ -47,7 +47,7 @@ namespace PL.Order
         {
         }
 
-        private void ProductID_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OrderID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedProductID = (sender as ComboBox).SelectedValue;
             if (selectedProductID != null)
