@@ -7,7 +7,8 @@ namespace BlImplementation
 
     internal class Product : IProduct
     {
-        private Dal.DalProduct _dal = new Dal.DalProduct();
+        DalApi.IDal? _dal = DalApi.Factory.Get();
+
         /// <summary>
         /// 
         /// </summary>
@@ -18,7 +19,7 @@ namespace BlImplementation
             checkProduct(product);
             try
             {
-                _dal.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock });
+                _dal.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock });
             }
             catch (DO.ObjectNotFoundException)
             {
@@ -41,7 +42,7 @@ namespace BlImplementation
             }
             try
             {
-                _dal.Delete(idProduct);
+                _dal.Product.Delete(idProduct);
             }
             catch
             {
@@ -58,7 +59,8 @@ namespace BlImplementation
             try
             {
                 checkProduct(product);
-                _dal.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, Categories = (DO.Enums.Category)product.Categories });
+                _dal.Product.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
+                    Categories = (DO.Enums.Category)product.Categories });
             }
             catch
             {
@@ -73,7 +75,7 @@ namespace BlImplementation
         /// <returns></returns>
         BO.Product IProduct.GetProduct(int id)
         {
-            DO.Product DOproduct = _dal.GetById(id);
+            DO.Product DOproduct = _dal.Product.GetById(id);
             BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock, Categories = (BO.Enums.Category)DOproduct.Categories };
             return product;
         }
@@ -84,7 +86,7 @@ namespace BlImplementation
         /// <returns></returns>
         public IEnumerable<BO.ProductForList> GetProductsForList(Func<ProductForList?, bool>? filter = null)
         {
-            IEnumerable<DO.Product> productsList = _dal.GetAll();
+            IEnumerable<DO.Product> productsList = _dal.Product.GetAll();
 
             return from prod in productsList
                    select new ProductForList
@@ -128,6 +130,33 @@ namespace BlImplementation
         public IEnumerable<ProductForList> GetProductsForListByCond(IEnumerable<ProductForList> productForLists, Func<ProductForList?, bool>? filter)
         {
             return productForLists.Where(filter);
+        }
+
+        public ProductItem GetProductItem(int productId, BO.Cart cart)
+        {
+            DO.Product prod = _dal!.Product.GetById(productId);  
+           return new ProductItem
+            {
+                ID = prod.ID,
+                Name = prod.Name,
+                Price = prod.Price,
+                InStock = prod.InStock > 0,
+                Categories = (BO.Enums.Category)prod.Categories,
+                Path = prod.Path,
+                AmountInCart = (from item in cart.Items
+                               where item.ProductID == prod.ID
+                               select item.Amount).FirstOrDefault(0)
+           };
+        }
+
+        public IEnumerable<ProductItem> GetProductItems(BO.Cart cart, Func<ProductItem?, bool>? filter = null)
+        {
+            IEnumerable<DO.Product> productsList = _dal.Product.GetAll();
+            //, Func<ProductItem?, bool>? filter
+            return from prod in productsList
+                   let productItem = GetProductItem(prod.ID, cart)
+                   where filter(productItem)
+                   select productItem;
         }
     }
 

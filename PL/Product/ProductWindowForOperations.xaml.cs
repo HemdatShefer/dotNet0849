@@ -55,6 +55,7 @@ namespace PL.Product
             try
             {
                 bl.Product.UpdateProduct(Product);
+                MessageBox.Show("Update secuessfuly");
                 Close();
             }
             catch (Exception ex)

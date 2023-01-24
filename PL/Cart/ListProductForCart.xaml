@@ -62,7 +62,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="Cart" Content="Cart" Width="100" Padding="5" Click="Cart_Click" Height="38" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="0,6,0,0"/>
-            <TextBlock Grid.Column="1" Text="{Binding cart.Items.Count}" Margin="35,5,0,18" />
+            <TextBlock Grid.Column="1" Text="{Binding cart.Items.Count}" Margin="35,5,0,18"  />
 
             <Label Content="The pink pearl" Background="LightCoral" Foreground="Wheat" 
                HorizontalContentAlignment ="Center" VerticalContentAlignment="Center" Height="40" Grid.Column="3" Margin="130,10,-80,12" />
@@ -75,7 +75,7 @@
         </Grid>
 
 
-        <ListView x:Name="ProductListView" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,32,0,0" SelectionChanged="ProductListView_SelectionChanged_1">
+        <ListView x:Name="ProductListView" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  Margin="0,32,0,0" SelectionChanged="ProductListView_SelectionChanged_1">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel></WrapPanel>
@@ -87,19 +87,26 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3.5*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition> 
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
+                        
                         <Image >
                             <Image.Source>
                                 <BitmapImage UriSource="{Binding Path}"  CacheOption="OnLoad"/>
                             </Image.Source>
                         </Image>
+                        
                         <WrapPanel Grid.Row="1">
-                            <TextBlock Text="{Binding Name}" DataContext="{Binding Name}"/>
+                            <TextBlock Text="{Binding Name}" />
                         </WrapPanel>
+                        
                         <WrapPanel Grid.Row="2">
                             <TextBlock Text="{Binding Price}"/>
+                        </WrapPanel>
+
+                        <WrapPanel Grid.Row="3">
+                            <TextBlock Text="{Binding AmountInCart}"/>
                         </WrapPanel>
                     </Grid>
                 </DataTemplate>

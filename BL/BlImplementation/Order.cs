@@ -64,7 +64,7 @@ namespace BlImplementation
                         OrderID = orderItem.OrderID,
                         Price = orderItem.Price,
                         Amount = orderItem.Amount,
-                        TotalPrice = orderItem.Price * orderItem.Amount,
+                        Total = orderItem.Price * orderItem.Amount,
                     }).ToList()
                 };
             }

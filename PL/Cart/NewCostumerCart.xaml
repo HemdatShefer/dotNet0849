@@ -71,12 +71,7 @@
                 <TextBlock  Text="Customer Email" Margin="0 5 0 5"/>
                 <TextBox x:Name="CustomerEmail" Text="{Binding Cart.CustomerEmail}" Padding="2" HorizontalAlignment="Left" Width="435" />
             </StackPanel>
-            
-            <!-- Total Price -->
-            <StackPanel Grid.Row="4">
-                <TextBlock  Text="Total Price" Margin="0 5 0 5"/>
-                <TextBlock x:Name="TotalPrice" Text="{Binding Cart.TotalPrice}" Padding="2" Width="435" HorizontalAlignment="Left" />
-            </StackPanel>
+           
                 <Button x:Name="Checkout" Content="Checkout" Margin="0,64,0,-59" Grid.Row="4" Click="Checkout_Click" />
         </Grid>
     </StackPanel>

@@ -30,12 +30,18 @@ namespace PL.Cart
 
         private void Checkout_Click(object sender, RoutedEventArgs e)
         {
-            cart.CustomerName = CustomerName.Text;
-            cart.CustomerAdress = CustomerAddress.Text;
-            cart.CustomerEmail = CustomerEmail.Text;
-            BO.Order order = createNewOrder(cart);
-
-            new PL.Cart.CartView(bl!, cart, order).Show();
+            if (string.IsNullOrEmpty(CustomerName.Text) || string.IsNullOrEmpty(CustomerAddress.Text) || string.IsNullOrEmpty(CustomerEmail.Text))
+            {
+                MessageBox.Show("Please fill in all the required fields before checking out.");
+            }
+            else
+            {
+                cart.CustomerName = CustomerName.Text;
+                cart.CustomerAdress = CustomerAddress.Text;
+                cart.CustomerEmail = CustomerEmail.Text;
+                BO.Order order = createNewOrder(cart);
+                new PL.Cart.CartView(bl!, cart, order).Show();
+            }
         }
         private static BO.Order createNewOrder(BO.Cart cart)
         {

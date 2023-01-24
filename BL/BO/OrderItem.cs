@@ -28,7 +28,7 @@ namespace BO
         /// <summary>
         /// 
         /// </summary>
-        public double TotalPrice { get; set; }
+        public double Total { get; set; }
 
         public override string ToString()
         {

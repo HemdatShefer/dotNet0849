@@ -27,7 +27,7 @@ namespace PL.Cart
     {
         public BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public IEnumerable<BO.ProductForList> ProductForLists;
+        public IEnumerable<BO.ProductItem> ProductForLists;
         public BO.Cart cart;
         public ListProductForCart(BlApi.IBl bl, BO.Cart _cart)
         {
@@ -37,7 +37,7 @@ namespace PL.Cart
             this.bl = bl;
             cart = _cart;
 
-            ProductForLists = bl.Product.GetProductsForList();
+            ProductForLists = bl.Product.GetProductItems(cart);
             ProductListView.ItemsSource = ProductForLists;
             ProductListView.DataContext = ProductForLists;
 
@@ -46,7 +46,7 @@ namespace PL.Cart
 
         private void ProductSelector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
         {
-            ProductListView.ItemsSource = bl.Product.GetProductsForListByCond(ProductForLists, product => product.Categories == (BO.Enums.Category)ProductSelector.SelectedItem);
+            ProductListView.ItemsSource = bl.Product.GetProductItems(cart, product => product.Categories == (BO.Enums.Category)ProductSelector.SelectedItem);
         }
 
         private void amountSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -88,6 +88,7 @@ namespace PL.Cart
             catch (BlImplementation.NotInStockException ex)
             {
                 MessageBox.Show("Not enough stock to add this product to the cart.");
+                
             }
 
         }

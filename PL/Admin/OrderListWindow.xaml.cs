@@ -55,29 +55,50 @@ namespace PL.Admin
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UpdateShippedButtonClick(object sender, RoutedEventArgs e)
         {
-            // Get the selected item in the ListView
-            var selectedItem = OrderListView.SelectedItem as BO.OrderForList;
-
-            // Retrieve the order from the BL
-            BO.Order order = bl!.Order.GetOrder(selectedItem.ID);
+            // Get the selected item in the ListView            
+            Button button = (Button)sender;
+            BO.OrderForList order = (BO.OrderForList)button.DataContext;
             BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
-
-            // Check the order's status and open the appropriate window
-            if (status == BO.Enums.Status.shipped)
+            if (status == BO.Enums.Status.deliverd || status == BO.Enums.Status.shipped)
             {
-                new PL.Order.UpdateOrderWindow(bl, Visibility.Collapsed, Visibility.Visible, order).ShowDialog();
+                MessageBox.Show("This Order Alredy been shipped");
             }
-            else if (status == BO.Enums.Status.confirmed)
+            else
             {
-                new PL.Order.UpdateOrderWindow(bl, Visibility.Visible, Visibility.Collapsed, order).ShowDialog();
-            }
+                bl.Order.UpdateshippedDate(order.ID);
+            }          
 
             // Refresh the ListView
             OrderForList = bl!.Order.orderForLists();
             OrderListView.ItemsSource = OrderForList;
         }
 
+        private void UpdateDeliverdButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Get the selected item in the ListView            
+            Button button = (Button)sender;
+            BO.OrderForList order = (BO.OrderForList)button.DataContext;
+            BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+
+            if (status == BO.Enums.Status.deliverd)
+            {
+                MessageBox.Show("This Order Alredy been deliverd");
+            }
+            else if (status == BO.Enums.Status.confirmed)
+            {
+                MessageBox.Show("This Order haven't shipped yet");
+            }
+            else
+            {
+                bl.Order.UpdateDeliverdDate(order.ID);
+            }
+
+
+            // Refresh the ListView
+            OrderForList = bl!.Order.orderForLists();
+            OrderListView.ItemsSource = OrderForList;
+        }
     }
 }

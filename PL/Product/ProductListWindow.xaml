@@ -49,7 +49,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
@@ -64,20 +64,21 @@
             <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="336" Height="44" Grid.Column="1"/>
 
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" d:ItemsSource="{d:SampleData ItemCount=7}" Margin="295,21,10,10" >
+        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" ><!--ItemContainerStyleSelector="{StaticResource styleForListViewItem}">-->
+          
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding ID}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Categories}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Price}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding InStock}"/>
-                    <GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding ID}"  Width="100" Header="ID"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="180"  Header="Name"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Categories}" Width="120"  Header="Category"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="120"  Header="Price"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding InStock}" Width="120"  Header="InStock"/>
+                    <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image>
+                                <Image  Width="80" Height="50">
                                     <Image.Source>
-                                        <BitmapImage UriSource="{Binding Path}"  CacheOption="OnLoad" />
+                                        <BitmapImage  UriSource="{Binding Path}"  CacheOption="OnLoad" />
                                     </Image.Source>
                                 </Image>
                             </DataTemplate>
@@ -87,8 +88,15 @@
             </ListView.View>
 
         </ListView>
-        <Button x:Name="btnAdd" Content="Add New Item" Grid.Row="1" Margin="25,0,490,0" Padding="5" Click="BtnAdd_Click" Height="42" VerticalAlignment="Center"/>
-        <Button x:Name="update" Content="Update Item" Grid.Row="1" Margin="25,191,490,0" Padding="5" Click="BtnAdd_Click" Height="42" VerticalAlignment="Top"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAdd" Content="Add New Item" Padding="5" Click="BtnAdd_Click" />
+            <Button x:Name="update" Content="Update Item" Padding="5" Click="BtnAdd_Click" Grid.Column="1"/>
 
+        </Grid>
+     
     </Grid>
 </Window>

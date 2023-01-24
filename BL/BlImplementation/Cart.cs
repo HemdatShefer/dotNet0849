@@ -30,10 +30,13 @@ namespace BlImplementation
                 OrderItem orderItem = getOrderItem(cart, productId);
 
                 if (orderItem is null)
-                    cart.Items!.Add(new BO.OrderItem { Price = dOproduct.Price, Amount = 1, ProductID = dOproduct.ID , ID = productId });
+                    cart.Items!.Add(new BO.OrderItem { Price = dOproduct.Price, Amount = 1, ProductID = dOproduct.ID, ID = productId, Total = dOproduct.Price });
 
                 else
+                {
                     orderItem.Amount++;
+                    orderItem.Total = orderItem.Price* orderItem.Amount;
+                }
 
                 cart.TotalPrice += dOproduct.Price;
             }
@@ -164,7 +167,7 @@ namespace BlImplementation
         /// <exception cref="NameUnvalidException"></exception>
         /// <exception cref="AdressUnvalidException"></exception>
         /// <exception cref="TotalUnvalidException"></exception>
-        private static void CheckClient(BO.Cart cart)
+        public static void CheckClient(BO.Cart cart)
         {
 
             if (cart.CustomerEmail == "")
