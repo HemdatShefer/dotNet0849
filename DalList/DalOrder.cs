@@ -46,7 +46,7 @@ public class DalOrder : IOrder
     public Order GetById(int id)
     {
         foreach (var order in DataSource.orders.Where(order => order.ID == id)) { return order; }
-        throw new NotImplementedException("CANT FIND order");
+        throw new ObjectNotFoundException("CANT FIND order");
     }
 
 }

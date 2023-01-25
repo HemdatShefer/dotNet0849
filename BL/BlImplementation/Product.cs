@@ -78,9 +78,24 @@ namespace BlImplementation
         /// <returns></returns>
         BO.Product IProduct.GetProduct(int id)
         {
-            DO.Product DOproduct = _dal.Product.GetById(id);
-            BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock, Categories = (BO.Enums.Category)DOproduct.Categories , Path = DOproduct.Path};
-            return product;
+            try
+            {
+                DO.Product DOproduct = _dal.Product.GetById(id);
+                BO.Product product = new BO.Product
+                { 
+                    ID = DOproduct.ID, 
+                    Name = DOproduct.Name,
+                    Price = DOproduct.Price, 
+                    InStock = DOproduct.InStock,
+                    Categories = (BO.Enums.Category)DOproduct.Categories,
+                    Path = DOproduct.Path 
+                };
+                return product;
+            }
+            catch(ObjectNotFoundException ex)
+            {
+                throw new unValidProductException();
+            }
         }
         /// <summary>
         /// 
@@ -137,19 +152,27 @@ namespace BlImplementation
 
         public ProductItem GetProductItem(int productId, BO.Cart cart)
         {
-            DO.Product prod = _dal!.Product.GetById(productId);  
-           return new ProductItem
+            try
             {
-                ID = prod.ID,
-                Name = prod.Name,
-                Price = prod.Price,
-                InStock = prod.InStock > 0,
-                Categories = (BO.Enums.Category)prod.Categories,
-                Path = prod.Path,
-                AmountInCart = (from item in cart.Items
-                               where item.ProductID == prod.ID
-                               select item.Amount).FirstOrDefault(0)
-           };
+                DO.Product prod = _dal!.Product.GetById(productId);
+                return new ProductItem
+                {
+                    ID = prod.ID,
+                    Name = prod.Name,
+                    Price = prod.Price,
+                    InStock = prod.InStock > 0,
+                    Categories = (BO.Enums.Category)prod.Categories,
+                    Path = prod.Path,
+                    AmountInCart = (from item in cart.Items
+                                    where item.ProductID == prod.ID
+                                    select item.Amount).FirstOrDefault(0)
+                };
+            }
+            catch(ObjectNotFoundException ex)
+            {
+                throw new ObjectNotFoundException();
+            }
+          
         }
 
         public IEnumerable<ProductItem> GetProductItems(BO.Cart cart, Func<ProductItem?, bool>? filter = null)

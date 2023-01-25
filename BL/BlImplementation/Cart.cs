@@ -40,6 +40,7 @@ namespace BlImplementation
 
                 cart.TotalPrice += dOproduct.Price;
             }
+
             catch (DO.ObjectNotFoundException ex)
             {
                 throw new ObjectNotFoundException("", ex);
@@ -87,7 +88,7 @@ namespace BlImplementation
 
                     if (DOproduct.InStock - amount <= 0)
                     {
-                        throw new NotInStockException("Not enoge");
+                        throw new NotInStockException("Not enough products in stock");
                     }
 
                     if (amount == 0)
@@ -106,6 +107,9 @@ namespace BlImplementation
             {
                 throw new NotInStockException("Not enough products in stock");
             }
+            catch(ObjectNotFoundException)
+            { 
+            }
             return cart;
         }
         /// <summary>
@@ -117,7 +121,7 @@ namespace BlImplementation
         {
             if (cart.Items!.Count() <= 0)
             {
-                throw new EmptyCartException(" items are empty");
+                throw new EmptyCartException("cart are empty");
             }
             try
             {

@@ -30,20 +30,16 @@ namespace BlImplementation
     public class StockNotAdmissibleException : Exception
     {
         public StockNotAdmissibleException()
-        {
-        }
+        { }
 
         public StockNotAdmissibleException(string? message) : base(message)
-        {
-        }
+        {}
 
         public StockNotAdmissibleException(string? message, Exception? innerException) : base(message, innerException)
-        {
-        }
+        {}
 
         public StockNotAdmissibleException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        {}
     }
     [Serializable]
     public class PriceNotAdmissibleException : Exception
