@@ -19,7 +19,9 @@ namespace BlImplementation
             checkProduct(product);
             try
             {
-                _dal.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock });
+                _dal.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
+                    Path = product.Path == null? "D:\\repos\\dotNet0849\\photos\\MissingImage.png" : product.Path, Categories = (DO.Enums.Category)product.Categories
+                });
             }
             catch (DO.ObjectNotFoundException)
             {
@@ -60,7 +62,8 @@ namespace BlImplementation
             {
                 checkProduct(product);
                 _dal.Product.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
-                    Categories = (DO.Enums.Category)product.Categories });
+                    Categories = (DO.Enums.Category)product.Categories, Path = product.Path == null ? "D:\\repos\\dotNet0849\\photos\\MissingImage.png" : product.Path
+                });
             }
             catch
             {
@@ -76,7 +79,7 @@ namespace BlImplementation
         BO.Product IProduct.GetProduct(int id)
         {
             DO.Product DOproduct = _dal.Product.GetById(id);
-            BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock, Categories = (BO.Enums.Category)DOproduct.Categories };
+            BO.Product product = new BO.Product { ID = DOproduct.ID, Name = DOproduct.Name, Price = DOproduct.Price, InStock = DOproduct.InStock, Categories = (BO.Enums.Category)DOproduct.Categories , Path = DOproduct.Path};
             return product;
         }
         /// <summary>

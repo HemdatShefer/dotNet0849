@@ -1,8 +1,14 @@
 ﻿using BlApi;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Controls;
+
+using System.Xml.Linq;
+
 namespace PL.Product
 {
     /// <summary>
@@ -35,11 +41,18 @@ namespace PL.Product
         {
 
         }
-
+      
         private void AddProductClick(object sender, RoutedEventArgs e)
         {
+            //if(string.IsNullOrEmpty(ProductID.Text)  || string.IsNullOrEmpty(ProductName.Text) || string.IsNullOrEmpty(ProductPrice.Text) || string.IsNullOrEmpty(ProductAmountInStock.Text) )
+            //{
+            //}
+            //if(double.TryParse(ProductPrice.Text, out price))
+            //            Button button = (Button)sender;
+          //  BO.OrderForList order = (BO.OrderForList)button.DataContext;
             try
             {
+                
                 bl.Product.AddProduct(Product);
                 Close();
             }

@@ -62,8 +62,8 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="Cart" Content="Cart" Width="100" Padding="5" Click="Cart_Click" Height="38" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="0,6,0,0"/>
-            <TextBlock Grid.Column="1" Text="{Binding cart.Items.Count}" Margin="35,5,0,18"  />
-
+            <!--<TextBlock  x:Name="AmountInCart" Grid.Column="1" Margin="35,5,0,18" Text="{Binding amountInCart}" />-->
+            
             <Label Content="The pink pearl" Background="LightCoral" Foreground="Wheat" 
                HorizontalContentAlignment ="Center" VerticalContentAlignment="Center" Height="40" Grid.Column="3" Margin="130,10,-80,12" />
 
@@ -105,9 +105,9 @@
                             <TextBlock Text="{Binding Price}"/>
                         </WrapPanel>
 
-                        <WrapPanel Grid.Row="3">
+                        <!--<WrapPanel Grid.Row="3">
                             <TextBlock Text="{Binding AmountInCart}"/>
-                        </WrapPanel>
+                        </WrapPanel>-->
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

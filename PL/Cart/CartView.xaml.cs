@@ -47,8 +47,16 @@ namespace PL.Cart
 
         private void commitCart_Click(object sender, RoutedEventArgs e)
         {
-            bl!.Cart.CommitCart(cart);
-            MessageBox.Show("Thanks for buying!");
+            try 
+            {
+                bl!.Cart.CommitCart(cart);
+                MessageBox.Show("Thanks for buying!");
+            }
+            catch(EmptyCartException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
             this.Close();
         }
 
@@ -70,25 +78,68 @@ namespace PL.Cart
         {
 
         }
+        private void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //var scrollBar = sender as ScrollBar;
+
+            //var selectedItem = itemsInCart.SelectedItem as BO.OrderItem;
+            //var productId = selectedItem.ProductID;
+            //var newAmount = (int)scrollBar.Value;
+            //Button button = (Button)sender;
+            //BO.OrderItem item = (BO.OrderItem)scrollBar.DataContext;
+            //bl.Cart.UpdateOrderItem(cart, productId, newAmount);
+
+        }
 
         private void itemsInCart_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItem = ((Selector)sender).SelectedItem as BO.OrderItem;
             var select = (BO.OrderItem)itemsInCart.SelectedItem;
-           // new PL.Cart.UpdateAmountItems(bl!, cart, selectedItem.ProductID).Show();
-
-            if (selectedItem is null)
-            {
-                MessageBox.Show("");
-                return;
-            }
 
         }
 
         private void itemsInCart_IsMouseDirectlyOverChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             MessageBox.Show(((BO.OrderItem)itemsInCart.SelectedItem).ToString());
-            this.Close();
+        }
+
+        private void ScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            var scrollBar = sender as ScrollBar;
+
+            var newAmount = (int)scrollBar.Value ;
+
+
+            ScrollBar ScrollBar = (ScrollBar)sender;
+            BO.OrderItem item = (BO.OrderItem)scrollBar.DataContext;
+
+            try
+            {
+                if (e.ScrollEventType == ScrollEventType.SmallDecrement)
+                {
+                    bl.Cart.UpdateOrderItem(cart, item.ProductID, newAmount + 1);
+                }
+                else if (e.ScrollEventType == ScrollEventType.SmallIncrement)
+                {
+                    bl.Cart.UpdateOrderItem(cart, item.ProductID, newAmount - 1);
+                }
+            }
+            catch(NotInStockException ex)
+            { 
+                MessageBox.Show(ex.Message);
+            }
+
+            Loaded += CartView_Loaded;
+            ((CollectionView)CollectionViewSource.GetDefaultView(itemsInCart.ItemsSource)).Refresh();
+            this.DataContext = cart;
+
+            string s_total = string.Format("{0:0.00}", cart.TotalPrice);
+            total.Text = s_total;
+
+            var binding = total.GetBindingExpression(TextBox.TextProperty);
+            binding.UpdateSource();
+            ((CollectionView)CollectionViewSource.GetDefaultView(itemsInCart.ItemsSource)).Refresh();
+            BindingOperations.GetBindingExpression(total, TextBox.TextProperty)?.UpdateTarget();
         }
     }
 

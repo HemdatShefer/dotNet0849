@@ -48,6 +48,7 @@
 
     <StackPanel Margin="10">
         <Grid x:Name="CartProperties">
+            
             <!-- Row definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

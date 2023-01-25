@@ -67,6 +67,8 @@ namespace BlImplementation
                         Total = orderItem.Price * orderItem.Amount,
                     }).ToList()
                 };
+                
+                
             }
             else
             {
@@ -87,14 +89,14 @@ namespace BlImplementation
                 DO.Order order = _dal!.Order.GetById(orderID);
                 IEnumerable<DO.OrderItem> orderItems = _dal.OrderItem.GetAll();
                 IEnumerable<DO.OrderItem> orderItemsFilter = _dal.OrderItem.GetAll();
-                return new BO.Order
+                BO.Order order1 = new BO.Order
                 {
                     ID = order.ID,
                     CustomerName = order.CustomerName,
                     CustomerAddress = order.CustomerAddress,
                     OrderDate = order.OrderDate,
                     CustomerEmail = order.CustomerEmail,
-                    ShipDate = order.ShipDate,
+                    ShipDate = DateTime.Now,
                     DeliveryDate = order.DeliveryDate,
                     Status = BO.Enums.Status.shipped,
                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
@@ -107,6 +109,19 @@ namespace BlImplementation
                         Amount = orderItem.Amount
                     }).ToList()
                 };
+                _dal.Order.Delete(orderID);
+                _dal.Order.Add(new DO.Order
+                {
+                    ID = orderID,
+                    CustomerName = order.CustomerName,
+                    CustomerAddress = order.CustomerAddress,
+                    OrderDate = order.OrderDate,
+                    CustomerEmail = order.CustomerEmail,
+                    ShipDate = DateTime.Now,
+                    DeliveryDate = order.DeliveryDate,
+
+                });
+                return order1;
             }
             catch
             {
@@ -127,7 +142,7 @@ namespace BlImplementation
                 DO.Order order = _dal!.Order.GetById(orderID);
                 IEnumerable<DO.OrderItem> orderItems = _dal!.OrderItem.GetAll();
                 IEnumerable<DO.OrderItem> orderItemsFilter = _dal!.OrderItem.GetAll();
-                return new BO.Order
+                BO.Order order1 = new BO.Order
                 {
                     ID = order.ID,
                     CustomerName = order.CustomerName,
@@ -135,7 +150,7 @@ namespace BlImplementation
                     OrderDate = order.OrderDate,
                     CustomerEmail = order.CustomerEmail,
                     ShipDate = order.ShipDate,
-                    DeliveryDate = order.DeliveryDate,
+                    DeliveryDate = DateTime.Now,
                     Status = BO.Enums.Status.deliverd,
                     TotalPrice = orderItems.Sum(orderItem => orderItem.Price * orderItem.Amount),
                     Items = orderItemsFilter.Select(orderItem => new BO.OrderItem
@@ -147,6 +162,19 @@ namespace BlImplementation
                         Amount = orderItem.Amount
                     }).ToList()
                 };
+                _dal.Order.Delete(orderID);
+                _dal.Order.Add(new DO.Order
+                {
+                    ID = order.ID,
+                    CustomerName = order.CustomerName,
+                    CustomerAddress = order.CustomerAddress,
+                    OrderDate = order.OrderDate,
+                    CustomerEmail = order.CustomerEmail,
+                    ShipDate = order.ShipDate,
+                    DeliveryDate = DateTime.Now,
+
+                });
+                return order1;
             }
             catch
             {
@@ -185,22 +213,23 @@ namespace BlImplementation
         /// <returns></returns>
         string GetStringStatus(DO.Order order)
         {
+            string date_str = "";
             if (order.OrderDate != DateTime.MinValue)
             {
-                string? date_str = order.OrderDate.ToString("dd/MM/yyyy HH:mm:ss");
-                return date_str + " order created";
+                date_str = order.OrderDate.ToString("dd/MM/yyyy HH:mm:ss");
+                date_str += " order created\n";
             }
             if (order.ShipDate != DateTime.MinValue)
             {
-                string? date_str = order.ShipDate.ToString("dd/MM/yyyy HH:mm:ss");
-                return date_str + " order sent";
+                date_str = order.ShipDate.ToString("dd/MM/yyyy HH:mm:ss");
+                date_str += " order sent\n";
             }
             if (order.DeliveryDate != DateTime.MinValue)
             {
-                string date_str = order.DeliveryDate.ToString("dd/MM/yyyy HH:mm:ss");
-                return date_str + " order deliverd";
+                date_str = order.DeliveryDate.ToString("dd/MM/yyyy HH:mm:ss");
+                date_str += " order deliverd\n";
             }
-            return " order created";
+            return date_str;
 
 
         }

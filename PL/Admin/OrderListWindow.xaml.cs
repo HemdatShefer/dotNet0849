@@ -38,21 +38,7 @@ namespace PL.Admin
 
         private void OrderView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (IsMouseCaptureWithin)
-            {
-                BO.Order order = bl!.Order.GetOrder(((BO.OrderForList)OrderListView.SelectedItem).ID);
-                BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
-                if (status == BO.Enums.Status.shipped)
-                {
-                    new PL.Order.UpdateOrderWindow(bl, Visibility.Collapsed, Visibility.Visible, order).ShowDialog();
-                }
-                if (status == BO.Enums.Status.confirmed)
-                {
-                    new PL.Order.UpdateOrderWindow(bl, Visibility.Visible, Visibility.Collapsed, order).ShowDialog();
-                }
-                OrderForList = bl!.Order.orderForLists();
-                OrderListView.ItemsSource = OrderForList;
-            }
+            
         }
 
         private void UpdateShippedButtonClick(object sender, RoutedEventArgs e)
@@ -61,13 +47,15 @@ namespace PL.Admin
             Button button = (Button)sender;
             BO.OrderForList order = (BO.OrderForList)button.DataContext;
             BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+
+            BO.Order order1;
             if (status == BO.Enums.Status.deliverd || status == BO.Enums.Status.shipped)
             {
                 MessageBox.Show("This Order Alredy been shipped");
             }
             else
             {
-                bl.Order.UpdateshippedDate(order.ID);
+                order1 = bl.Order.UpdateshippedDate(order.ID);
             }          
 
             // Refresh the ListView

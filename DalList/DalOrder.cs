@@ -7,7 +7,7 @@ public class DalOrder : IOrder
 {
     public int Add(Order order)
     {
-        order.ID = DataSource.config.NextOrderNumberOrderItem;
+            //order.ID = DataSource.config.NextOrderNumberOrderItem;
         DataSource.orders.Add(order);
         return order.ID;
     }
@@ -19,6 +19,7 @@ public class DalOrder : IOrder
             if (order.ID == id)
             {
                 DataSource.orders.Remove(order);
+                return;
             }
         }
         throw new Exception("CANT FIND order");

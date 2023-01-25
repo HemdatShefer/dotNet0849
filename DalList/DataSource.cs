@@ -78,10 +78,11 @@ internal static class DataSource
         string[] Addresses = new string[] { "Heifa", "Ashkelon", "Ra'anana", "Eylat", "Jerusalem", "Tel Aviv", "Be'er Seva", "Bet Shemesh", "Ashdod", "Dimona" };
 
 
+        int percent_shiped = 3;//(int)(orders.Count() * 0.3 + 1);
+        int percent_deliverd = 3;//(int)(orders.Count() * 0.2 + 1);
+
         for (int i = 0; i < 10; i++)
         {
-            int percent_shiped = (int)(orders.Count() * 0.8 + 1);
-            int percent_deliverd = (int)(percent_shiped * 0.6 + 1);
             string newCustomerName = Names[i];
 
             Order newOrder = new Order
@@ -91,7 +92,7 @@ internal static class DataSource
                 CustomerEmail = newCustomerName + "@gmail.com",
                 CustomerAddress = Addresses[i],
                 OrderDate = DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)),
-                ShipDate =   percent_shiped-- > 0 ? DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
+                ShipDate =   percent_shiped-- > 0 ?  DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
                 DeliveryDate =  percent_deliverd-- > 0 ? DateTime.Now - new TimeSpan(random.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L)) : DateTime.MinValue,
             };
             orders.Add(newOrder);

@@ -96,14 +96,15 @@ namespace BlImplementation
                     }
                     else
                     {
+                        cart.TotalPrice += -(orderItem.Price * orderItem.Amount) + orderItem.Price * amount;
+
                         orderItem.Amount = amount;
                     }
-                    cart.TotalPrice += -(orderItem.Price * orderItem.Amount) + orderItem.Price * amount;
                 }
             }
-            catch
+            catch(NotInStockException )
             {
-                throw new unValidException("id not valid");
+                throw new NotInStockException("Not enough products in stock");
             }
             return cart;
         }

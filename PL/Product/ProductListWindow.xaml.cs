@@ -32,22 +32,39 @@ namespace PL.Product
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl!);
-            productWindowForOperations.ShowDialog();
-            ProductForLists = bl!.Product.GetProductsForList();
-            ProductListView.ItemsSource = ProductForLists;
+            try
+            {
+                ProductWindowForOperations productWindowForOperations = new ProductWindowForOperations(bl!);
+                productWindowForOperations.ShowDialog();
+                ProductForLists = bl!.Product.GetProductsForList();
+                ProductListView.ItemsSource = ProductForLists;
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-        }
+}
 
         private void ProductListView_DoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             //open operations window in add mode
-            if (IsMouseCaptureWithin)
+            try
             {
-                new ProductWindowForOperations(bl!, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
-                ProductForLists = bl.Product.GetProductsForList();
-                ProductListView.ItemsSource = ProductForLists;
+                if (IsMouseCaptureWithin)
+                {
+                    //   new ProductWindowForOperations(bl, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
+                    new ProductWindowForOperations(bl!, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
+                    ProductForLists = bl.Product.GetProductsForList();
+                    ProductListView.ItemsSource = ProductForLists;
+                }
             }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            } 
+
 
         }
     }

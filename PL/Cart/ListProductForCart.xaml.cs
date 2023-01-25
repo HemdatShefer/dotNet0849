@@ -58,8 +58,12 @@ namespace PL.Cart
         }
 
 
-        private void Cart_Click(object sender, RoutedEventArgs e) => new PL.Cart.NewCostumerCart(bl, cart).Show(); 
+        private void Cart_Click(object sender, RoutedEventArgs e)
+        {
+            new PL.Cart.NewCostumerCart(bl, cart).Show();
+            this.Close();
 
+        }
 
         private void ProductListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -76,6 +80,7 @@ namespace PL.Cart
                 if (selectedProduct is not null)
                 {
                     bl!.Cart.AddOrderItem(cart, selectedProduct.ID);
+
                     MessageBox.Show("product added to cart");
 
                 }

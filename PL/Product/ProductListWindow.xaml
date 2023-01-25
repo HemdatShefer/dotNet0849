@@ -57,15 +57,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="ProductSelector" HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" Grid.Column="1" SelectionChanged="ProductSelector_SelectionChanged">
+            <ComboBox Name="ProductSelector" Grid.Column="1" SelectionChanged="ProductSelector_SelectionChanged" Margin="192,0,0,0"/>
 
-            </ComboBox>
-
-            <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="10,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Center" Width="336" Height="44" Grid.Column="1"/>
+            <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="22,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Top" Width="165" Height="44" Grid.Column="1"/>
 
         </Grid>
         <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}">
-          
+
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding ID}"  Width="100" Header="ID"/>
@@ -93,10 +91,10 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnAdd" Content="Add New Item" Padding="5" Click="BtnAdd_Click" />
-            <Button x:Name="update" Content="Update Item" Padding="5" Click="BtnAdd_Click" Grid.Column="1"/>
+            <Button x:Name="btnAdd" Content="Add New Item" Padding="5" Click="BtnAdd_Click" Grid.ColumnSpan="2" />
+            <!--<Button x:Name="update" Content="Update Item" Padding="5" Click="BtnAdd_Click" Grid.Column="1"/>-->
 
         </Grid>
-     
+
     </Grid>
 </Window>

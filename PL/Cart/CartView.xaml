@@ -55,8 +55,11 @@
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
                HorizontalContentAlignment ="Center" Height="40"/>
 
-        <ListView x:Name="itemsInCart"  MouseDoubleClick= "itemsInCart_MouseDoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}"
-                  IsMouseDirectlyOverChanged="itemsInCart_IsMouseDirectlyOverChanged" d:ItemsSource="{d:SampleData ItemCount=7}"  ItemsSource="{Binding Items}"
+        <ListView x:Name="itemsInCart"  MouseDoubleClick= "itemsInCart_MouseDoubleClick" 
+                  ItemContainerStyle="{StaticResource styleForListViewItem}"
+                  IsMouseDirectlyOverChanged="itemsInCart_IsMouseDirectlyOverChanged"
+                  d:ItemsSource="{d:SampleData ItemCount=7}"  
+                  ItemsSource="{Binding Items}"
  Margin="340,39,10,10" SelectionChanged="itemsInCart_SelectionChanged" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
@@ -67,7 +70,7 @@
                     <GridViewColumn Width="120"   Header="Update amount">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <ScrollBar Maximum="{Binding Amount}" Minimum="1" Value="{Binding Amount}"></ScrollBar>
+                                <ScrollBar Maximum="100" Minimum="0" Value="{Binding Amount}"  ValueChanged="ScrollBar_ValueChanged" Scroll="ScrollBar_Scroll"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

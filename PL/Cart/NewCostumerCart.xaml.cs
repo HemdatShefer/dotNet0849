@@ -42,6 +42,7 @@ namespace PL.Cart
                 BO.Order order = createNewOrder(cart);
                 new PL.Cart.CartView(bl!, cart, order).Show();
             }
+            this.Close();
         }
         private static BO.Order createNewOrder(BO.Cart cart)
         {

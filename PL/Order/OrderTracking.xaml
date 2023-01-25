@@ -47,8 +47,8 @@
 
     <Grid x:Name="grid2"
               HorizontalAlignment="Center"
-              VerticalAlignment="Top"
-              Height="254" Width="290" Margin="0,70,0,0">
+              VerticalAlignment="Top" Height="450" Width="780">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -63,26 +63,29 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
         <!-- ID -->
+
         <StackPanel
-            x:Name="enterID" Grid.Row="0">
+            x:Name="enterID" Grid.Row="7" Grid.Column="1" Margin="230,111,-490,-159">
             <TextBlock Text="Order ID" Margin="0 0 0 5" Height="14" Width="260"/>
             <ComboBox x:Name="OrderID" 
                       ItemsSource="{Binding OrderForList}" 
                       DisplayMemberPath="ID" 
                       SelectedValuePath="ID" 
-                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="OrderID_SelectionChanged">
-            </ComboBox>
-        </StackPanel>
+                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="OrderID_SelectionChanged"/>
 
 
-        <TextBox
+            <TextBox
             x:Name="_orderTracking" 
             Text="{Binding OrderTrackingStatus}" 
             Padding="2" 
             HorizontalAlignment="Center" 
-            Width="233" Margin="0,5,0,-51" TextChanged="_orderTracking_TextChanged" Grid.Row="7" IsReadOnly="True"/>
+            Width="261" Margin="0,5,0,-51" TextChanged="_orderTracking_TextChanged" Grid.Row="7" IsReadOnly="True"/>
+
+        </StackPanel>
 
     </Grid>
+
 </Window>
     
