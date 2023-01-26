@@ -51,18 +51,39 @@
             <RowDefinition Height="500*"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" 
+              HorizontalAlignment="Stretch" 
+              Height="auto" Grid.Row="0" 
+              VerticalAlignment="Stretch"
+              Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="ProductSelector" Grid.Column="1" SelectionChanged="ProductSelector_SelectionChanged" Margin="192,0,0,0"/>
+            <ComboBox 
+                Name="ProductSelector" 
+                Grid.Column="1" 
+                SelectionChanged="ProductSelector_SelectionChanged" 
+                Margin="192,0,0,0"/>
 
-            <TextBox HorizontalAlignment="Left" Padding="10" FontSize="15" Margin="22,0,0,0" TextWrapping="Wrap" Text="Catalog" VerticalAlignment="Top" Width="165" Height="44" Grid.Column="1"/>
+            <TextBox 
+                HorizontalAlignment="Left" 
+                Padding="10" 
+                FontSize="15" 
+                Margin="22,0,0,0" 
+                TextWrapping="Wrap"
+                Text="Catalog" 
+                VerticalAlignment="Top" 
+                Width="165" 
+                Height="44" 
+                Grid.Column="1"/>
 
         </Grid>
-        <ListView x:Name="ProductListView" Grid.Row="1"  MouseDoubleClick="ProductListView_DoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}">
+        <ListView x:Name="ProductListView" 
+                  Grid.Row="1" 
+                  MouseDoubleClick="ProductListView_DoubleClick" 
+                  ItemContainerStyle="{StaticResource styleForListViewItem}">
 
             <ListView.View>
                 <GridView>
@@ -92,7 +113,6 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnAdd" Content="Add New Item" Padding="5" Click="BtnAdd_Click" Grid.ColumnSpan="2" />
-            <!--<Button x:Name="update" Content="Update Item" Padding="5" Click="BtnAdd_Click" Grid.Column="1"/>-->
 
         </Grid>
 

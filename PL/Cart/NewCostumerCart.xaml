@@ -47,8 +47,7 @@
     </Window.Resources>
 
     <StackPanel Margin="10">
-        <Grid x:Name="CartProperties">
-            
+        <Grid x:Name="CartProperties" Height="314">
             <!-- Row definitions -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -57,23 +56,25 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="-15,-11,-15,-115" Width="NaN" Grid.RowSpan="5"  />
+
             <!-- Customer Name -->
             <StackPanel Grid.Row="0">
-                <TextBlock Text="Customer Name" Margin="0 0 0 5"/>
+                <TextBlock Text="Customer Name" Margin="0 0 0 5" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <TextBox x:Name="CustomerName" Text="{Binding Cart.CustomerName}" Padding="2" HorizontalAlignment="Left" Width="430" MaxLength="30"/>
             </StackPanel>
             <!-- Customer Address -->
             <StackPanel Grid.Row="1">
-                <TextBlock  Text="Customer Address" Margin="0 5 0 5"/>
+                <TextBlock  Text="Customer Address" HorizontalAlignment="Center" Margin="0 5 0 5"/>
                 <TextBox x:Name="CustomerAddress" Text="{Binding Cart.CustomerAdress}" Padding="2" HorizontalAlignment="Left" Width="430" />
             </StackPanel>
             <!-- Customer Email -->
             <StackPanel Grid.Row="2">
-                <TextBlock  Text="Customer Email" Margin="0 5 0 5"/>
+                <TextBlock  Text="Customer Email" Margin="0 5 0 5" HorizontalAlignment="Center" />
                 <TextBox x:Name="CustomerEmail" Text="{Binding Cart.CustomerEmail}" Padding="2" HorizontalAlignment="Left" Width="435" />
             </StackPanel>
-           
-                <Button x:Name="Checkout" Content="Checkout" Margin="0,64,0,-59" Grid.Row="4" Click="Checkout_Click" />
+
+            <Button x:Name="Checkout" Content="Checkout" Margin="0,64,0,-59" Grid.Row="4" Click="Checkout_Click" />
         </Grid>
     </StackPanel>
 </Window>

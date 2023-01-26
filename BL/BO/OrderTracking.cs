@@ -15,7 +15,7 @@ namespace BO
         /// <summary>
         /// 
         /// </summary>
-        public string? OrderTrackingStatus { get; set; }
+        public List<Tuple<Enums.Status, DateTime>>? OrderTrackingStatus { get; set; }
         /// <summary>
         /// 
         /// </summary>

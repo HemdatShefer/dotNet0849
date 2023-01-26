@@ -134,6 +134,7 @@ namespace BlImplementation
                 }
                 int OrderId = _dal!.Order.Add(new DO.Order
                 {
+                    ID = 0,
                     CustomerName = cart.CustomerName!,
                     CustomerAddress = cart.CustomerAdress!,
                     CustomerEmail = cart.CustomerEmail!,
@@ -149,6 +150,7 @@ namespace BlImplementation
                         ProductID = orderItem.ProductID,
                         Price = orderItem.Price,
                         Amount = orderItem.Amount,
+                        ID= orderItem.ProductID,
                     });
 
                     DO.Product product = products.Find(product => product.ID == orderItem.ProductID);
@@ -221,4 +223,3 @@ namespace BlImplementation
 
 }
 
-//add ListView in xaml for AddToCartWindow like in ProductForList that show binding product ID Name  Categories Price InStock and if user click on a SelectedItem In the ListView the SelectedItem 

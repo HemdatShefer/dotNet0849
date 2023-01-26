@@ -69,11 +69,6 @@ namespace PL.Cart
         {
             var selectedProduct = ((Selector)sender).SelectedItem as BO.ProductItem;
             var select = (BO.ProductItem)ProductListView.SelectedItem;
-            if (selectedProduct is null)
-            {
-                MessageBox.Show("Please select a product to add to cart.");
-                return;
-            }
             
             try
             {

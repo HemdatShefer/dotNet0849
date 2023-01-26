@@ -54,7 +54,6 @@ namespace PL.Product
             {
                 if (IsMouseCaptureWithin)
                 {
-                    //   new ProductWindowForOperations(bl, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
                     new ProductWindowForOperations(bl!, ((BO.ProductForList)ProductListView.SelectedItem).ID).ShowDialog();
                     ProductForLists = bl.Product.GetProductsForList();
                     ProductListView.ItemsSource = ProductForLists;

@@ -7,7 +7,10 @@ public class DalOrder : IOrder
 {
     public int Add(Order order)
     {
-            //order.ID = DataSource.config.NextOrderNumberOrderItem;
+        if(order.ID == 0)
+        {
+            order.ID = DataSource.config.NextOrderNumberOrderItem;
+        }
         DataSource.orders.Add(order);
         return order.ID;
     }

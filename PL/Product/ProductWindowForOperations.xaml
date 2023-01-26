@@ -67,6 +67,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="-10,-45,-10,-114" Width="NaN" Grid.RowSpan="6"  />
+
             <!-- ID -->
             <StackPanel Grid.Row="0">
                 <TextBlock Text="Product ID" Margin="0 0 0 5"/>
@@ -77,7 +80,7 @@
                 <TextBlock  Text="Product Name" Margin="0 5 0 5"/>
                 <TextBox x:Name="ProductName" Text="{Binding Product.Name}" Padding="2" HorizontalAlignment="Left" Width="150" />
             </StackPanel>
-           
+
             <!-- Price -->
             <StackPanel Grid.Row="3">
                 <TextBlock  Text="Product Price" Margin="0 5 0 5"/>
@@ -87,7 +90,7 @@
             <StackPanel Grid.Row="4">
                 <TextBlock  Text="Product Category" Margin="0 5 0 5"/>
                 <ComboBox x:Name="ProductCategory" ItemsSource="{Binding Categories}" SelectedItem="{Binding Product.Categories}" HorizontalAlignment="Left" Width="150" >
-               
+
                 </ComboBox>
             </StackPanel>
             <!-- Amount of Product in stock -->
@@ -96,7 +99,7 @@
                 <TextBox x:Name="ProductAmountInStock" Text="{Binding Product.InStock}" Padding="2" HorizontalAlignment="Left" Width="100" />
             </StackPanel>
         </Grid>
-        
+
         <Button x:Name="AddProduct"  Content="Add" Click="AddProductClick"/>
         <Button x:Name="UpdateProduct" Content="Update"  Click="UpdateProductClick"/>
     </StackPanel>

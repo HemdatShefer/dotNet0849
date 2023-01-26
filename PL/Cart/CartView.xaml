@@ -46,10 +46,13 @@
     </Window.Resources>
 
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="0,32,0,0" Width="NaN" Grid.ColumnSpan="2"  />
+
 
         <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
@@ -84,8 +87,8 @@
         <TextBlock Text="Total price"  Margin="10,168,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.462,0.927" Width="325"/>
         <TextBox x:Name="total" DataContext="{Binding TotalPrice}" Text="{Binding TotalPrice}"  Margin="10,186,265,180" TextChanged="total_TextChanged" />
 
-        <TextBlock Text="Name" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
-        <TextBox x:Name="CustomerName" DataContext="{Binding CustomerName}" Text="{Binding CustomerName}"  Margin="10,83,265,295" TextChanged="CustomerName_TextChanged" />
+        <TextBlock Text="Name" Margin="10,44,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="325"/>
+        <TextBox x:Name="CustomerName" DataContext="{Binding CustomerName}" Text="{Binding CustomerName}"  Margin="5,69,270,309" TextChanged="CustomerName_TextChanged" />
 
 
 

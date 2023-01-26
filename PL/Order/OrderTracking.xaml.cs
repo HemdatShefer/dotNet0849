@@ -38,7 +38,7 @@ namespace PL.Order
         {
             BO.OrderForList order;
             BO.OrderTracking tracking = bl.Order.GetOrderTracking(value);
-            _orderTracking.Text = bl.Order.GetOrderTracking(value).OrderTrackingStatus; 
+           
             BO.Order OrderTracking = bl.Order.GetOrder(value);
             orderToTrack = OrderTracking;
         }
@@ -52,9 +52,16 @@ namespace PL.Order
             var selectedProductID = (sender as ComboBox).SelectedValue;
             if (selectedProductID != null)
             {
-                var tracking = bl.Order.GetOrderTracking((int)(selectedProductID)); 
-                _orderTracking.Text = tracking.OrderTrackingStatus;
+                var tracking = bl.Order.GetOrderTracking((int)(selectedProductID));
+                OrdeTrackings.ItemsSource = tracking.OrderTrackingStatus;
+                currentStatus.Text = tracking.Status.ToString();
+
             }
+        }
+
+        private void OrdeTrackings_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 

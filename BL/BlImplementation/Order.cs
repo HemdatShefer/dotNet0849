@@ -193,12 +193,23 @@ namespace BlImplementation
             try
             {
                 DO.Order order = _dal!.Order.GetById(orderID);
+                List<Tuple<Enums.Status, DateTime>>? orderTrackingStatus = new List<Tuple<Enums.Status, DateTime>>(); 
+
+                if (order.OrderDate != DateTime.MinValue)
+                    orderTrackingStatus.Add(Tuple.Create(Enums.Status.confirmed, order.OrderDate));
+
+                    if (order.ShipDate != DateTime.MinValue)
+                    orderTrackingStatus.Add(Tuple.Create(Enums.Status.shipped, order.ShipDate));
+
+                if (order.DeliveryDate != DateTime.MinValue)
+                    orderTrackingStatus.Add(Tuple.Create(Enums.Status.deliverd, order.DeliveryDate));
+
                 return new OrderTracking()
                 {
                     ID = orderID,
                     Status = OrderStatus(order),
-                    OrderTrackingStatus = GetStringStatus(order),
-                };
+                    OrderTrackingStatus = orderTrackingStatus,
+                }; ;
             }
             catch
             {

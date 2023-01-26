@@ -19,7 +19,7 @@ namespace BlImplementation
             checkProduct(product);
             try
             {
-                _dal.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
+                _dal!.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
                     Path = product.Path == null? "D:\\repos\\dotNet0849\\photos\\MissingImage.png" : product.Path, Categories = (DO.Enums.Category)product.Categories
                 });
             }

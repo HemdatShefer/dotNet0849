@@ -15,6 +15,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="LightCoral"/>
         </Style>
+
         <Style x:Name="_buttonStyle" TargetType="Button" >
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
@@ -22,6 +23,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="Wheat"/>
         </Style>
+
         <Style x:Name="_listViewStyle" TargetType="ListView" >
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
@@ -29,6 +31,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="LightCoral"/>
         </Style>
+
         <Style x:Name="_labelStyle" TargetType="Label" >
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
@@ -36,6 +39,7 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="LightCoral"/>
         </Style>
+
         <Style x:Name="_textBlock" TargetType="TextBlock" >
             <Setter Property="FontSize" Value="15" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
@@ -49,42 +53,49 @@
               HorizontalAlignment="Center"
               VerticalAlignment="Top" Height="450" Width="780">
 
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+
         </Grid.RowDefinitions>
 
+        <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="-5,-6,-54,1" Width="NaN" Grid.ColumnSpan="2"  />
+
         <!-- ID -->
+        <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="-25,-11,0,0"  VerticalAlignment="Top"
+               Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
+               HorizontalContentAlignment ="Center" Height="40"/>
+
 
         <StackPanel
-            x:Name="enterID" Grid.Row="7" Grid.Column="1" Margin="230,111,-490,-159">
-            <TextBlock Text="Order ID" Margin="0 0 0 5" Height="14" Width="260"/>
+            x:Name="enterID" Margin="-5,44,340,-92" Grid.ColumnSpan="2">
+            <TextBlock Text="Order ID" Height="29" Width="350"/>
             <ComboBox x:Name="OrderID" 
                       ItemsSource="{Binding OrderForList}" 
                       DisplayMemberPath="ID" 
                       SelectedValuePath="ID" 
-                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="OrderID_SelectionChanged"/>
-
-
+                      SelectedValue="{Binding SelectedOrderID}" SelectionChanged="OrderID_SelectionChanged" Width="350"/>
             <TextBox
-            x:Name="_orderTracking" 
-            Text="{Binding OrderTrackingStatus}" 
+            x:Name="currentStatus" 
+            Text="{Binding Status}" 
             Padding="2" 
-            HorizontalAlignment="Center" 
-            Width="261" Margin="0,5,0,-51" TextChanged="_orderTracking_TextChanged" Grid.Row="7" IsReadOnly="True"/>
+            Width="345" TextChanged="_orderTracking_TextChanged" IsReadOnly="True" Height="36"/>
 
         </StackPanel>
 
+        <ListView x:Name="OrdeTrackings" ItemContainerStyle="{StaticResource styleForListViewItem}"
+                  Margin="368,37,15,211" ItemsSource="{Binding OrderTrackingStatus}" SelectionChanged="OrdeTrackings_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Column="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Item1}" Width="100" Header="Status" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Item2}" Width="150" Header ="Date" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 
 </Window>
