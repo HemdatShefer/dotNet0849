@@ -25,14 +25,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{A50E48D8-E5CA-44FE-82B5-52C80E0250F5}"
 	ProjectSection(SolutionItems) = preProject
+		xml\config.xml = xml\config.xml
 		xml\dal-config.xml = xml\dal-config.xml
+		xml\orders.xml = xml\orders.xml
+		xml\ordersItems.xml = xml\ordersItems.xml
+		xml\products.xml = xml\products.xml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{B707F0BE-AF48-4DB5-8545-1018A5C34CDA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulator", "Simulator\Simulator.csproj", "{E6C25623-4A56-4A68-8985-2D9AFE32867E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{A51E170C-38BC-4018-9702-57BD394ADC05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{A51E170C-38BC-4018-9702-57BD394ADC05}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BC02AD8C-0455-4444-9468-BA371343908F} = {BC02AD8C-0455-4444-9468-BA371343908F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

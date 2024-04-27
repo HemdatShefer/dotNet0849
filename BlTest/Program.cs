@@ -173,7 +173,7 @@ namespace BlTest
             int id = 0;
             do
             {
-                Console.Write("enter Order id: ");
+                Console.Write("enter DalOrder id: ");
                 flag = int.TryParse(Console.ReadLine(), out id);
 
             } while (!flag);

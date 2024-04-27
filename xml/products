@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <ID>10001</ID>
+    <Name>pearl golden necklace</Name>
+    <Categories>Necklaces</Categories>
+    <Price>70.9</Price>
+    <InStock>0</InStock>
+    <Path>D:\repos\dotNet0849\photos\pearl golden necklace.png</Path>
+  </Product>
+  <Product>
+    <ID>10002</ID>
+    <Name>amber necklace</Name>
+    <Categories>Necklaces</Categories>
+    <Price>70.9</Price>
+    <InStock>96</InStock>
+    <Path>D:\repos\dotNet0849\photos\amber necklace.png</Path>
+  </Product>
+  <Product>
+    <ID>10003</ID>
+    <Name>haze necklace</Name>
+    <Categories>Necklaces</Categories>
+    <Price>43.9</Price>
+    <InStock>58</InStock>
+    <Path>D:\repos\dotNet0849\photos\haze necklace.png</Path>
+  </Product>
+  <Product>
+    <ID>10004</ID>
+    <Name>14k pearl necklace</Name>
+    <Categories>Necklaces</Categories>
+    <Price>42.9</Price>
+    <InStock>98</InStock>
+    <Path>D:\repos\dotNet0849\photos\14k pearl necklace.png</Path>
+  </Product>
+  <Product>
+    <ID>10005</ID>
+    <Name>14k gold rope necklace</Name>
+    <Categories>Necklaces</Categories>
+    <Price>48.9</Price>
+    <InStock>95</InStock>
+    <Path>D:\repos\dotNet0849\photos\14k gold rope necklace.png</Path>
+  </Product>
+  <Product>
+    <ID>10006</ID>
+    <Name>bubble errings</Name>
+    <Categories>Earrings</Categories>
+    <Price>94.9</Price>
+    <InStock>0</InStock>
+    <Path>D:\repos\dotNet0849\photos\bubble errings.png</Path>
+  </Product>
+  <Product>
+    <ID>10007</ID>
+    <Name>purple haze errings</Name>
+    <Categories>Earrings</Categories>
+    <Price>92.9</Price>
+    <InStock>48</InStock>
+    <Path>D:\repos\dotNet0849\photos\purple haze errings.png</Path>
+  </Product>
+  <Product>
+    <ID>10008</ID>
+    <Name>mini moon errings</Name>
+    <Categories>Earrings</Categories>
+    <Price>27.9</Price>
+    <InStock>62</InStock>
+    <Path>D:\repos\dotNet0849\photos\mini moon errings.png</Path>
+  </Product>
+  <Product>
+    <ID>10009</ID>
+    <Name>roxen errings</Name>
+    <Categories>Earrings</Categories>
+    <Price>5.9</Price>
+    <InStock>45</InStock>
+    <Path>D:\repos\dotNet0849\photos\roxen errings.png</Path>
+  </Product>
+  <Product>
+    <ID>10010</ID>
+    <Name>breeze errings</Name>
+    <Categories>Earrings</Categories>
+    <Price>65.9</Price>
+    <InStock>33</InStock>
+    <Path>D:\repos\dotNet0849\photos\breeze errings.png</Path>
+  </Product>
+  <Product>
+    <ID>10011</ID>
+    <Name>14k gold buble ring</Name>
+    <Categories>Rings</Categories>
+    <Price>39.9</Price>
+    <InStock>0</InStock>
+    <Path>D:\repos\dotNet0849\photos\14k gold buble ring.png</Path>
+  </Product>
+  <Product>
+    <ID>10012</ID>
+    <Name>pearl ring</Name>
+    <Categories>Rings</Categories>
+    <Price>83.9</Price>
+    <InStock>38</InStock>
+    <Path>D:\repos\dotNet0849\photos\pearl ring.png</Path>
+  </Product>
+  <Product>
+    <ID>10013</ID>
+    <Name>braid ring</Name>
+    <Categories>Rings</Categories>
+    <Price>84.9</Price>
+    <InStock>50</InStock>
+    <Path>D:\repos\dotNet0849\photos\braid ring.png</Path>
+  </Product>
+  <Product>
+    <ID>10014</ID>
+    <Name>dimond ring</Name>
+    <Categories>Rings</Categories>
+    <Price>98.9</Price>
+    <InStock>42</InStock>
+    <Path>D:\repos\dotNet0849\photos\dimond ring.png</Path>
+  </Product>
+  <Product>
+    <ID>10015</ID>
+    <Name>wedding rings silver</Name>
+    <Categories>Rings</Categories>
+    <Price>75.9</Price>
+    <InStock>92</InStock>
+    <Path>D:\repos\dotNet0849\photos\wedding rings silver.png</Path>
+  </Product>
+  <Product>
+    <ID>10016</ID>
+    <Name>bridal bracelet</Name>
+    <Categories>Bracelets</Categories>
+    <Price>38.9</Price>
+    <InStock>0</InStock>
+    <Path>D:\repos\dotNet0849\photos\bridal bracelet.png</Path>
+  </Product>
+  <Product>
+    <ID>10017</ID>
+    <Name>lia bracelet</Name>
+    <Categories>Bracelets</Categories>
+    <Price>72.9</Price>
+    <InStock>56</InStock>
+    <Path>D:\repos\dotNet0849\photos\lia bracelet.png</Path>
+  </Product>
+  <Product>
+    <ID>10018</ID>
+    <Name>pearl bracelet</Name>
+    <Categories>Bracelets</Categories>
+    <Price>24.9</Price>
+    <InStock>96</InStock>
+    <Path>D:\repos\dotNet0849\photos\pearl bracelet.png</Path>
+  </Product>
+  <Product>
+    <ID>10019</ID>
+    <Name>mermaid bracelet</Name>
+    <Categories>Bracelets</Categories>
+    <Price>43.9</Price>
+    <InStock>91</InStock>
+    <Path>D:\repos\dotNet0849\photos\mermaid bracelet.png</Path>
+  </Product>
+  <Product>
+    <ID>10020</ID>
+    <Name>jacob bracelet</Name>
+    <Categories>Mens_jewelry</Categories>
+    <Price>44.9</Price>
+    <InStock>0</InStock>
+    <Path>D:\repos\dotNet0849\photos\jacob bracelet.png</Path>
+  </Product>
+  <Product>
+    <ID>10021</ID>
+    <Name>men chain</Name>
+    <Categories>Mens_jewelry</Categories>
+    <Price>33.9</Price>
+    <InStock>51</InStock>
+    <Path>D:\repos\dotNet0849\photos\men chain.png</Path>
+  </Product>
+  <Product>
+    <ID>10022</ID>
+    <Name>signature ring</Name>
+    <Categories>Mens_jewelry</Categories>
+    <Price>58.9</Price>
+    <InStock>78</InStock>
+    <Path>D:\repos\dotNet0849\photos\signature ring.png</Path>
+  </Product>
+</ArrayOfProduct>

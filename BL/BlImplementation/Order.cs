@@ -1,6 +1,7 @@
 ﻿using BO;
 using Dal;
 using DalApi;
+using static BO.Enums;
 using IOrder = BlApi.IOrder;
 
 namespace BlImplementation
@@ -10,14 +11,16 @@ namespace BlImplementation
     {
         DalApi.IDal? _dal = DalApi.Factory.Get();
         /// <summary>
-                                                        /// 
-                                                        /// </summary>
-                                                        /// <returns></returns>
-        IEnumerable<OrderForList> IOrder.orderForLists()
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+        public IEnumerable<OrderForList?> orderForLists()
         {
             IEnumerable<DO.Order> ordersList = new Dal.DalOrder().GetAll();
             List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
-            
+
             foreach (DO.Order order in ordersList)
             {
                 IEnumerable<DO.OrderItem> ordersItems = _dal!.OrderItem.GetAll().Where(orderItem => orderItem.OrderID == order.ID);
@@ -67,8 +70,8 @@ namespace BlImplementation
                         Total = orderItem.Price * orderItem.Amount,
                     }).ToList()
                 };
-                
-                
+
+
             }
             else
             {
@@ -193,12 +196,12 @@ namespace BlImplementation
             try
             {
                 DO.Order order = _dal!.Order.GetById(orderID);
-                List<Tuple<Enums.Status, DateTime>>? orderTrackingStatus = new List<Tuple<Enums.Status, DateTime>>(); 
+                List<Tuple<Enums.Status, DateTime>>? orderTrackingStatus = new List<Tuple<Enums.Status, DateTime>>();
 
                 if (order.OrderDate != DateTime.MinValue)
                     orderTrackingStatus.Add(Tuple.Create(Enums.Status.confirmed, order.OrderDate));
 
-                    if (order.ShipDate != DateTime.MinValue)
+                if (order.ShipDate != DateTime.MinValue)
                     orderTrackingStatus.Add(Tuple.Create(Enums.Status.shipped, order.ShipDate));
 
                 if (order.DeliveryDate != DateTime.MinValue)
@@ -215,34 +218,6 @@ namespace BlImplementation
             {
                 throw new unValidException("id not valid");
             }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="order"></param>
-        /// <returns></returns>
-        string GetStringStatus(DO.Order order)
-        {
-            string date_str = "";
-            if (order.OrderDate != DateTime.MinValue)
-            {
-                date_str = order.OrderDate.ToString("dd/MM/yyyy HH:mm:ss");
-                date_str += " order created\n";
-            }
-            if (order.ShipDate != DateTime.MinValue)
-            {
-                date_str = order.ShipDate.ToString("dd/MM/yyyy HH:mm:ss");
-                date_str += " order sent\n";
-            }
-            if (order.DeliveryDate != DateTime.MinValue)
-            {
-                date_str = order.DeliveryDate.ToString("dd/MM/yyyy HH:mm:ss");
-                date_str += " order deliverd\n";
-            }
-            return date_str;
-
-
         }
 
         /// <summary>
@@ -293,5 +268,63 @@ namespace BlImplementation
             return price;
         }
 
+        public BO.Order OldOrder()
+        {
+            IEnumerable<IGrouping<int, DO.OrderItem>> orderItems = from item in _dal.OrderItem.GetAll()
+                                                                   group item by item.OrderID into g
+                                                                   select g;
+
+            IEnumerable<BO.Order> orders = from order in _dal.Order.GetAll()
+                                           select new BO.Order
+                                           {
+                                               ID = order.ID,
+                                               CustomerName = order.CustomerName,
+                                               CustomerEmail = order.CustomerEmail,
+                                               CustomerAddress = order.CustomerAddress,
+                                               OrderDate = order.OrderDate,
+                                               ShipDate = order.ShipDate,
+                                               DeliveryDate = order.DeliveryDate,
+                                               Status = GetStatus(order),
+                                               Items = GetOrderItemList(order.ID).ToList()!,
+                                               TotalPrice = (double)(from item in orderItems
+                                                                     where item.Key == order.ID
+                                                                     select item).Sum(x => x.Sum(x => x.Price))!
+                                           }; ;
+            return orders.OrderBy(x => x.Status).ThenBy(x => x.OrderDate).First();
+        }
+
+        private Status GetStatus(DO.Order? dOrder)
+        {
+            return dOrder?.DeliveryDate != DateTime.MinValue ? Status.deliverd :
+                dOrder?.ShipDate != DateTime.MinValue ? Status.shipped : Status.confirmed;
+        }
+
+        /// <summary>
+        /// return dOrder item list 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private IEnumerable<BO.OrderItem> GetOrderItemList(int? id)
+        {
+            try
+            {
+                return from DO.OrderItem item in _dal.OrderItem.GetAll().Where(x => x.OrderID == id)
+                       select new BO.OrderItem
+                       {
+                           OrderID = item.ID,
+                           ProductID = item.ProductID,
+                           Amount = item.Amount,
+                           Price = item.Price / item.Amount,
+                           Total = item.Price
+                       };
+            }
+            catch (Exception ex)
+            {
+                throw new ObjectNotFoundException("the list is empty\n");
+            }
+        }
     }
+
+
+
 }

@@ -83,7 +83,7 @@ namespace PL.Cart
             }
             catch (ObjectNotFoundException ex)
             {
-                MessageBox.Show("Product not found.");
+                MessageBox.Show("DalProduct not found.");
             }
             catch (BlImplementation.NotInStockException ex)
             {

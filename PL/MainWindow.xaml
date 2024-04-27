@@ -47,33 +47,24 @@
     </Window.Resources>
     <Grid x:Name="MainGrid" HorizontalAlignment="Right" Width="800" Background="Black">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="180*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="Auto" MinHeight="208.47"/>
+            <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
         <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="-5,-8,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="3" Background="LightCoral" Foreground="Wheat" Width="800"
                HorizontalContentAlignment ="Center" Height="40"/>
 
         <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="0,32,10,10" Width="NaN" Grid.ColumnSpan="3" Grid.RowSpan="4"  />
-        <Grid x:Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,87" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
+        <StackPanel VerticalAlignment="Center">
+            <Button Click="adminClick" Content="Admin" Margin="10" Width="160" Height="40"/>
+            <Button  Click ="NewOrderClick"  Content="New order" Margin="10" Width="160" Height="40"/>
+            <Button Content="Tracking order" Margin="10" Click="Button_Click" Width="160" Height="40"/>
+            <Button  Click ="SimulaterClick" Margin="10" Content="Simulator" Width="160" Height="40"/>
+        </StackPanel>
 
-        </Grid>
-
-        <Button Click="adminClick" Content="Admin" Margin="10,10,10,10" Grid.Row="1" Grid.Column="1"/>
-        <Button  Click ="NewOrderClick"  Content="New order" Margin="10,5,10,10" Grid.Row="2" Grid.Column="1"/>
-        <Button Content="Tracking order" Margin="10,0,10,145" Grid.Row="3" Click="Button_Click" Grid.Column="1"/>
 
     </Grid>
 

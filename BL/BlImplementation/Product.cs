@@ -25,7 +25,7 @@ namespace BlImplementation
             }
             catch (DO.ObjectNotFoundException)
             {
-                throw new unValidProductException("Product not valid");
+                throw new unValidProductException("DalProduct not valid");
             }
         }
         /// <summary>
@@ -48,7 +48,7 @@ namespace BlImplementation
             }
             catch
             {
-                throw new unValidProductException("Product not valid");
+                throw new unValidProductException("DalProduct not valid");
             }
         }
         /// <summary>
@@ -67,7 +67,7 @@ namespace BlImplementation
             }
             catch
             {
-                throw new unValidProductException("Product not valid");
+                throw new unValidProductException("DalProduct not valid");
 
             }
         }

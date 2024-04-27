@@ -51,7 +51,7 @@ namespace PL.Admin
             BO.Order order1;
             if (status == BO.Enums.Status.deliverd || status == BO.Enums.Status.shipped)
             {
-                MessageBox.Show("This Order Alredy been shipped");
+                MessageBox.Show("This DalOrder Alredy been shipped");
             }
             else
             {
@@ -72,11 +72,11 @@ namespace PL.Admin
 
             if (status == BO.Enums.Status.deliverd)
             {
-                MessageBox.Show("This Order Alredy been deliverd");
+                MessageBox.Show("This DalOrder Alredy been deliverd");
             }
             else if (status == BO.Enums.Status.confirmed)
             {
-                MessageBox.Show("This Order haven't shipped yet");
+                MessageBox.Show("This DalOrder haven't shipped yet");
             }
             else
             {
