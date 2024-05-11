@@ -8,73 +8,82 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Simulator" Height="450" Width="800">
     <Window.Resources>
-
-        <Style x:Name="_comboStyle" TargetType="ComboBox" >
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="LightCoral"/>
-        </Style>
-        <Style x:Name="_buttonStyle" TargetType="Button" >
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="Wheat"/>
-        </Style>
-        <Style x:Name="_listViewStyle" TargetType="ListView" >
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="LightCoral"/>
-        </Style>
-
         <Style x:Name="_textBlock" TargetType="TextBlock" >
-            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontSize" Value="17" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Name="_processBar" TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="#FF5B99FF"/>
+            <Setter Property="Background" Value="#FFD3D3D3"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style x:Name="_button" TargetType="Button">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="#FF5B99FF"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontFamily" Value="Rockwell Condensed"/>
+            <Setter Property="FontSize" Value="14" />
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Title -->
+            <RowDefinition Height="Auto"/>
+            <!-- Clock -->
+            <RowDefinition Height="Auto"/>
+            <!-- Currently handling order label -->
+            <RowDefinition Height="Auto"/>
+            <!-- Currently handling order ID -->
+            <RowDefinition Height="Auto"/>
+            <!-- Current status label and value -->
+            <RowDefinition Height="Auto"/>
+            <!-- Processing start time label and value -->
+            <RowDefinition Height="Auto"/>
+            <!-- Next status label and value -->
+            <RowDefinition Height="Auto"/>
+            <!-- Estimated handling time label and value -->
+            <RowDefinition Height="Auto"/>
+            <!-- Stop button -->
+            <RowDefinition Height="Auto"/>
+            <!-- Progress bar -->
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-
+            <!-- Fills the remaining space -->
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock></TextBlock>
-        <TextBlock Grid.Row="1" Text="{Binding Clock ,StringFormat='{}{0:dd/MM/yyyy hh:mm:ss}'}" FontSize="30" Margin="0,0,40,87" Grid.RowSpan="2" />
 
-        <TextBlock Grid.Row="2" Text="Currently handling order:" TextAlignment="Left" Margin="50,0" />
-        <TextBlock Grid.Row="2" Text="{Binding CurrentID}" TextAlignment="right"   Margin="0,0,40,86" Grid.RowSpan="2" />
+        <!-- Background Image -->
+        <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" 
+               Grid.RowSpan="11"/>
 
+        <!-- Content -->
+        <TextBlock Text="Simulator" FontSize="40" Grid.Row="0" HorizontalAlignment="Center"/>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="Current status:" TextAlignment="left"  Margin="50,0" />
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding Status}" TextAlignment="Right"  Margin="0,0,40,0" />
+        <TextBlock Text="{Binding Clock, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" FontSize="15" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10"/>
 
+        <TextBlock Text="Currently handling order:" Grid.Row="2" HorizontalAlignment="Center" Margin="0,5" FontSize="18" />
+        <TextBlock Text="{Binding CurrentID}" Grid.Row="3" HorizontalAlignment="Center" Margin="0,5" />
 
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="Processing start time:" TextAlignment="left"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding StartTime ,StringFormat='{}{0:dd/MM/yyyy hh:mm:ss}'}" FontSize="15" TextAlignment="Right" Margin="0,0,25,0" />
+        <TextBlock Text="Current status:" Grid.Row="4" HorizontalAlignment="Center" Margin="0,5"/>
+        <TextBlock Text="{Binding Status}" Grid.Row="4" HorizontalAlignment="Center" Margin="0,20"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Next status:" TextAlignment="left"   Margin="50,0" />
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding NextStatus}" TextAlignment="Right" Margin="0,86,40,0" Grid.RowSpan="2" />
+        <TextBlock Text="Processing start time:" Grid.Row="6" HorizontalAlignment="Center" Margin="0,5"/>
+        <TextBlock Text="{Binding StartTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" FontSize="15" Grid.Row="6" HorizontalAlignment="Center" Margin="0,20"/>
 
+        <TextBlock Text="Next status:" Grid.Row="5" HorizontalAlignment="Center" Margin="0,5"/>
+        <TextBlock Text="{Binding NextStatus}" Grid.Row="5" HorizontalAlignment="Center" Margin="0,20"/>
 
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="Estimated handling time:" TextAlignment="left"  />
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding HandleTime ,StringFormat='{}{0:dd/MM/yyyy hh:mm:ss}'}" FontSize="15" TextAlignment="Right"  Margin="0,0,20,0" />
+        <TextBlock Text="Estimated handling time:" Grid.Row="7" HorizontalAlignment="Center" Margin="0,5"/>
+        <TextBlock Text="{Binding HandleTime, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}" FontSize="15" Grid.Row="7" HorizontalAlignment="Center" Margin="0,20"/>
 
-
-        <Button Content="Stop" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left"  Click="EndSimulationClick" Width="135"  Margin="20,15,0,10"/>
-        <ProgressBar HorizontalAlignment="Left" Value="{Binding TimeProgress}" Height="10" Margin="200,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Stop" Grid.Row="8" HorizontalAlignment="Left" Margin="20,12,0,10" Click="EndSimulationClick" Width="142"/>
+        <ProgressBar Grid.Row="8" HorizontalAlignment="Center" Value="{Binding TimeProgress}" Margin="0,10,0,10" Width="168"/>
     </Grid>
 </Window>

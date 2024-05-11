@@ -48,6 +48,7 @@
             <Setter Property="Background" Value="LightCoral"/>
         </Style>
     </Window.Resources>
+    
 
     <Grid x:Name="grid2"
               HorizontalAlignment="Center"
@@ -62,8 +63,9 @@
 
         </Grid.RowDefinitions>
 
-        <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="-5,-6,-54,1" Width="NaN" Grid.ColumnSpan="2"  />
 
+        <!-- Background Image -->
+        <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" Grid.ColumnSpan="2" Margin="-5,0,-24,10"/>
         <!-- ID -->
         <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="-25,-11,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"

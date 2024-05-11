@@ -42,7 +42,6 @@
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="LightCoral"/>
         </Style>
     </Window.Resources>
 
@@ -56,7 +55,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="-15,-11,-15,-115" Width="NaN" Grid.RowSpan="5"  />
+            <!-- Background Image -->
+
+            <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" Height="NaN" Margin="-15,-11,-15,-115" Width="NaN" Grid.RowSpan="5"  />
 
             <!-- Customer Name -->
             <StackPanel Grid.Row="0">

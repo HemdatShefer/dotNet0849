@@ -3,12 +3,15 @@
 namespace Dal;
 
 /// <summary>
-/// Provides a singleton data source for managing products, orders, and order items.
+/// A static class that serves as a singleton data source managing all application data.
+/// This includes lists for Products, Orders, and OrderItems with initial data population methods.
 /// </summary>
+
 internal static class DataSource
 {
     /// <summary>
-    /// Config class to manage and generate unique IDs for different entities.
+    /// Internal data lists and methods to initialize and populate these lists with sample data.
+    /// Static constructor ensures data is initialized once per application lifetime.
     /// </summary>
     internal static class config
     {

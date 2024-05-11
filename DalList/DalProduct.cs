@@ -5,10 +5,14 @@ using DO;
 namespace Dal;
 
 /// <summary>
-/// 
+/// Implements IProduct for managing Product entities' CRUD operations.
+/// This includes custom validation like checking the existence of an item before adding to prevent duplicates.
 /// </summary>
 public class DalProduct : IProduct
 {
+    // Implementation details for Add, Delete, GetById, GetAll, and Update.
+    // Includes existence checks and handling of unique ID generation and data consistency.
+
     /// <summary>
     /// 
     /// </summary>

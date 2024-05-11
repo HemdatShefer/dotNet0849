@@ -6,7 +6,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Simulator;
 
 /// <summary>
-/// A simulator for demonstrating the progress of orders within the system.
+/// Manages the simulation of order processing for the system.
 /// </summary>
 public static class Simulator
 {
@@ -43,10 +43,11 @@ public static class Simulator
         _proggressChange = proggressChange;
         _runClock = runClock;
         _runProgres = runProgres;
-        isRun = true;
-        RunSimulator();
-        RunTime();
+        isRun = true;// Sets the simulation as active.
+        RunSimulator();// Starts the order update simulation.
+        RunTime(); // Starts the simulation clock.
     }
+    
     /// <summary>
     /// Initiates the clock operation in the simulator.
     /// </summary>
@@ -56,12 +57,12 @@ public static class Simulator
         {
             while (isRun)
                 _runClock(DateTime.Now);
-            Thread.Sleep(1000);
+            Thread.Sleep(1000);// Updates the clock every second.
         })).Start();
     }
 
     /// <summary>
-    /// Begins the simulation of order updates.
+    /// Begins the simulation of order updates, iterating through order status changes and updating UI components.
     /// </summary>
     private static void RunSimulator()
     {
@@ -70,19 +71,21 @@ public static class Simulator
         {
             while (isRun)
             {
-                Order = bl.Order.OldOrder();
+                Order = bl.Order.OldOrder();// Fetches an old order to simulate status updates.
 
+                // Logic to simulate order progression from 'confirmed' to 'shipped', then to 'delivered'.
                 if (Order.Status == Status.confirmed)
                 {
                     nextStatus = Status.shipped;
                     startTime = DateTime.Now;
-                    handleTime = startTime.Value.AddSeconds(10);
+                    handleTime = startTime.Value.AddSeconds(10);// Simulates a handling time of 10 seconds.
+
 
                     _proggressChange(Order.ID,Order.Status, nextStatus, startTime, handleTime);
 
-                    RunProgressBar();
+                    RunProgressBar();// Starts the progress bar simulation.
 
-                    bl.Order.UpdateshippedDate(Order.ID);
+                    bl.Order.UpdateshippedDate(Order.ID);// Updates the shipped date in the business logic layer.
 
                     _proggressChange(Order.ID, nextStatus, Status.deliverd, startTime, handleTime);
                 }
@@ -90,31 +93,33 @@ public static class Simulator
                 {
                     nextStatus = Status.deliverd;
                     startTime = DateTime.Now;
-                    handleTime = startTime.Value.AddSeconds(10);
+                    handleTime = startTime.Value.AddSeconds(10);// Simulates a handling time of 10 seconds.
 
                     _proggressChange(Order.ID, Order.Status, nextStatus, startTime, handleTime);
 
-                    RunProgressBar();
+                    RunProgressBar();// Continues the progress bar simulation.
 
-                    bl.Order.UpdateDeliverdDate(Order.ID);
+                    bl.Order.UpdateDeliverdDate(Order.ID);// Updates the delivered date in the business logic layer.
 
                     _proggressChange(Order.ID, nextStatus, Status.deliverd, startTime, handleTime);
                 }
+
             }
         }).Start();
 
     }
+
     /// <summary>
-    /// Starts the progress bar operation in the simulator.
+    /// Manages the simulation of the progress bar, incrementally updating the progress from 0 to 100%.
     /// </summary>
     private static void RunProgressBar()
     {
         for (int p = 0; p < 101; p++)
         {
-            if (!isRun)
+            if (!isRun) // Checks if the simulation is still running.
                 break;
-            _runProgres(p);
-            Thread.Sleep(100);
+            _runProgres(p);// Updates the progress bar.
+            Thread.Sleep(100);// Waits 100 milliseconds before the next update.
         }
     }
 }

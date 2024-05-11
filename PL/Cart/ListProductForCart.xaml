@@ -83,7 +83,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="200" Height="250">
+                    <Grid Width="180" Height="250">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3.5*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
@@ -98,11 +98,11 @@
                         </Image>
                         
                         <WrapPanel Grid.Row="1">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding Name}" Margin="18,0,0,0" />
                         </WrapPanel>
                         
                         <WrapPanel Grid.Row="2">
-                            <TextBlock Text="{Binding Price}"/>
+                            <TextBlock Text="{Binding Price}" Margin="18,0,0,0"/>
                         </WrapPanel>
 
                         <!--<WrapPanel Grid.Row="3">

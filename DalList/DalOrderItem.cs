@@ -3,10 +3,11 @@ using DO;
 
 namespace Dal;
 /// <summary>
-/// 
+/// Implements IOrderItem for CRUD operations specific to OrderItem entities.
 /// </summary>
 public class DalOrderItem : IOrderItem
 {
+    // Methods implement the CRUD operations handling in-memory data access through DataSource.
     int ICrud<OrderItem>.Add(OrderItem item)
     {
         DataSource.OrderItem.Add(item);

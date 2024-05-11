@@ -31,7 +31,7 @@
             <Setter Property="Background" Value="LightCoral"/>
         </Style>
         <Style x:Name="_labelStyle" TargetType="Label" >
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="45" />
             <Setter Property="FontFamily" Value="Rockwell Condensed"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="Black"/>
@@ -52,11 +52,10 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        <Label Content="The Jewelry Chest" HorizontalAlignment="Left" Margin="-5,-8,0,0"  VerticalAlignment="Top"
-               Grid.ColumnSpan="3" Background="LightCoral" Foreground="Wheat" Width="800"
-               HorizontalContentAlignment ="Center" Height="40"/>
+        <Label Content="The Jewelry Chest" HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="Wheat" Width="800"
+               HorizontalContentAlignment ="Center" Height="74" />
 
-        <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="0,32,10,10" Width="NaN" Grid.ColumnSpan="3" Grid.RowSpan="4"  />
+        <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" Height="NaN" Margin="0,74,0,0" Width="800" Grid.RowSpan="2" HorizontalAlignment="Center"  />
 
         <StackPanel VerticalAlignment="Center">
             <Button Click="adminClick" Content="Admin" Margin="10" Width="160" Height="40"/>

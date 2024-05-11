@@ -119,7 +119,6 @@ namespace BlImplementation
                     CustomerEmail = order.CustomerEmail,
                     ShipDate = DateTime.Now,
                     DeliveryDate = order.DeliveryDate,
-
                 });
                 return order1;
             }

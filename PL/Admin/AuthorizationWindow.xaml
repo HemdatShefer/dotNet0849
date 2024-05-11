@@ -56,7 +56,8 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Source="D:\repos\dotNet0849\photos\background.png" Stretch="Fill" Height="NaN" Margin="0,32,0,0" Width="NaN" Grid.ColumnSpan="2"  />
+        <!-- Background Image -->
+        <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" Grid.ColumnSpan="2"/>
 
         <Label Content="The pink pearl" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"

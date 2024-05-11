@@ -59,7 +59,7 @@
             </Grid.ColumnDefinitions >
         </Grid>
         <ListView x:Name="OrderListView" Grid.Row="1" MouseDoubleClick="OrderView_MouseDoubleClick" ItemContainerStyle="{StaticResource styleForListViewItem}"
-                  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,10,-5,0">
+                  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,10,-5,0" ItemsSource="{Binding Order_List}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="100" Header="ID" />

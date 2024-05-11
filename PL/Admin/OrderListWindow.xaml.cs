@@ -1,92 +1,150 @@
 ﻿using BO;
-using PL.Product;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Threading;
+
 
 namespace PL.Admin
 {
     /// <summary>
-    /// Interaction logic for OrderListWindow.xaml
+    /// Interaction logic for OrderListWindow.xaml.
+    /// This window displays a list of orders and allows the user to update order statuses.
     /// </summary>
-    /// 
-
-
     public partial class OrderListWindow : Window
     {
-        public BlApi.IBl? bl = BlApi.Factory.Get();
-        public IEnumerable<BO.Order?> OrderList;
-        public IEnumerable<BO.OrderForList?> OrderForList;
+        private readonly BlApi.IBl bl = BlApi.Factory.Get();
+        private DispatcherTimer refreshTimer;
 
-        public OrderListWindow(BlApi.IBl? bl)
+        /// <summary>
+        /// ObservableCollection that is bound to the ListView in the XAML.
+        /// This allows the UI to automatically update when items are added or removed.
+        /// </summary>
+        public ObservableCollection<OrderForList> Order_List { get; } = new ObservableCollection<OrderForList>();
+
+        /// <summary>
+        /// Constructor that initializes the window and sets up data and UI components.
+        /// </summary>
+        /// <param name="bl">The business logic layer instance.</param>
+        public OrderListWindow(BlApi.IBl bl)
         {
             InitializeComponent();
-            this.bl = bl;
-            OrderForList = bl!.Order.orderForLists();
-            OrderListView.ItemsSource = OrderForList;
+            this.bl = bl ?? throw new ArgumentNullException(nameof(bl));
+            this.DataContext = this;  // Set the DataContext for data binding.
+
+            LoadOrders();  // Load initial set of orders.
+
+            SetupRefreshTimer();  // Setup the timer to refresh orders periodically.
         }
 
-        private void OrderView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Sets up a timer to refresh the order list every 10 seconds.
+        /// </summary>
+        private void SetupRefreshTimer()
         {
-            
+            refreshTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(3)
+            };
+            refreshTimer.Tick += RefreshTimer_Tick;
+            refreshTimer.Start();
         }
 
+        /// <summary>
+        /// Event handler for the timer tick that refreshes the orders.
+        /// </summary>
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            RefreshOrders();
+        }
+
+        /// <summary>
+        /// Loads the orders from the business layer and populates the ObservableCollection.
+        /// </summary>
+        private void LoadOrders()
+        {
+            var orders = bl.Order.orderForLists();
+            Order_List.Clear();
+            foreach (var order in orders)
+            {
+                Order_List.Add(order);
+            }
+        }
+
+        /// <summary>
+        /// Refreshes the order list by re-querying from the business layer.
+        /// </summary>
+        private void RefreshOrders()
+        {
+            var updatedOrders = bl.Order.orderForLists();
+            Order_List.Clear();
+            foreach (var order in updatedOrders)
+            {
+                Order_List.Add(order);
+            }
+        }
+
+        /// <summary>
+        /// Event handler for the window being closed. Stops the refresh timer to clean up resources.
+        /// </summary>
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            refreshTimer?.Stop();
+        }
+
+        /// <summary>
+        /// Event handler for the "Shipped" button click. Updates the shipped status of the order.
+        /// </summary>
         private void UpdateShippedButtonClick(object sender, RoutedEventArgs e)
         {
-            // Get the selected item in the ListView            
-            Button button = (Button)sender;
-            BO.OrderForList order = (BO.OrderForList)button.DataContext;
-            BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+            var button = (Button)sender;
+            var order = (OrderForList)button.DataContext;
+            var status = bl.Order.GetOrderTracking(order.ID).Status;
 
-            BO.Order order1;
             if (status == BO.Enums.Status.deliverd || status == BO.Enums.Status.shipped)
             {
-                MessageBox.Show("This DalOrder Alredy been shipped");
+                MessageBox.Show("This order has already been shipped or delivered.");
             }
             else
             {
-                order1 = bl.Order.UpdateshippedDate(order.ID);
-            }          
-
-            // Refresh the ListView
-            OrderForList = bl!.Order.orderForLists();
-            OrderListView.ItemsSource = OrderForList;
+                bl.Order.UpdateshippedDate(order.ID);
+                RefreshOrders();  // Refresh the list to show the updated status.
+            }
         }
 
+        /// <summary>
+        /// Event handler for the "Delivered" button click. Updates the delivery status of the order.
+        /// </summary>
         private void UpdateDeliverdButtonClick(object sender, RoutedEventArgs e)
         {
-            // Get the selected item in the ListView            
-            Button button = (Button)sender;
-            BO.OrderForList order = (BO.OrderForList)button.DataContext;
-            BO.Enums.Status status = bl.Order.GetOrderTracking(order.ID).Status;
+            var button = (Button)sender;
+            var order = (OrderForList)button.DataContext;
+            var status = bl.Order.GetOrderTracking(order.ID).Status;
 
             if (status == BO.Enums.Status.deliverd)
             {
-                MessageBox.Show("This DalOrder Alredy been deliverd");
+                MessageBox.Show("This order has already been delivered.");
             }
             else if (status == BO.Enums.Status.confirmed)
             {
-                MessageBox.Show("This DalOrder haven't shipped yet");
+                MessageBox.Show("This order has not been shipped yet.");
             }
             else
             {
                 bl.Order.UpdateDeliverdDate(order.ID);
+                RefreshOrders();  // Refresh the list to show the updated status.
             }
+        }
 
 
-            // Refresh the ListView
-            OrderForList = bl!.Order.orderForLists();
-            OrderListView.ItemsSource = OrderForList;
+        private void OrderView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
+
+

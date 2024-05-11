@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Dal;
+
+/// <summary>
+/// Provides static methods for serializing and deserializing lists to and from XML files.
+/// Used to save and load persistent data, encapsulating XML handling complexities.
+/// </summary>
 public class XmlTools
 {
 
-    public static string dir = @"..\xml\";
+    public static string dir = @"..\xml\";// Directory for storing XML files.
     static XmlTools()
     {
+        // Ensure the directory for XML files exists, creating it if necessary.
         if (!Directory.Exists(dir))
             Directory.CreateDirectory(dir);
     }

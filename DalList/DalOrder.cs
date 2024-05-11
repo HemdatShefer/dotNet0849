@@ -3,8 +3,13 @@ using DO;
 
 namespace Dal;
 
+/// <summary>
+/// Provides CRUD operations for Order entities by implementing the IOrder interface.
+/// </summary>
 public class DalOrder : IOrder
 {
+    // Implementation details for Add, Delete, GetAll, GetById, and Update methods
+    // which interact with an in-memory DataSource. Demonstrates handling of ID generation and entity retrieval.
     public int Add(Order order)
     {
         if(order.ID == 0)
