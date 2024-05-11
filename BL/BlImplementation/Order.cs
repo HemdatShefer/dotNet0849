@@ -15,25 +15,24 @@ namespace BlImplementation
         /// </summary>
         /// <returns></returns>
         /// 
-
         public IEnumerable<OrderForList?> orderForLists()
         {
             IEnumerable<DO.Order> ordersList = new Dal.DalOrder().GetAll();
-            List<BO.OrderForList> ordersForList = new List<BO.OrderForList>();
-
-            foreach (DO.Order order in ordersList)
+            return ordersList.Select(order =>
             {
-                IEnumerable<DO.OrderItem> ordersItems = _dal!.OrderItem.GetAll().Where(orderItem => orderItem.OrderID == order.ID);
-                ordersForList.Add(new BO.OrderForList
+                // Retrieve all order items for the current order
+                IEnumerable<DO.OrderItem> ordersItems = _dal!.OrderItem.GetAll()
+                    .Where(orderItem => orderItem.OrderID == order.ID);
+
+                return new BO.OrderForList
                 {
                     ID = order.ID,
                     Name = order.CustomerName,
                     Status = OrderStatus(order),
                     Amount = ordersItems.Count(),
                     TotalPrice = GetTotalPrice(ordersItems)
-                });
-            }
-            return ordersForList;
+                };
+            }).ToList(); // Convert the result to List to match the return type IEnumerable
         }
 
         /// <summary>
@@ -70,8 +69,6 @@ namespace BlImplementation
                         Total = orderItem.Price * orderItem.Amount,
                     }).ToList()
                 };
-
-
             }
             else
             {
@@ -260,12 +257,8 @@ namespace BlImplementation
         /// <returns></returns>
         private static double GetTotalPrice(IEnumerable<DO.OrderItem> OrdersItems)
         {
-            double price = 0;
-            foreach (DO.OrderItem thisOrderItem in OrdersItems)
-            {
-                price += thisOrderItem.Price * thisOrderItem.Amount;
-            }
-            return price;
+            return OrdersItems.Sum(item => item.Price * item.Amount);
+
         }
 
         public BO.Order OldOrder()

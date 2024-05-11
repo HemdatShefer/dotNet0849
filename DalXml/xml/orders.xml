@@ -1,126 +1,185 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
 <orders>
-	<Order>
-		<ID>0</ID>
-		<CustomerName>Norit</CustomerName>
-		<CustomerEmail>Norit@gmail.com</CustomerEmail>
-		<CustomerAddress>Heifa</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
-	</Order>
+
 	<Order>
 		<ID>1</ID>
 		<CustomerName>Ron</CustomerName>
 		<CustomerEmail>Ron@gmail.com</CustomerEmail>
 		<CustomerAddress>Ashkelon</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-03</ShipDate>
+		<DeliveryDate>2024-04-06</DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>2</ID>
 		<CustomerName>Lior</CustomerName>
 		<CustomerEmail>Lior@gmail.com</CustomerEmail>
 		<CustomerAddress>Ra'anana</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
+		<DeliveryDate>2024-04-04</DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>3</ID>
 		<CustomerName>Yael</CustomerName>
 		<CustomerEmail>Yael@gmail.com</CustomerEmail>
 		<CustomerAddress>Jerusalem</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-03</ShipDate>
 		<DeliveryDate></DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>4</ID>
 		<CustomerName>Shlomo</CustomerName>
 		<CustomerEmail>Shlomo@gmail.com</CustomerEmail>
 		<CustomerAddress>Jerusalem</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
+		<DeliveryDate>2024-04-05</DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>5</ID>
 		<CustomerName>Tamar</CustomerName>
 		<CustomerEmail>Tamar@gmail.com</CustomerEmail>
 		<CustomerAddress>Tel Aviv</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
 		<DeliveryDate></DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>6</ID>
 		<CustomerName>harry</CustomerName>
 		<CustomerEmail>harry@gmail.com</CustomerEmail>
 		<CustomerAddress>Bet Shemesh</CustomerAddress>
-		<OrderDate></OrderDate>
+		<OrderDate>2024-04-01</OrderDate>
 		<ShipDate></ShipDate>
 		<DeliveryDate></DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>7</ID>
 		<CustomerName>Jacob</CustomerName>
 		<CustomerEmail>Jacob@gmail.com</CustomerEmail>
 		<CustomerAddress>Ashdod</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-03</ShipDate>
 		<DeliveryDate></DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>8</ID>
 		<CustomerName>Rivka</CustomerName>
 		<CustomerEmail>Rivka@gmail.com</CustomerEmail>
 		<CustomerAddress>Tel Aviv</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
+		<DeliveryDate>2024-04-04</DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>9</ID>
 		<CustomerName>David</CustomerName>
 		<CustomerEmail>David@gmail.com</CustomerEmail>
 		<CustomerAddress>Ashdod</CustomerAddress>
-		<OrderDate></OrderDate>
-		<ShipDate></ShipDate>
-		<DeliveryDate></DeliveryDate>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
+		<DeliveryDate>2024-04-05</DeliveryDate>
 	</Order>
-
-
 	<Order>
 		<ID>10</ID>
+		<CustomerName>Lili</CustomerName>
+		<CustomerEmail>Lili@gmail.com</CustomerEmail>
+		<CustomerAddress>Tel Aviv</CustomerAddress>
+		<OrderDate>2024-04-03</OrderDate>
+		<ShipDate>2024-04-04</ShipDate>
+		<DeliveryDate>2024-04-07</DeliveryDate>
+	</Order>
+	<Order>
+		<ID>11</ID>
+		<CustomerName>Aharon</CustomerName>
+		<CustomerEmail>Aharon@gmail.com</CustomerEmail>
+		<CustomerAddress>Be'er Seva</CustomerAddress>
+		<OrderDate>2024-04-03</OrderDate>
+		<ShipDate>2024-04-05</ShipDate>
+		<DeliveryDate>2024-04-08</DeliveryDate>
+	</Order>
+	<Order>
+		<ID>12</ID>
 		<CustomerName>Tal</CustomerName>
 		<CustomerEmail>Tal@gmail.com</CustomerEmail>
-		<CustomerAddress>Bet Shemesh</CustomerAddress>
-		<OrderDate></OrderDate>
+		<CustomerAddress>Ra'anana</CustomerAddress>
+		<OrderDate>2024-04-04</OrderDate>
+		<ShipDate>2024-04-05</ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+	<Order>
+		<ID>13</ID>
+		<CustomerName>Rivka</CustomerName>
+		<CustomerEmail>Rivka@gmail.com</CustomerEmail>
+		<CustomerAddress>Jerusalem</CustomerAddress>
+		<OrderDate>2024-04-05</OrderDate>
+		<ShipDate>2024-04-07</ShipDate>
+		<DeliveryDate>2024-04-10</DeliveryDate>
+	</Order>
+	<Order>
+		<ID>14</ID>
+		<CustomerName>Shlomo</CustomerName>
+		<CustomerEmail>Shlomo@gmail.com</CustomerEmail>
+		<CustomerAddress>Heifa</CustomerAddress>
+		<OrderDate>2024-04-05</OrderDate>
 		<ShipDate></ShipDate>
 		<DeliveryDate></DeliveryDate>
 	</Order>
-
-
-
-
+	<Order>
+		<ID>15</ID>
+		<CustomerName>Yael</CustomerName>
+		<CustomerEmail>Yael@gmail.com</CustomerEmail>
+		<CustomerAddress>Ashkelon</CustomerAddress>
+		<OrderDate>2024-04-06</OrderDate>
+		<ShipDate>2024-04-07</ShipDate>
+		<DeliveryDate>2024-04-09</DeliveryDate>
+	</Order>
+	<Order>
+		<ID>16</ID>
+		<CustomerName>Ron</CustomerName>
+		<CustomerEmail>Ron@gmail.com</CustomerEmail>
+		<CustomerAddress>Bet Shemesh</CustomerAddress>
+		<OrderDate>2024-04-06</OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+	<Order>
+		<ID>17</ID>
+		<CustomerName>Norit</CustomerName>
+		<CustomerEmail>Norit@gmail.com</CustomerEmail>
+		<CustomerAddress>Eylat</CustomerAddress>
+		<OrderDate>2024-04-07</OrderDate>
+		<ShipDate>2024-04-08</ShipDate>
+		<DeliveryDate>2024-04-11</DeliveryDate>
+	</Order>
+	<Order>
+		<ID>18</ID>
+		<CustomerName>Jacob</CustomerName>
+		<CustomerEmail>Jacob@gmail.com</CustomerEmail>
+		<CustomerAddress>Dimona</CustomerAddress>
+		<OrderDate>2024-04-07</OrderDate>
+		<ShipDate>2024-04-08</ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+	<Order>
+		<ID>19</ID>
+		<CustomerName>David</CustomerName>
+		<CustomerEmail>David@gmail.com</CustomerEmail>
+		<CustomerAddress>Tel Aviv</CustomerAddress>
+		<OrderDate>2024-04-07</OrderDate>
+		<ShipDate></ShipDate>
+		<DeliveryDate></DeliveryDate>
+	</Order>
+	<Order>
+		<ID>20</ID>
+		<CustomerName>Norit</CustomerName>
+		<CustomerEmail>Norit@gmail.com</CustomerEmail>
+		<CustomerAddress>Heifa</CustomerAddress>
+		<OrderDate>2024-04-01</OrderDate>
+		<ShipDate>2024-04-02</ShipDate>
+		<DeliveryDate>2024-04-05</DeliveryDate>
+	</Order>
 
 </orders>

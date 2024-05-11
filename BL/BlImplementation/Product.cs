@@ -8,7 +8,7 @@ namespace BlImplementation
     internal class Product : IProduct
     {
         DalApi.IDal? _dal = DalApi.Factory.Get();
-
+        string pathMissing = "C:\\Users\\hemda\\OneDrive\\Desktop\\dotnet\\bin\\photos\\MissingImage.png";
         /// <summary>
         /// 
         /// </summary>
@@ -20,7 +20,7 @@ namespace BlImplementation
             try
             {
                 _dal!.Product.Add(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
-                    Path = product.Path == null? "D:\\repos\\dotNet0849\\photos\\MissingImage.png" : product.Path, Categories = (DO.Enums.Category)product.Categories
+                    Path = product.Path == null? pathMissing : product.Path, Categories = (DO.Enums.Category)product.Categories
                 });
             }
             catch (DO.ObjectNotFoundException)
@@ -62,7 +62,7 @@ namespace BlImplementation
             {
                 checkProduct(product);
                 _dal.Product.Update(new DO.Product { ID = product.ID, Name = product.Name!, Price = product.Price, InStock = product.InStock, 
-                    Categories = (DO.Enums.Category)product.Categories, Path = product.Path == null ? "D:\\repos\\dotNet0849\\photos\\MissingImage.png" : product.Path
+                    Categories = (DO.Enums.Category)product.Categories, Path = product.Path == null ? pathMissing : product.Path
                 });
             }
             catch
@@ -174,11 +174,17 @@ namespace BlImplementation
             }
           
         }
-
+        /// <summary>
+        /// Retrieves an enumerable of <see cref="ProductItem"/> objects based on the contents of the specified cart.
+        /// Optionally applies a filter to each product item.
+        /// </summary>
+        /// <param name="cart">The shopping cart from which to retrieve product items. This cart is expected to contain the context necessary for fetching the appropriate items.</param>
+        /// <param name="filter">An optional filter as a function that takes a <see cref="ProductItem"/> and returns a boolean value. If the function returns true, the item is included in the result; otherwise, it is excluded. If null, all items are included.</param>
+        /// <returns>An <see cref="IEnumerable{ProductItem}"/> where each element represents a product item potentially filtered by the provided predicate. The enumeration of results is deferred until the collection is iterated.</returns>
         public IEnumerable<ProductItem> GetProductItems(BO.Cart cart, Func<ProductItem?, bool>? filter = null)
         {
-            IEnumerable<DO.Product> productsList = _dal.Product.GetAll();
-            //, Func<ProductItem?, bool>? filter
+            IEnumerable<DO.Product> productsList = _dal!.Product.GetAll();
+            //utilizes LINQ to interact with the data access layer for retrieving products. 
             return from prod in productsList
                    let productItem = GetProductItem(prod.ID, cart)
                    where filter is null? true : filter(productItem)

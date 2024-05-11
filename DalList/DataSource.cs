@@ -3,12 +3,12 @@
 namespace Dal;
 
 /// <summary>
-/// 
+/// Provides a singleton data source for managing products, orders, and order items.
 /// </summary>
 internal static class DataSource
 {
     /// <summary>
-    /// 
+    /// Config class to manage and generate unique IDs for different entities.
     /// </summary>
     internal static class config
     {
@@ -28,14 +28,14 @@ internal static class DataSource
     private static Random random = new Random(DateTime.Now.Millisecond);
 
     /// <summary>
-    /// 
+    /// Static constructor to initialize the DataSource singleton.
     /// </summary>
     static DataSource()
     {
         s_Initialize();
     }
     /// <summary>
-    /// 
+    ///  Initializes the product catalog 
     /// </summary>
     static private void initProduct()
     {
@@ -75,7 +75,7 @@ internal static class DataSource
         }
     }
     /// <summary>
-    /// 
+    /// Initializes sample orders
     /// </summary>
     static private void initOrders()
     {
@@ -109,7 +109,7 @@ internal static class DataSource
 
     }
     /// <summary>
-    /// 
+    /// Initializes order items for the sample orders.
     /// </summary>
     static private void initOrderItems()
     {
@@ -133,16 +133,12 @@ internal static class DataSource
         }
     }
     /// <summary>
-    /// 
+    /// Main initialization function that sets up products, orders, and order items.
     /// </summary>
     static private void s_Initialize()
     {
         initProduct();
         initOrders();
         initOrderItems();
-        //XmlTools.SaveListToXMLSerializer<Order>(orders, @"orders.xml");
-        //XmlTools.SaveListToXMLSerializer<OrderItem>(OrderItem, @"ordersItems.xml");
-        //XmlTools.SaveListToXMLSerializer<Product>(Products, @"products.xml");
-
     }
 }

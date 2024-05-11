@@ -17,7 +17,6 @@ namespace PL
         private void adminClick(object sender, RoutedEventArgs e) => new PL.Admin.AuthorizationWindow(bl!).Show();
         private void NewOrderClick(object sender, RoutedEventArgs e) => new PL.Cart.ListProductForCart(bl!, cart).Show();
         private void Button_Click(object sender, RoutedEventArgs e) => new PL.Order.OrderTracking(bl!).Show();
-
         private void SimulaterClick(object sender, RoutedEventArgs e) => new SimulatorWindow().Show();
     }
 }

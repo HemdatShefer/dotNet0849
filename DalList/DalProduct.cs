@@ -28,28 +28,28 @@ public class DalProduct : IProduct
     /// <exception cref="Exception"></exception>
     public Product GetById(int ID)
     {
-        foreach (var p in DataSource.Products.Where(p => p.ID == ID))
+        Product product = DataSource.Products.SingleOrDefault(p => p.ID == ID);
+        if (Equals(product, default(Product)))  // Adjust for value types
         {
-            return p;
+            throw new ObjectNotFoundException("Cannot find item with ID: " + ID);
         }
+        return product;
 
-        throw new ObjectNotFoundException("CANT FIND ITEM");
     }
 
     /// <summary>
-    /// 
+    /// Deletes a product by its ID.
     /// </summary>
-    /// <param name="id"></param>
-    /// <exception cref="Exception"></exception>
+    /// <param name="id">The ID of the product to delete.</param>
+    /// <exception cref="ObjectNotFoundException">Thrown when no product with the specified ID can be found to delete.</exception>
     public void Delete(int id)
     {
-        foreach (var p in DataSource.Products.Where(p => p.ID == id))
+        var product = DataSource.Products.FirstOrDefault(p => p.ID == id);
+        if (Equals(product, default(Product)))  // Adjust for value types
         {
-            DataSource.Products.Remove(p);
-            return;
+            throw new ObjectNotFoundException("Cannot find item to delete with ID: " + id);
         }
-
-        throw new ObjectNotFoundException("CANT FIND ITEM");
+        DataSource.Products.Remove(product);
     }
 
     /// <summary>

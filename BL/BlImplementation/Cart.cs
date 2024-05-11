@@ -126,12 +126,12 @@ namespace BlImplementation
             try
             {
                 CheckClient(cart);
-                List<DO.Product> products = new List<DO.Product>();
-                foreach (BO.OrderItem item in cart.Items!)
+                List<DO.Product> products = cart.Items!.Select(item =>
                 {
-                    CheckProduct(item);
-                    products.Add(_dal!.Product.GetById(item.ProductID));
-                }
+                    CheckProduct(item); // Performs product checks
+                    return _dal!.Product.GetById(item.ProductID); // Retrieves the product
+                }).ToList(); // Converts the IEnumerable returned by Select to List
+
                 int OrderId = _dal!.Order.Add(new DO.Order
                 {
                     ID = 0,
@@ -142,7 +142,7 @@ namespace BlImplementation
                     DeliveryDate = DateTime.MinValue,
                     ShipDate = DateTime.MinValue
                 });
-                cart.Items.ForEach(orderItem =>
+                cart.Items!.ForEach(orderItem =>
                 {
                     _dal.OrderItem.Add(new DO.OrderItem
                     {

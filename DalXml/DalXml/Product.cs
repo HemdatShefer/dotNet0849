@@ -11,11 +11,12 @@ namespace DalXml.xml.DalXml
 {
     internal class Product : IProduct
     {
+        public string filePath = "C:\\Users\\hemda\\OneDrive\\Desktop\\dotnet\\DalXml\\xml\\products.xml";
         const string s_products = "products"; //Linq to XML
 
         public IEnumerable<DO.Product> GetAll()
         {
-            return GetAllFromXml("D:\\repos\\dotNet0849\\DalXml\\xml\\products.xml");
+            return GetAllFromXml(filePath);
         }
 
         public IEnumerable<DO.Product> GetAllFromXml(string filePath)
@@ -49,7 +50,7 @@ namespace DalXml.xml.DalXml
 
         public DO.Product GetById(int id )
         {
-            return GetById(id, "D:\\repos\\dotNet0849\\DalXml\\xml\\products.xml");
+            return GetById(id, filePath);
         }
         public DO.Product GetById(int id, string filePath)
         {
@@ -72,7 +73,7 @@ namespace DalXml.xml.DalXml
 
         public int Add(DO.Product product)
         {
-            return Add(product, "D:\\repos\\dotNet0849\\DalXml\\xml\\products.xml");
+            return Add(product, filePath);
         }
         public int Add(DO.Product product, string filePath)
         {

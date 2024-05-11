@@ -10,19 +10,20 @@ namespace DalXml.xml.DalXml
 {
     internal class Order : IOrder
     {
+        public string filePath = "C:\\Users\\hemda\\OneDrive\\Desktop\\dotnet\\DalXml\\xml\\orders.xml";
         const string s_orders = "orders"; //Linq to XML
 
         public int Add(DO.Order order)
         {
-            return AddOrderToXml(order, "D:\\repos\\dotNet0849\\DalXml\\xml\\orders.xml");
+            return AddOrderToXml(order, filePath);
         }
         public IEnumerable<DO.Order> GetAll()
         {
-            return GetOrdersFromXml("D:\\repos\\dotNet0849\\DalXml\\xml\\orders.xml");
+            return GetOrdersFromXml(filePath);
         }
         public DO.Order GetById(int id)
         {
-            return GetOrder(id, "D:\\repos\\dotNet0849\\DalXml\\xml\\orders.xml");
+            return GetOrder(id, filePath);
         }
 
         public void Delete(int id)

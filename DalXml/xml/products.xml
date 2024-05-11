@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-
-
 <products>
 	<!--necklace-->
 	<Product>
@@ -9,7 +7,7 @@
 		<Categories>Necklaces</Categories>
 		<Price>150.90</Price>
 		<InStock>20</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\pearl golden necklace.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\pearl_golden_necklace.png</Path>
 	</Product>
 
 	<Product>
@@ -18,7 +16,7 @@
 		<Categories>Necklaces</Categories>
 		<Price>120.90</Price>
 		<InStock>3</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\amber necklace.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\amber_necklace.png</Path>
 	</Product>
 
 	<Product>
@@ -27,7 +25,7 @@
 		<Categories>Necklaces</Categories>
 		<Price>125.90</Price>
 		<InStock>12</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\haze necklace.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\haze_necklace.png</Path>
 	</Product>
 
 	<Product>
@@ -36,7 +34,7 @@
 		<Categories>Necklaces</Categories>
 		<Price>195.90</Price>
 		<InStock>0</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\14k pearl necklace.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\14k_pearl_necklace.png</Path>
 	</Product>
 
 	<Product>
@@ -45,21 +43,18 @@
 		<Categories>Necklaces</Categories>
 		<Price>120.90</Price>
 		<InStock>13</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\14k gold rope necklace.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\14k_gold_rope_necklace.png</Path>
 	</Product>
 
-
-	<!--errings-->
-
+	<!--earrings-->
 	<Product>
 		<ID>10005</ID>
 		<Name>bubble errings</Name>
 		<Categories>Earrings</Categories>
 		<Price>150.90</Price>
 		<InStock>65</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\bubble errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\bubble_errings.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10006</ID>
@@ -67,9 +62,8 @@
 		<Categories>Earrings</Categories>
 		<Price>120.90</Price>
 		<InStock>0</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\purple haze errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\purple_haze_errings.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10007</ID>
@@ -77,9 +71,8 @@
 		<Categories>Earrings</Categories>
 		<Price>125.90</Price>
 		<InStock></InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\heavan errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\heavan_errings.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10008</ID>
@@ -87,9 +80,8 @@
 		<Categories>Earrings</Categories>
 		<Price>150.90</Price>
 		<InStock>21</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\mini moon errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\mini_moon_errings.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10009</ID>
@@ -97,9 +89,8 @@
 		<Categories>Earrings</Categories>
 		<Price>120.90</Price>
 		<InStock>35</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\roxen errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\roxen_errings.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10010</ID>
@@ -107,19 +98,18 @@
 		<Categories>Earrings</Categories>
 		<Price>125.90</Price>
 		<InStock>19</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\breeze errings.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\breeze_errings.png</Path>
 	</Product>
 
-	<!--ring-->
+	<!--rings-->
 	<Product>
 		<ID>10011</ID>
 		<Name>14k gold buble ring</Name>
 		<Categories>Rings</Categories>
 		<Price>195.90</Price>
 		<InStock>0</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\14k gold buble ring.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\14k_gold_buble_ring.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10012</ID>
@@ -127,9 +117,8 @@
 		<Categories>Rings</Categories>
 		<Price>150.90</Price>
 		<InStock>14</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\pearl ring.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\pearl_ring.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10013</ID>
@@ -137,9 +126,8 @@
 		<Categories>Rings</Categories>
 		<Price>120.90</Price>
 		<InStock>24</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\braid ring.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\braid_ring.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10014</ID>
@@ -147,9 +135,8 @@
 		<Categories>Rings</Categories>
 		<Price>1500.90</Price>
 		<InStock>27</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\dimond ring.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\dimond_ring.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10015</ID>
@@ -157,19 +144,18 @@
 		<Categories>Rings</Categories>
 		<Price>125.90</Price>
 		<InStock>43</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\wedding rings silver.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\wedding_rings_silver.png</Path>
 	</Product>
 
-	<!--bracelet-->
+	<!--bracelets-->
 	<Product>
 		<ID>10016</ID>
 		<Name>bridal bracelet</Name>
 		<Categories>Bracelets</Categories>
 		<Price>150.90</Price>
 		<InStock>0</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\bridal bracelet.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\bridal_bracelet.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10017</ID>
@@ -177,9 +163,8 @@
 		<Categories>Bracelets</Categories>
 		<Price>120.90</Price>
 		<InStock>16</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\lia bracelet.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\lia_bracelet.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10018</ID>
@@ -187,9 +172,8 @@
 		<Categories>Bracelets</Categories>
 		<Price>125.90</Price>
 		<InStock>26</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\pearl bracelet.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\pearl_bracelet.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10019</ID>
@@ -197,19 +181,18 @@
 		<Categories>Bracelets</Categories>
 		<Price>195.90</Price>
 		<InStock>2</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\mermaid bracelet.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\mermaid_bracelet.png</Path>
 	</Product>
 
-	<!--Mens_jewelry-->
+	<!--Men's jewelry-->
 	<Product>
 		<ID>10020</ID>
 		<Name>jacob bracelet</Name>
 		<Categories>Mens_jewelry</Categories>
 		<Price>150.90</Price>
 		<InStock>8</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\jacob bracelet.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\jacob_bracelet.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10021</ID>
@@ -217,9 +200,8 @@
 		<Categories>Mens_jewelry</Categories>
 		<Price>195.90</Price>
 		<InStock>34</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\men chain.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\men_chain.png</Path>
 	</Product>
-
 
 	<Product>
 		<ID>10022</ID>
@@ -227,8 +209,6 @@
 		<Categories>Mens_jewelry</Categories>
 		<Price>150.90</Price>
 		<InStock>42</InStock>
-		<Path>D:\\repos\\dotNet0849\\photos\\signature ring.png</Path>
+		<Path>C:\Users\hemda\OneDrive\Desktop\dotnet\bin\photos\signature_ring.png</Path>
 	</Product>
-
 </products>
-
