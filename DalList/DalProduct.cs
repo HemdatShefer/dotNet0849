@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 
 namespace Dal;
@@ -18,6 +19,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="p"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Add(Product p)
     {
         DataSource.Products.Add(existItem(p.ID) ? throw new AlreadyExistException("This item is already exist") : p);
@@ -30,6 +32,7 @@ public class DalProduct : IProduct
     /// <param name="ID"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product GetById(int ID)
     {
         Product product = DataSource.Products.SingleOrDefault(p => p.ID == ID);
@@ -46,6 +49,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="id">The ID of the product to delete.</param>
     /// <exception cref="ObjectNotFoundException">Thrown when no product with the specified ID can be found to delete.</exception>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         var product = DataSource.Products.FirstOrDefault(p => p.ID == id);
@@ -61,6 +65,7 @@ public class DalProduct : IProduct
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
+    [MethodImpl(MethodImplOptions.Synchronized)]
     private bool existItem(int id)
     {
         return DataSource.Products.Exists(product => product.ID == id);
