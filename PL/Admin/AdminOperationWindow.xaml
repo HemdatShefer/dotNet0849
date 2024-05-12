@@ -48,11 +48,12 @@
     <Grid>
         <Image Source="C:\Users\hemda\OneDrive\Desktop\dotnet\photos\back.png" Stretch="Fill" Grid.ColumnSpan="2"/>
 
-        <Label Content="The pink pearl" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
+        <Label Content="The jewelry chest" HorizontalAlignment="Left" Margin="0,-6,0,0"  VerticalAlignment="Top"
                Grid.ColumnSpan="2" Background="LightCoral" Foreground="Wheat" Width="800"
                HorizontalContentAlignment ="Center" Height="40"/>
-
-        <Button Click="productListClick" Content="product List" Grid.ColumnSpan="3" Margin="232,0,232,0" Grid.Row="1" Height="55" VerticalAlignment="Center"/>
-        <Button Click ="orderListClick"  Content="Order list" Margin="231,104,232,274"/>
+        <StackPanel VerticalAlignment="Center">
+            <Button Click="productListClick" Content="product List"  Height="40" Width="300" Margin="0,30,0,30"/>
+            <Button Click ="orderListClick"  Content="Order list" Height="40" Width="300"/>
+        </StackPanel>
     </Grid>
 </Window>

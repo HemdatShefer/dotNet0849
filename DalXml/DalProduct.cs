@@ -18,6 +18,8 @@ internal class DalProduct : IProduct
     string path = @"products.xml";
     string configPath = @"..\config.xml";
     string dir = @"..\xml\";
+    private string dir_path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "xml");
+
 
     XElement productRoot;
 
@@ -30,13 +32,12 @@ internal class DalProduct : IProduct
     {
         try
         {
-            if (File.Exists(dir + path))
-                productRoot = XElement.Load(dir + path);
-            else
-            {
-                productRoot = new XElement("products");
-                productRoot.Save(dir + path);
-            }
+            path = Path.Combine(dir_path, "products.xml");
+            if (!Directory.Exists(dir_path))
+                Directory.CreateDirectory(dir_path);
+
+            productRoot = XElement.Load(path);
+
         }
         catch (Exception ex)
         {
@@ -107,8 +108,7 @@ internal class DalProduct : IProduct
         if (index == -1)
             throw new ObjectNotFoundException("the order is't exsit\n");
 
-        newList[index] = Pr ;
-        XmlTools.SaveListToXMLSerializer(newList, path);  
+        newList[index] = Pr;
+        XmlTools.SaveListToXMLSerializer(newList, path);
     }
 }
-

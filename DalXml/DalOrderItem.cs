@@ -11,7 +11,7 @@ namespace Dal;
 internal class DalOrderItem : IOrderItem
 {
     string path = @"ordersItems.xml";
-    string configPath = @"..\config.xml";
+    string configPath = @"config.xml";
     string dir = @"..\xml\";
 
     XElement ordersItemsRoot;
@@ -41,14 +41,14 @@ internal class DalOrderItem : IOrderItem
 
     public int Add(OrderItem Or)
     {
-        XElement configRoot = XElement.Load(configPath);
+        XElement configRoot = XElement.Load(dir + configPath);
         var v = configRoot.Element("orderItemSeq");
         int nextSeqNum = Convert.ToInt32(configRoot.Element("orderItemSeq")!.Value);
         nextSeqNum++;
         Or.ID = nextSeqNum;
         //update config file
         configRoot.Element("orderItemSeq")!.SetValue(nextSeqNum);
-        configRoot.Save(configPath);
+        configRoot.Save(dir + configPath);
 
         List<OrderItem> orderItemList = XmlTools.LoadListFromXMLSerializer<OrderItem>(path);
 

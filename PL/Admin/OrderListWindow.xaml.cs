@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,9 +34,7 @@ namespace PL.Admin
             InitializeComponent();
             this.bl = bl ?? throw new ArgumentNullException(nameof(bl));
             this.DataContext = this;  // Set the DataContext for data binding.
-
-            LoadOrders();  // Load initial set of orders.
-
+            LoadOrdersAsync();  // Load initial set of orders.
             SetupRefreshTimer();  // Setup the timer to refresh orders periodically.
         }
 
@@ -48,43 +47,43 @@ namespace PL.Admin
             {
                 Interval = TimeSpan.FromSeconds(3)
             };
-            refreshTimer.Tick += RefreshTimer_Tick;
+            refreshTimer.Tick += async (_, __) => await RefreshOrdersAsync();
             refreshTimer.Start();
         }
 
-        /// <summary>
-        /// Event handler for the timer tick that refreshes the orders.
-        /// </summary>
-        private void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            RefreshOrders();
-        }
 
-        /// <summary>
-        /// Loads the orders from the business layer and populates the ObservableCollection.
-        /// </summary>
-        private void LoadOrders()
+        private async void LoadOrdersAsync()
         {
-            var orders = bl.Order.orderForLists();
-            Order_List.Clear();
-            foreach (var order in orders)
+            await Task.Run(() =>
             {
-                Order_List.Add(order);
-            }
+                var orders = bl.Order.orderForLists();
+                Dispatcher.Invoke(() =>
+                {
+                    Order_List.Clear();
+                    foreach (var order in orders)
+                    {
+                        Order_List.Add(order);
+                    }
+                });
+            });
         }
 
         /// <summary>
         /// Refreshes the order list by re-querying from the business layer.
         /// </summary>
-        private void RefreshOrders()
+        private async Task RefreshOrdersAsync()
         {
             var updatedOrders = bl.Order.orderForLists();
-            Order_List.Clear();
-            foreach (var order in updatedOrders)
+            await Dispatcher.InvokeAsync(() =>
             {
-                Order_List.Add(order);
-            }
+                Order_List.Clear();
+                foreach (var order in updatedOrders)
+                {
+                    Order_List.Add(order);
+                }
+            });
         }
+
 
         /// <summary>
         /// Event handler for the window being closed. Stops the refresh timer to clean up resources.
@@ -93,6 +92,12 @@ namespace PL.Admin
         {
             base.OnClosed(e);
             refreshTimer?.Stop();
+        }
+
+        public void Dispose()
+        {
+            refreshTimer?.Stop();
+            refreshTimer = null;
         }
 
         /// <summary>
@@ -110,8 +115,8 @@ namespace PL.Admin
             }
             else
             {
-                bl.Order.UpdateshippedDate(order.ID);
-                RefreshOrders();  // Refresh the list to show the updated status.
+            bl.Order.UpdateshippedDate(order.ID);
+            RefreshOrdersAsync();
             }
         }
 
@@ -135,7 +140,7 @@ namespace PL.Admin
             else
             {
                 bl.Order.UpdateDeliverdDate(order.ID);
-                RefreshOrders();  // Refresh the list to show the updated status.
+                RefreshOrdersAsync(); // Refresh the list to show the updated status.
             }
         }
 

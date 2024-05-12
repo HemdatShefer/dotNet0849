@@ -142,7 +142,7 @@ namespace BlImplementation
                     DeliveryDate = DateTime.MinValue,
                     ShipDate = DateTime.MinValue
                 });
-                cart.Items!.ForEach(orderItem =>
+                cart.Items.ForEach(orderItem =>
                 {
                     _dal.OrderItem.Add(new DO.OrderItem
                     {

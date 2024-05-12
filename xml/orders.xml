@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Order>
     <ID>1</ID>
@@ -87,6 +87,24 @@
     <CustomerEmail>Rivka@gmail.com</CustomerEmail>
     <CustomerAddress>Dimona</CustomerAddress>
     <OrderDate>2024-04-09T20:49:23.0644214+03:00</OrderDate>
+    <ShipDate>0001-01-01T00:00:00</ShipDate>
+    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+  </Order>
+  <Order>
+    <Id>5</Id>
+    <CustomerName>hemdat</CustomerName>
+    <CustomerEmail>hem@gmail.com </CustomerEmail>
+    <CustomerAddress>shefer</CustomerAddress>
+    <OrderDate>2024-05-12T00:01:44.5693343+03:00</OrderDate>
+    <ShipDate>0001-01-01T00:00:00</ShipDate>
+    <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
+  </Order>
+  <Order>
+    <Id>16</Id>
+    <CustomerName>hem</CustomerName>
+    <CustomerEmail>hem@gmail.com</CustomerEmail>
+    <CustomerAddress>she</CustomerAddress>
+    <OrderDate>2024-05-12T02:35:43.8949873+03:00</OrderDate>
     <ShipDate>0001-01-01T00:00:00</ShipDate>
     <DeliveryDate>0001-01-01T00:00:00</DeliveryDate>
   </Order>

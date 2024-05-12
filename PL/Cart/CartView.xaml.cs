@@ -50,6 +50,7 @@ namespace PL.Cart
             try 
             {
                 bl!.Cart.CommitCart(cart);
+
                 MessageBox.Show("Thanks for buying!");
             }
             catch(EmptyCartException ex)

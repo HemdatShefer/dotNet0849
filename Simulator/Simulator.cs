@@ -26,6 +26,7 @@ public static class Simulator
     static private Action<int, Status?, Status?, DateTime?, DateTime?> _proggressChange;
     static private Action<DateTime> _runClock;
     static private Action<int> _runProgres;
+    static private Func<bool> _endOrderProcessing;
 
     static Status? currentStatus;
     static Status? nextStatus;
@@ -38,11 +39,12 @@ public static class Simulator
     /// <param name="proggressChange">An action to invoke upon progress change.</param>
     /// <param name="runClock">An action to invoke upon clock update.</param>
     /// <param name="runProgres">An action to invoke upon progress bar update.</param>
-    public static void StartSimulator(Action<int, Status?, Status?, DateTime?, DateTime?> proggressChange, Action<DateTime> runClock, Action<int> runProgres)
+    public static void StartSimulator(Action<int, Status?, Status?, DateTime?, DateTime?> proggressChange, Action<DateTime> runClock, Action<int> runProgres, Func<bool> endOrderProcessing)
     {
         _proggressChange = proggressChange;
         _runClock = runClock;
         _runProgres = runProgres;
+        _endOrderProcessing = endOrderProcessing; // Store the action
         isRun = true;// Sets the simulation as active.
         RunSimulator();// Starts the order update simulation.
         RunTime(); // Starts the simulation clock.
@@ -80,7 +82,6 @@ public static class Simulator
                     startTime = DateTime.Now;
                     handleTime = startTime.Value.AddSeconds(10);// Simulates a handling time of 10 seconds.
 
-
                     _proggressChange(Order.ID,Order.Status, nextStatus, startTime, handleTime);
 
                     RunProgressBar();// Starts the progress bar simulation.
@@ -103,11 +104,17 @@ public static class Simulator
 
                     _proggressChange(Order.ID, nextStatus, Status.deliverd, startTime, handleTime);
                 }
-
+                if(_endOrderProcessing())
+                {
+                    isRun = false;
+                    break;
+                }
+                
             }
         }).Start();
 
     }
+
 
     /// <summary>
     /// Manages the simulation of the progress bar, incrementally updating the progress from 0 to 100%.
@@ -122,4 +129,7 @@ public static class Simulator
             Thread.Sleep(100);// Waits 100 milliseconds before the next update.
         }
     }
+
+
+
 }

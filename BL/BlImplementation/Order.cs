@@ -17,7 +17,7 @@ namespace BlImplementation
         /// 
         public IEnumerable<OrderForList?> orderForLists()
         {
-            IEnumerable<DO.Order> ordersList = new Dal.DalOrder().GetAll();
+            IEnumerable<DO.Order> ordersList = _dal.Order.GetAll();
             return ordersList.Select(order =>
             {
                 // Retrieve all order items for the current order
@@ -30,7 +30,7 @@ namespace BlImplementation
                     Name = order.CustomerName,
                     Status = OrderStatus(order),
                     Amount = ordersItems.Count(),
-                    TotalPrice = GetTotalPrice(ordersItems)
+                    TotalPrice = GetTotalPrice(ordersItems),
                 };
             }).ToList(); // Convert the result to List to match the return type IEnumerable
         }
@@ -284,6 +284,17 @@ namespace BlImplementation
                                            }; ;
             return orders.OrderBy(x => x.Status).ThenBy(x => x.OrderDate).First();
         }
+        /// <summary>
+        /// return true if all orders been dedliverd 
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfAllOrdersFinished()
+        {
+            var allOrders = _dal!.Order.GetAll();
+            return allOrders.All(order => GetStatus(order) == Status.deliverd);
+        }
+
+
 
         private Status GetStatus(DO.Order? dOrder)
         {
@@ -315,6 +326,7 @@ namespace BlImplementation
                 throw new ObjectNotFoundException("the list is empty\n");
             }
         }
+  
     }
 
 

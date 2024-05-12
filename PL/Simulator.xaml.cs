@@ -18,7 +18,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(CurrentOrderInLineProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for CurrentOrderInLine.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for CurrentOrderInLine. 
     public static readonly DependencyProperty CurrentOrderInLineProperty =
         DependencyProperty.Register("CurrentID", typeof(int), typeof(SimulatorWindow));
 
@@ -29,7 +29,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(NextStatusProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for NextStatus.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for NextStatus. 
     public static readonly DependencyProperty NextStatusProperty =
         DependencyProperty.Register("NextStatus", typeof(Status?), typeof(SimulatorWindow));
 
@@ -40,7 +40,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(StatusProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for NextStatus.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for NextStatus. 
     public static readonly DependencyProperty StatusProperty =
         DependencyProperty.Register("Status", typeof(Status?), typeof(SimulatorWindow));
 
@@ -51,7 +51,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(startTimeProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for startTime.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for startTime.
     public static readonly DependencyProperty startTimeProperty =
         DependencyProperty.Register("StartTime", typeof(DateTime?), typeof(SimulatorWindow));
 
@@ -62,7 +62,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(handleTimeProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for handleTime.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for handleTime. 
     public static readonly DependencyProperty handleTimeProperty =
         DependencyProperty.Register("HandleTime", typeof(DateTime?), typeof(SimulatorWindow));
 
@@ -73,7 +73,7 @@ public partial class SimulatorWindow : Window
         set { SetValue(ClockProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for Clock.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for Clock. 
     public static readonly DependencyProperty ClockProperty =
         DependencyProperty.Register("Clock", typeof(DateTime), typeof(SimulatorWindow));
 
@@ -84,9 +84,11 @@ public partial class SimulatorWindow : Window
         set { SetValue(TimeProgressProperty, value); }
     }
 
-    // Using a DependencyProperty as the backing store for TimeProgress.  This enables animation, styling, binding, etc...
+    // Using a DependencyProperty as the backing store for TimeProgress. 
     public static readonly DependencyProperty TimeProgressProperty =
         DependencyProperty.Register("TimeProgress", typeof(int), typeof(SimulatorWindow));
+
+    public BlApi.IBl? bl = BlApi.Factory.Get();
 
     /// <summary>
     /// Initializes the SimulatorWindow and binds simulation control actions.
@@ -97,26 +99,37 @@ public partial class SimulatorWindow : Window
         InitializeComponent();
         Clock = DateTime.Now;
         TimeProgress = 0;
-        Simulator.Simulator.StartSimulator(DataChange, RunClock, RunProgress);
+        Simulator.Simulator.StartSimulator(DataChange, RunClock, RunProgress, EndOrderProcessing);
     }
 
 
     // Updates the data bindings based on the simulation's progress.
     private void DataChange(int id, Status? status, Status? nextStatus, DateTime? startTime, DateTime? handleTime)
     {
-        Application.Current.Dispatcher.Invoke(new Action(() =>
+        try
         {
-            CurrentID = id;
-            NextStatus = nextStatus;
-            Status = status;
-            StartTime = startTime;
-            HandleTime = handleTime;
-        }));
+            // Dispatcher.Invoke is used here to ensure that the UI thread handles these updates,
+            // which is necessary if this method is called from a non-UI thread.
+
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                CurrentID = id;
+                NextStatus = nextStatus;
+                Status = status;
+                StartTime = startTime;
+                HandleTime = handleTime;
+            }));
+        }
+        catch (Exception ex) 
+        {
+            MessageBox.Show("Failed to update UI: " + ex.Message);
+        }
     }
 
     // Updates the simulation clock in the UI.
     private void RunClock(DateTime currentTime)
     {
+        // Updates the Clock property which is bound to the UI.
         Application.Current?.Dispatcher.Invoke(new Action(() =>
         {
             Clock = currentTime;
@@ -126,6 +139,7 @@ public partial class SimulatorWindow : Window
     // Updates the progress bar in the UI to reflect the current progress of the simulation.
     private void RunProgress(int progress)
     {
+        // Updates the progress of a ProgressBar in the UI.
         Application.Current?.Dispatcher.Invoke(new Action(() =>
         {
             TimeProgress = progress;
@@ -135,7 +149,31 @@ public partial class SimulatorWindow : Window
     // Ends the simulation and closes the window.
     private void EndSimulationClick(object sender, RoutedEventArgs e)
     {
+        // Stops the simulation and closes the window.
         Simulator.Simulator.isRun = false;
         this.Close();
     }
+    /// <summary>
+    /// check if all order alaredy been successfully delivered
+    /// </summary>
+    /// <returns></returns>
+    public bool EndOrderProcessing()
+    {
+        // Check if all orders have been processed and end the simulation if they have.
+
+        if (bl!.Order.CheckIfAllOrdersFinished())
+        {
+            Simulator.Simulator.isRun = false;
+            Application.Current?.Dispatcher.Invoke(new Action(() =>
+            {
+                MessageBox.Show("all orders delivered successfully");
+                this.Close();
+            }));
+            return true; 
+        }
+        return false; // 
+    }
+
+
+
 }

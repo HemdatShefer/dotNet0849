@@ -2,7 +2,7 @@
 
 namespace BlImplementation
 {
-    public class Bl : IBl
+    internal class Bl : IBl
     {
         public ICart Cart { get; } = new Cart();
         public IProduct Product { get; } = new Product();
